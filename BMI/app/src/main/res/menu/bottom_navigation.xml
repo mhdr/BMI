@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_bn_graph"
+        android:enabled="true"
+        android:icon="@drawable/graph"
+        android:title="@string/graph"
+        android:visible="true"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/item_bn_bmi"
+        android:enabled="true"
+        android:icon="@drawable/weight_scale"
+        android:title="@string/bmi"
+        android:visible="true"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/item_bn_table"
+        android:enabled="true"
+        android:icon="@drawable/table"
+        android:title="@string/table"
+        android:visible="true"
+        app:showAsAction="always" />
+</menu>

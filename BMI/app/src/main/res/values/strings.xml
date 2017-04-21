@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name_fa">شاخص توده بدنی</string>
+    <string name="app_name">BMI</string>
+
+    <string name="graph">نمودار</string>
+    <string name="bmi">شاخص توده بدنی</string>
+    <string name="table">جدول</string>
+
+    <string name="drawer_open">باز کردن منو کشوئی</string>
+    <string name="drawer_close">بستن منو کشوئی</string>
+</resources>
