@@ -5,10 +5,8 @@
     <string name="graph">نمودار</string>
     <string name="bmi">شاخص توده بدنی</string>
     <string name="table">جدول</string>
+    <string name="history">سوابق</string>
 
     <string name="drawer_open">باز کردن منو کشوئی</string>
     <string name="drawer_close">بستن منو کشوئی</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

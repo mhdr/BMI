@@ -20,7 +20,7 @@
         android:id="@+id/item_bn_table"
         android:enabled="true"
         android:icon="@drawable/table"
-        android:title="@string/table"
+        android:title="@string/history"
         android:visible="true"
         app:showAsAction="always" />
 </menu>
