@@ -9,4 +9,19 @@
 
     <string name="drawer_open">باز کردن منو کشوئی</string>
     <string name="drawer_close">بستن منو کشوئی</string>
+
+    <string name="profile_management">مدیریت پروفایل</string>
+    <string name="exit">خروج</string>
+    <string name="settings">تنظیمات</string>
+    <string name="about">درباره</string>
+    <string name="more">بیشتر</string>
+
+    <string name="profile_name">نام پروفایل</string>
+    <string name="gender">جنسیت</string>
+    <string name="birth_date">تاریخ تولد</string>
+
+    <string-array name="gender_array">
+        <item>مرد</item>
+        <item>زن</item>
+    </string-array>
 </resources>

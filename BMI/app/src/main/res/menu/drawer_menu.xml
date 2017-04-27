@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/itemSettings"
+            android:title="@string/settings" />
+
+        <item
+            android:id="@+id/itemProfile"
+            android:title="@string/profile_management" />
+
+    </group>
+
+
+    <item android:title="@string/more">
+        <menu>
+            <item
+                android:id="@+id/itemAbout"
+                android:title="@string/about" />
+
+            <item
+                android:id="@+id/itemExit"
+                android:title="@string/exit" />
+        </menu>
+    </item>
+</menu>
