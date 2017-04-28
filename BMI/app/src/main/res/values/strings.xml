@@ -24,4 +24,6 @@
         <item>مرد</item>
         <item>زن</item>
     </string-array>
+
+    <string name="first_run">اجرای اول</string>
 </resources>
