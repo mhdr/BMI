@@ -27,68 +27,104 @@
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:paddingStart="5dp"
+        android:background="@color/colorBackground"
         android:paddingTop="10dp">
 
         <TextView
+            android:id="@+id/textViewFirstRunHeader1"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="@string/first_run_header1"/>
+
+        <TextView
+            android:id="@+id/textViewFirstRunHeader2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textSize="18sp"
+            android:layout_below="@id/textViewFirstRunHeader1"
+            android:text="@string/first_run_header2"/>
+
+        <TextView
             android:id="@+id/textViewProfileName"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
+            android:layout_below="@+id/textViewFirstRunHeader2"
             android:gravity="center|start"
-            android:text="@string/profile_name" />
+            android:text="@string/profile_name"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/editTextProfileName"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_toLeftOf="@+id/textViewProfileName"
-            android:layout_toStartOf="@+id/textViewProfileName"
             android:gravity="left|center|start"
-            android:inputType="text" />
-
+            android:inputType="text"
+            android:layout_below="@+id/textViewProfileName"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <TextView
             android:id="@+id/textViewGender"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/editTextProfileName"
             android:gravity="center|start"
-            android:text="@string/gender" />
+            android:text="@string/gender"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spinnerGender"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_below="@+id/editTextProfileName"
-            android:layout_toLeftOf="@+id/textViewGender"
-            android:layout_toStartOf="@+id/textViewGender"
-            android:gravity="end|center">
+            android:gravity="end|center"
+            android:layout_below="@+id/textViewGender"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
 
         </Spinner>
 
         <TextView
             android:id="@+id/textViewBirthdate"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/spinnerGender"
             android:gravity="center|start"
-            android:text="@string/birth_date" />
+            android:text="@string/birth_date"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/editTextBirthdate"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_below="@id/spinnerGender"
-            android:layout_toLeftOf="@+id/textViewBirthdate"
-            android:layout_toStartOf="@+id/textViewBirthdate"
             android:gravity="left|center|start"
-            android:inputType="text" />
+            android:inputType="text"
+            android:layout_below="@+id/textViewBirthdate"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editTextBirthdate"
+            android:textSize="18sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/first_run_header3"/>
 
     </RelativeLayout>
 

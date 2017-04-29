@@ -1,10 +1,12 @@
 package ir.mhdr.bmi;
 
+import android.graphics.PorterDuff;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -25,6 +27,7 @@ public class FirstRunActivity extends AppCompatActivity {
     ArrayAdapter<String> spinnerAdapter;
     EditText editTextBirthdate;
     Toolbar toolbarFirstRun;
+    WebView webViewHeaderFirstRun;
 
 
     @Override
@@ -39,6 +42,7 @@ public class FirstRunActivity extends AppCompatActivity {
 
         editTextProfileName= (EditText) findViewById(R.id.editTextProfileName);
         ViewCompat.setLayoutDirection(editTextProfileName,ViewCompat.LAYOUT_DIRECTION_RTL);
+
         spinnerGender= (Spinner) findViewById(R.id.spinnerGender);
 
         Resources resources=new Resources(FirstRunActivity.this);
