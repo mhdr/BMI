@@ -118,6 +118,7 @@
             android:layout_alignParentEnd="true" />
 
         <TextView
+            android:id="@+id/textViewFirstRunHeader3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/editTextBirthdate"
@@ -125,6 +126,30 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
             android:text="@string/first_run_header3"/>
+
+
+        <TextView
+            android:id="@+id/textViewHeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/textViewFirstRunHeader3"
+            android:gravity="center|start"
+            android:text="@string/height"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editTextHeight"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="left|center|start"
+            android:inputType="number"
+            android:layout_below="@+id/textViewHeight"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
 

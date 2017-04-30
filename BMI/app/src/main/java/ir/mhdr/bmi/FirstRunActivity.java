@@ -27,7 +27,7 @@ public class FirstRunActivity extends AppCompatActivity {
     ArrayAdapter<String> spinnerAdapter;
     EditText editTextBirthdate;
     Toolbar toolbarFirstRun;
-    WebView webViewHeaderFirstRun;
+    EditText editTextHeight;
 
 
     @Override
@@ -40,46 +40,65 @@ public class FirstRunActivity extends AppCompatActivity {
         ViewCompat.setLayoutDirection(toolbarFirstRun, ViewCompat.LAYOUT_DIRECTION_RTL);
         getSupportActionBar().setTitle(R.string.first_run);
 
-        editTextProfileName= (EditText) findViewById(R.id.editTextProfileName);
-        ViewCompat.setLayoutDirection(editTextProfileName,ViewCompat.LAYOUT_DIRECTION_RTL);
+        editTextProfileName = (EditText) findViewById(R.id.editTextProfileName);
+        ViewCompat.setLayoutDirection(editTextProfileName, ViewCompat.LAYOUT_DIRECTION_RTL);
 
-        spinnerGender= (Spinner) findViewById(R.id.spinnerGender);
+        spinnerGender = (Spinner) findViewById(R.id.spinnerGender);
 
-        Resources resources=new Resources(FirstRunActivity.this);
-        genderList=resources.getGenderList();
+        Resources resources = new Resources(FirstRunActivity.this);
+        genderList = resources.getGenderList();
 
 
-        spinnerAdapter=new ArrayAdapter<String>(FirstRunActivity.this, android.R.layout.simple_spinner_item,genderList);
+        spinnerAdapter = new ArrayAdapter<String>(FirstRunActivity.this, android.R.layout.simple_spinner_item, genderList);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGender.setAdapter(spinnerAdapter);
-        ViewCompat.setLayoutDirection(spinnerGender,ViewCompat.LAYOUT_DIRECTION_RTL);
+        ViewCompat.setLayoutDirection(spinnerGender, ViewCompat.LAYOUT_DIRECTION_RTL);
 
-        editTextBirthdate= (EditText) findViewById(R.id.editTextBirthdate);
+        editTextBirthdate = (EditText) findViewById(R.id.editTextBirthdate);
         editTextBirthdate.setOnFocusChangeListener(editTextBirthdate_OnFocusChangeListener);
         editTextBirthdate.setOnClickListener(editTextBirthdate_OnClickListener);
+
+        editTextHeight = (EditText) findViewById(R.id.editTextHeight);
+        editTextHeight.setOnFocusChangeListener(editTextHeight_OnFocusChangeListener);
+        editTextHeight.setOnClickListener(editTextHeight_OnClickListener);
     }
 
-    View.OnFocusChangeListener editTextBirthdate_OnFocusChangeListener=new View.OnFocusChangeListener() {
+    View.OnFocusChangeListener editTextBirthdate_OnFocusChangeListener = new View.OnFocusChangeListener() {
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
-            if (hasFocus)
-            {
+            if (hasFocus) {
                 openPersianDatePickerDialog();
             }
 
         }
     };
 
-    View.OnClickListener editTextBirthdate_OnClickListener=new View.OnClickListener() {
+    View.OnClickListener editTextBirthdate_OnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             openPersianDatePickerDialog();
         }
     };
 
-    private void openPersianDatePickerDialog()
-    {
-        PersianDatePickerDialog dialog=new PersianDatePickerDialog(FirstRunActivity.this)
+    View.OnFocusChangeListener editTextHeight_OnFocusChangeListener = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if (hasFocus) {
+                openHeightDialog();
+            }
+
+        }
+    };
+
+    View.OnClickListener editTextHeight_OnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            openHeightDialog();
+        }
+    };
+
+    private void openPersianDatePickerDialog() {
+        PersianDatePickerDialog dialog = new PersianDatePickerDialog(FirstRunActivity.this)
                 .setPositiveButtonString("تائید")
                 .setNegativeButton("انصراف")
                 .setTodayButton("امروز")
@@ -89,11 +108,11 @@ public class FirstRunActivity extends AppCompatActivity {
                 .setListener(new Listener() {
                     @Override
                     public void onDateSelected(PersianCalendar persianCalendar) {
-                        int year=persianCalendar.getPersianYear();
-                        int month=persianCalendar.getPersianMonth();
-                        int day=persianCalendar.getPersianDay();
+                        int year = persianCalendar.getPersianYear();
+                        int month = persianCalendar.getPersianMonth();
+                        int day = persianCalendar.getPersianDay();
 
-                        String output=String.format("%s/%s/%s",year,month,day);
+                        String output = String.format("%s/%s/%s", year, month, day);
                         editTextBirthdate.setText(output);
                     }
 
@@ -104,5 +123,18 @@ public class FirstRunActivity extends AppCompatActivity {
                 });
 
         dialog.show();
+    }
+
+    private void openHeightDialog()
+    {
+        HeightFragment heightFragment=new HeightFragment();
+        heightFragment.setOnSaveListener(new HeightFragment.OnSaveListener() {
+            @Override
+            public void onSave() {
+
+            }
+        });
+
+        heightFragment.show(getSupportFragmentManager(),"height1");
     }
 }

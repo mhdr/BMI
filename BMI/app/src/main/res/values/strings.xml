@@ -29,4 +29,16 @@
     <string name="first_run_header1">به برنامه محاسبه شاخص توده بدنی خوش آمدید</string>
     <string name="first_run_header2">لطفا برای ایجاد پروفایل اطلاعات زیر را وارد نمائید</string>
     <string name="first_run_header3">لطفا برای محاسبه شاخص توده بدنی خود اطلاعات مربوط به وزن و قد خود را وارد نمائید</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="font_path">fonts/BYekan.ttf</string>
+    <string name="height_unit">سانتی متر</string>
+    <string name="weight_unit">کیلوگرم</string>
+
+    <string name="height">قد</string>
+    <string name="weight">وزن</string>
+
+    <string name="ok">تائید</string>
 </resources>
