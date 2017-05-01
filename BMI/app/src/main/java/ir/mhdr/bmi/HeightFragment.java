@@ -14,7 +14,6 @@ import android.widget.TextView;
 public class HeightFragment extends DialogFragment {
 
     NumberPicker numberPickerHeight;
-    TextView textViewHeightUnit;
     Button buttonSaveHeight;
 
     OnSaveListener onSaveListener;
@@ -31,7 +30,6 @@ public class HeightFragment extends DialogFragment {
         View view = inflater.inflate(R.layout.fragment_height, container, false);
 
         numberPickerHeight = (NumberPicker) view.findViewById(R.id.numberPickerHeight);
-        textViewHeightUnit = (TextView) view.findViewById(R.id.textViewHeightUnit);
         buttonSaveHeight = (Button) view.findViewById(R.id.buttonSaveHeight);
 
         numberPickerHeight.setMaxValue(999);

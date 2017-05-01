@@ -37,8 +37,12 @@
     <string name="height_unit">سانتی متر</string>
     <string name="weight_unit">کیلوگرم</string>
 
-    <string name="height">قد ( سانتی متر )</string>
-    <string name="weight">وزن</string>
+    <string name="height_unit_text">قد ( سانتی متر )</string>
+    <string name="weight_unit_text">وزن ( کیلوگرم )</string>
 
     <string name="ok">تائید</string>
+
+    <string name="dot">.</string>
+
+    <string name="start">شروع</string>
 </resources>

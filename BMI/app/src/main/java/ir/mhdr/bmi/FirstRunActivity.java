@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -30,6 +31,8 @@ public class FirstRunActivity extends AppCompatActivity {
     EditText editTextBirthdate;
     Toolbar toolbarFirstRun;
     EditText editTextHeight;
+    EditText editTextWeight;
+    TextView textViewProfileName;
 
 
     @Override
@@ -41,6 +44,9 @@ public class FirstRunActivity extends AppCompatActivity {
         setSupportActionBar(toolbarFirstRun);
         ViewCompat.setLayoutDirection(toolbarFirstRun, ViewCompat.LAYOUT_DIRECTION_RTL);
         getSupportActionBar().setTitle(R.string.first_run);
+
+        textViewProfileName= (TextView) findViewById(R.id.textViewProfileName);
+        textViewProfileName.requestFocusFromTouch();
 
         editTextProfileName = (EditText) findViewById(R.id.editTextProfileName);
         ViewCompat.setLayoutDirection(editTextProfileName, ViewCompat.LAYOUT_DIRECTION_RTL);
@@ -63,6 +69,10 @@ public class FirstRunActivity extends AppCompatActivity {
         editTextHeight = (EditText) findViewById(R.id.editTextHeight);
         editTextHeight.setOnFocusChangeListener(editTextHeight_OnFocusChangeListener);
         editTextHeight.setOnClickListener(editTextHeight_OnClickListener);
+
+        editTextWeight = (EditText) findViewById(R.id.editTextWeight);
+        editTextWeight.setOnFocusChangeListener(editTextWeight_OnFocusChangeListener);
+        editTextWeight.setOnClickListener(editTextWeight_OnClickListener);
     }
 
     View.OnFocusChangeListener editTextBirthdate_OnFocusChangeListener = new View.OnFocusChangeListener() {
@@ -99,6 +109,23 @@ public class FirstRunActivity extends AppCompatActivity {
         }
     };
 
+    View.OnFocusChangeListener editTextWeight_OnFocusChangeListener = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if (hasFocus) {
+                openWeightDialog();
+            }
+
+        }
+    };
+
+    View.OnClickListener editTextWeight_OnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            openWeightDialog();
+        }
+    };
+
     private void openPersianDatePickerDialog() {
         PersianDatePickerDialog dialog = new PersianDatePickerDialog(FirstRunActivity.this)
                 .setPositiveButtonString("تائید")
@@ -127,14 +154,12 @@ public class FirstRunActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void openHeightDialog()
-    {
-        String valueStr= editTextHeight.getText().toString();
+    private void openHeightDialog() {
+        String valueStr = editTextHeight.getText().toString();
 
-        HeightFragment heightFragment=new HeightFragment();
+        HeightFragment heightFragment = new HeightFragment();
 
-        if (valueStr.length()>0)
-        {
+        if (valueStr.length() > 0) {
             heightFragment.setHeightValue(Integer.parseInt(valueStr));
         }
 
@@ -145,7 +170,25 @@ public class FirstRunActivity extends AppCompatActivity {
             }
         });
 
-        heightFragment.show(getSupportFragmentManager(),"height1");
+        heightFragment.show(getSupportFragmentManager(), "height");
+    }
+
+    private void openWeightDialog() {
+        String valueStr = editTextWeight.getText().toString();
+
+        WeightFragment weightFragment = new WeightFragment();
+
+        if (valueStr.length() > 0) {
+            weightFragment.setWeightValue(Double.parseDouble(valueStr));
+        }
+
+        weightFragment.setOnSaveListener(new WeightFragment.OnSaveListener() {
+            @Override
+            public void onSave(double value) {
+                editTextWeight.setText(String.valueOf(value));
+            }
+        });
+        weightFragment.show(getSupportFragmentManager(), "weight");
     }
 
     @Override
