@@ -1,5 +1,6 @@
 package ir.mhdr.bmi;
 
+import android.content.Context;
 import android.graphics.PorterDuff;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import ir.hamsaa.persiandatepicker.Listener;
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog;
 import ir.hamsaa.persiandatepicker.util.PersianCalendar;
 import ir.mhdr.bmi.lib.Resources;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class FirstRunActivity extends AppCompatActivity {
 
@@ -127,14 +129,27 @@ public class FirstRunActivity extends AppCompatActivity {
 
     private void openHeightDialog()
     {
+        String valueStr= editTextHeight.getText().toString();
+
         HeightFragment heightFragment=new HeightFragment();
+
+        if (valueStr.length()>0)
+        {
+            heightFragment.setHeightValue(Integer.parseInt(valueStr));
+        }
+
         heightFragment.setOnSaveListener(new HeightFragment.OnSaveListener() {
             @Override
-            public void onSave() {
-
+            public void onSave(int value) {
+                editTextHeight.setText(String.valueOf(value));
             }
         });
 
         heightFragment.show(getSupportFragmentManager(),"height1");
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

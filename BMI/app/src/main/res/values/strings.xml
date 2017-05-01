@@ -37,7 +37,7 @@
     <string name="height_unit">سانتی متر</string>
     <string name="weight_unit">کیلوگرم</string>
 
-    <string name="height">قد</string>
+    <string name="height">قد ( سانتی متر )</string>
     <string name="weight">وزن</string>
 
     <string name="ok">تائید</string>
