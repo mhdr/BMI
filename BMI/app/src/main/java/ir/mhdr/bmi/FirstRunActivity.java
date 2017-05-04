@@ -1,6 +1,7 @@
 package ir.mhdr.bmi;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -9,17 +10,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import net.time4j.PlainDate;
 
 import java.util.List;
 
 import ir.hamsaa.persiandatepicker.Listener;
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog;
 import ir.hamsaa.persiandatepicker.util.PersianCalendar;
+import ir.mhdr.bmi.bl.UserBL;
+import ir.mhdr.bmi.lib.Gender;
 import ir.mhdr.bmi.lib.Resources;
+import ir.mhdr.bmi.model.User;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class FirstRunActivity extends AppCompatActivity {
@@ -33,6 +41,7 @@ public class FirstRunActivity extends AppCompatActivity {
     EditText editTextHeight;
     EditText editTextWeight;
     TextView textViewProfileName;
+    Button buttonStart;
 
 
     @Override
@@ -45,7 +54,7 @@ public class FirstRunActivity extends AppCompatActivity {
         ViewCompat.setLayoutDirection(toolbarFirstRun, ViewCompat.LAYOUT_DIRECTION_RTL);
         getSupportActionBar().setTitle(R.string.first_run);
 
-        textViewProfileName= (TextView) findViewById(R.id.textViewProfileName);
+        textViewProfileName = (TextView) findViewById(R.id.textViewProfileName);
         textViewProfileName.requestFocusFromTouch();
 
         editTextProfileName = (EditText) findViewById(R.id.editTextProfileName);
@@ -73,7 +82,102 @@ public class FirstRunActivity extends AppCompatActivity {
         editTextWeight = (EditText) findViewById(R.id.editTextWeight);
         editTextWeight.setOnFocusChangeListener(editTextWeight_OnFocusChangeListener);
         editTextWeight.setOnClickListener(editTextWeight_OnClickListener);
+
+        initializeButtonStart();
     }
+
+    private void initializeButtonStart() {
+        buttonStart = (Button) findViewById(R.id.buttonStart);
+        buttonStart.setOnClickListener(buttonStart_OnClickListener);
+    }
+
+    View.OnClickListener buttonStart_OnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            int validationError=0;
+
+            String name = editTextProfileName.getText().toString();
+
+            if (name.length()==0) {
+                validationError++;
+            }
+
+            String genderStr = (String) spinnerGender.getSelectedItem();
+
+            if (genderStr.length()==0)
+            {
+                validationError++;
+            }
+
+            String birthdateStr = editTextBirthdate.getText().toString();
+
+            if (birthdateStr.length()==0)
+            {
+                validationError++;
+            }
+
+            String height = editTextHeight.getText().toString();
+
+            if (height.length()==0)
+            {
+                validationError++;
+            }
+
+            String weight = editTextWeight.getText().toString();
+
+            if (weight.length()==0)
+            {
+                validationError++;
+            }
+
+            if (validationError>0)
+            {
+                Toast.makeText(getApplicationContext(), R.string.first_run_validation_msg,Toast.LENGTH_LONG).show();
+
+                return;
+            }
+
+            Gender gender = Gender.Male;
+
+            switch (genderStr) {
+                case "مرد":
+                    gender = Gender.Male;
+                    break;
+                case "زن":
+                    gender = Gender.Female;
+                    break;
+            }
+
+            String[] birthdateArray = birthdateStr.split("/");
+            int year = Integer.parseInt(birthdateArray[0]);
+            int month = Integer.parseInt(birthdateArray[1]);
+            int day = Integer.parseInt(birthdateArray[2]);
+
+            net.time4j.calendar.PersianCalendar persianCalendar = net.time4j.calendar.PersianCalendar.of(year, month, day);
+            PlainDate birthdate = persianCalendar.transform(PlainDate.class);
+
+            User user = new User();
+            user.setName(name);
+            user.setGenderEnum(gender);
+            user.setBirthdate(birthdate.toString());
+            user.setLatestHeight(height);
+            user.setLatestWeight(weight);
+
+            UserBL userBL = new UserBL(FirstRunActivity.this);
+            long id = userBL.insert(user);
+
+            if (id > 0) {
+
+                Toast.makeText(getApplicationContext(), R.string.profile_created_successful_msg,Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(FirstRunActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+        }
+    };
 
     View.OnFocusChangeListener editTextBirthdate_OnFocusChangeListener = new View.OnFocusChangeListener() {
         @Override
@@ -127,13 +231,35 @@ public class FirstRunActivity extends AppCompatActivity {
     };
 
     private void openPersianDatePickerDialog() {
+
+        String previousStr=editTextBirthdate.getText().toString();
+        PersianCalendar initDate=null;
+
+        if (previousStr.length()>0)
+        {
+            String[] previous=previousStr.split("/");
+            PersianCalendar previousBirthDate=new PersianCalendar();
+
+            int year=Integer.parseInt(previous[0]);
+            int month=Integer.parseInt(previous[1]);
+            int day=Integer.parseInt(previous[2]);
+
+            previousBirthDate.setPersianDate(year,month,day);
+            initDate=previousBirthDate;
+        }
+        else {
+            initDate = new PersianCalendar();
+            initDate.setPersianDate(1364, 3, 1);
+        }
+
         PersianDatePickerDialog dialog = new PersianDatePickerDialog(FirstRunActivity.this)
                 .setPositiveButtonString("تائید")
                 .setNegativeButton("انصراف")
                 .setTodayButton("امروز")
                 .setTodayButtonVisible(true)
-                .setMaxYear(1400)
+                .setMaxYear(1450)
                 .setMinYear(1300)
+                .setInitDate(initDate)
                 .setListener(new Listener() {
                     @Override
                     public void onDateSelected(PersianCalendar persianCalendar) {

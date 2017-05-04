@@ -2,6 +2,8 @@ package ir.mhdr.bmi;
 
 import android.app.Application;
 
+import net.time4j.android.ApplicationStarter;
+
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 
@@ -15,6 +17,8 @@ public class MyApplication extends Application {
                 .setDefaultFontPath("fonts/BYekan.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build());
+
+        ApplicationStarter.initialize(this, true); // time4j
     }
 }
 

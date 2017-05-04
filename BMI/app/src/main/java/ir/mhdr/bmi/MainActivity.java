@@ -18,6 +18,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 
+import ir.mhdr.bmi.bl.UserBL;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,16 +28,22 @@ public class MainActivity extends AppCompatActivity {
     ActionBarDrawerToggle actionBarDrawerToggle;
     BottomNavigationView bottomNavigationView;
     ViewPager viewPagerMain;
-    boolean firstRun = true;
+    boolean firstRun = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        UserBL userBL = new UserBL(MainActivity.this);
+
+        if (userBL.countUsers() == 0) {
+            firstRun = true;
+        }
+
         if (firstRun) {
             Intent intent = new Intent(MainActivity.this, FirstRunActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY|Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish(); // to close current activity
         }

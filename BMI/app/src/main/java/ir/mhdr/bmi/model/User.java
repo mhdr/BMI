@@ -5,7 +5,7 @@ import ir.mhdr.bmi.lib.Gender;
 
 public class User {
 
-    private int _id;
+    private long id;
 
     private String name;
 
@@ -13,16 +13,16 @@ public class User {
 
     private int gender;
 
-    private String latest_height;
+    private String latestHeight;
 
-    private String latest_weight;
+    private String latestWeight;
 
-    public int get_id() {
-        return _id;
+    public long getId() {
+        return id;
     }
 
-    public void set_id(int _id) {
-        this._id = _id;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -49,19 +49,41 @@ public class User {
         this.gender = gender;
     }
 
-    public String getLatest_height() {
-        return latest_height;
+    public String getLatestHeight() {
+        return latestHeight;
     }
 
-    public void setLatest_height(String latest_height) {
-        this.latest_height = latest_height;
+    public void setLatestHeight(String latestHeight) {
+        this.latestHeight = latestHeight;
     }
 
-    public String getLatest_weight() {
-        return latest_weight;
+    public String getLatestWeight() {
+        return latestWeight;
     }
 
-    public void setLatest_weight(String latest_weight) {
-        this.latest_weight = latest_weight;
+    public void setLatestWeight(String latestWeight) {
+        this.latestWeight = latestWeight;
+    }
+
+    public Gender getGenderEnum() {
+        switch (this.gender) {
+            case 1:
+                return Gender.Male;
+            case 2:
+                return Gender.Female;
+            default:
+                return Gender.Male;
+        }
+    }
+
+    public void setGenderEnum(Gender gender) {
+        switch (gender) {
+            case Male:
+                this.gender = 1;
+                break;
+            case Female:
+                this.gender = 2;
+                break;
+        }
     }
 }

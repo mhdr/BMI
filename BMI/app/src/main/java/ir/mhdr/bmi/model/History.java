@@ -1,21 +1,23 @@
 package ir.mhdr.bmi.model;
 
 
+import ir.mhdr.bmi.lib.HistoryType;
+
 public class History {
-    public int get_id() {
+    public long get_id() {
         return _id;
     }
 
-    public void set_id(int _id) {
+    public void set_id(long _id) {
         this._id = _id;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public String getDatetime() {
@@ -42,13 +44,35 @@ public class History {
         this.type = type;
     }
 
-    private int _id;
+    private long _id;
 
-    private int user_id;
+    private long userId;
 
     private String datetime;
 
     private String value;
 
     private int type;
+
+    public HistoryType getTypeEnum() {
+        switch (this.type) {
+            case 1:
+                return HistoryType.Weight;
+            case 2:
+                return HistoryType.Height;
+            default:
+                return HistoryType.Weight;
+        }
+    }
+
+    public void setHistoryEnum(HistoryType history) {
+        switch (history) {
+            case Weight:
+                this.type = 1;
+                break;
+            case Height:
+                this.type = 2;
+                break;
+        }
+    }
 }
