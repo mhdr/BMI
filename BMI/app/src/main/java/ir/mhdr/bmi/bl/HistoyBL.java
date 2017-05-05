@@ -29,7 +29,6 @@ public class HistoyBL {
         values.put(DatabaseHandler.Schema_History.COL2_USER_ID,history.getUserId());
         values.put(DatabaseHandler.Schema_History.COL3_DATETIME,history.getDatetime());
         values.put(DatabaseHandler.Schema_History.COL4_VALUE,history.getValue());
-        values.put(DatabaseHandler.Schema_History.COL5_TYPE,history.getType());
 
         long inserted_id = db.insert(DatabaseHandler.Schema_History.TABLE_NAME, null, values);
         db.close();

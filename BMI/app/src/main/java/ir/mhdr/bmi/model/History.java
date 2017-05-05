@@ -1,8 +1,6 @@
 package ir.mhdr.bmi.model;
 
 
-import ir.mhdr.bmi.lib.HistoryType;
-
 public class History {
     public long get_id() {
         return _id;
@@ -36,14 +34,6 @@ public class History {
         this.value = value;
     }
 
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
     private long _id;
 
     private long userId;
@@ -51,28 +41,4 @@ public class History {
     private String datetime;
 
     private String value;
-
-    private int type;
-
-    public HistoryType getTypeEnum() {
-        switch (this.type) {
-            case 1:
-                return HistoryType.Weight;
-            case 2:
-                return HistoryType.Height;
-            default:
-                return HistoryType.Weight;
-        }
-    }
-
-    public void setHistoryEnum(HistoryType history) {
-        switch (history) {
-            case Weight:
-                this.type = 1;
-                break;
-            case Height:
-                this.type = 2;
-                break;
-        }
-    }
 }

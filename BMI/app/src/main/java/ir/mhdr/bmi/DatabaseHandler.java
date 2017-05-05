@@ -62,14 +62,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         public static final String COL2_USER_ID = "user_id";
         public static final String COL3_DATETIME = "datetime";
         public static final String COL4_VALUE = "value";
-        public static final String COL5_TYPE = "type";
         public static final String QUERY_CREATE_TABLE=String.format("CREATE TABLE \"%s\" (\n" +
                 "\"%s\"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
                 "\"%s\"  INTEGER NOT NULL,\n" +
                 "\"%s\"  TEXT NOT NULL,\n" +
                 "\"%s\"  TEXT NOT NULL,\n" +
                 "\"%s\"  INTEGER NOT NULL\n" +
-                ");",TABLE_NAME,COL1_ID,COL2_USER_ID,COL3_DATETIME,COL4_VALUE,COL5_TYPE);
+                ");",TABLE_NAME,COL1_ID,COL2_USER_ID,COL3_DATETIME,COL4_VALUE);
         public static final String QUERY_DROP_TABLE =String.format("DROP TABLE IF EXISTS \"%s\";",TABLE_NAME);
     }
 }
