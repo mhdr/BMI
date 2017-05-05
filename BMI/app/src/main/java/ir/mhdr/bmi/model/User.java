@@ -17,6 +17,16 @@ public class User {
 
     private String latestWeight;
 
+    public int getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(int isActive) {
+        this.isActive = isActive;
+    }
+
+    private int isActive;
+
     public long getId() {
         return id;
     }
@@ -65,7 +75,7 @@ public class User {
         this.latestWeight = latestWeight;
     }
 
-    public Gender getGenderEnum() {
+    public Gender getGenderX() {
         switch (this.gender) {
             case 1:
                 return Gender.Male;
@@ -76,7 +86,7 @@ public class User {
         }
     }
 
-    public void setGenderEnum(Gender gender) {
+    public void setGenderX(Gender gender) {
         switch (gender) {
             case Male:
                 this.gender = 1;
@@ -84,6 +94,29 @@ public class User {
             case Female:
                 this.gender = 2;
                 break;
+        }
+    }
+
+    public boolean getIsActiveX()
+    {
+        if (this.isActive==1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void setIsActiveX(boolean value)
+    {
+        if (value)
+        {
+            this.isActive=1;
+        }
+        else {
+            this.isActive=0;
         }
     }
 }

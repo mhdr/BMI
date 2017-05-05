@@ -2,17 +2,14 @@ package ir.mhdr.bmi;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -159,10 +156,11 @@ public class FirstRunActivity extends AppCompatActivity {
 
             User user = new User();
             user.setName(name);
-            user.setGenderEnum(gender);
+            user.setGenderX(gender);
             user.setBirthdate(birthdate.toString());
             user.setLatestHeight(height);
             user.setLatestWeight(weight);
+            user.setIsActiveX(true);
 
             UserBL userBL = new UserBL(FirstRunActivity.this);
             long id = userBL.insert(user);

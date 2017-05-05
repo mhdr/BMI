@@ -32,6 +32,7 @@ public class UserBL {
         values.put(DatabaseHandler.Schema_Users.COL4_GENDER, user.getGender());
         values.put(DatabaseHandler.Schema_Users.COL5_LATEST_HEIGHT, user.getLatestHeight());
         values.put(DatabaseHandler.Schema_Users.COL6_LATEST_WEIGHT, user.getLatestWeight());
+        values.put(DatabaseHandler.Schema_Users.COL7_ISACTIVE,user.getIsActive());
 
         long inserted_id = db.insert(DatabaseHandler.Schema_Users.TABLE_NAME, null, values);
         db.close();
@@ -49,6 +50,7 @@ public class UserBL {
                 DatabaseHandler.Schema_Users.COL4_GENDER,
                 DatabaseHandler.Schema_Users.COL5_LATEST_HEIGHT,
                 DatabaseHandler.Schema_Users.COL6_LATEST_WEIGHT,
+                DatabaseHandler.Schema_Users.COL7_ISACTIVE
         };
 
         String selection = DatabaseHandler.Schema_Users.COL1_ID + " = ?";
@@ -74,6 +76,7 @@ public class UserBL {
         user.setGender(cursor.getInt(cursor.getColumnIndex(DatabaseHandler.Schema_Users.COL4_GENDER)));
         user.setLatestHeight(cursor.getString(cursor.getColumnIndex(DatabaseHandler.Schema_Users.COL5_LATEST_HEIGHT)));
         user.setLatestWeight(cursor.getString(cursor.getColumnIndex(DatabaseHandler.Schema_Users.COL6_LATEST_WEIGHT)));
+        user.setIsActive(cursor.getInt(cursor.getColumnIndex(DatabaseHandler.Schema_Users.COL7_ISACTIVE)));
 
         cursor.close();
 
@@ -90,6 +93,7 @@ public class UserBL {
                 DatabaseHandler.Schema_Users.COL4_GENDER,
                 DatabaseHandler.Schema_Users.COL5_LATEST_HEIGHT,
                 DatabaseHandler.Schema_Users.COL6_LATEST_WEIGHT,
+                DatabaseHandler.Schema_Users.COL7_ISACTIVE
         };
 
         Cursor cursor = db.query(DatabaseHandler.Schema_Users.TABLE_NAME, column, null, null, null, null, null);
@@ -112,6 +116,7 @@ public class UserBL {
                 user.setGender(cursor.getInt(cursor.getColumnIndex(DatabaseHandler.Schema_Users.COL4_GENDER)));
                 user.setLatestHeight(cursor.getString(cursor.getColumnIndex(DatabaseHandler.Schema_Users.COL5_LATEST_HEIGHT)));
                 user.setLatestWeight(cursor.getString(cursor.getColumnIndex(DatabaseHandler.Schema_Users.COL6_LATEST_WEIGHT)));
+                user.setIsActive(cursor.getInt(cursor.getColumnIndex(DatabaseHandler.Schema_Users.COL7_ISACTIVE)));
 
                 result.add(user);
 

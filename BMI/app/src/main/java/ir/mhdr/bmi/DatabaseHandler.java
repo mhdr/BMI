@@ -43,14 +43,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         public static final String COL4_GENDER = "gender";
         public static final String COL5_LATEST_HEIGHT = "latest_height";
         public static final String COL6_LATEST_WEIGHT = "latest_weight";
+        public static final String COL7_ISACTIVE="isActive";
         public static final String QUERY_CREATE_TABLE=String.format("CREATE TABLE \"%s\" (\n" +
                 "\"%s\"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
                 "\"%s\"  TEXT NOT NULL,\n" +
                 "\"%s\"  TEXT NOT NULL,\n" +
                 "\"%s\"  INTEGER NOT NULL,\n" +
                 "\"%s\"  TEXT NOT NULL,\n" +
-                "\"%s\"  TEXT NOT NULL\n" +
-                ");",TABLE_NAME,COL1_ID,COL2_NAME,COL3_BIRTHDATE,COL4_GENDER,COL5_LATEST_HEIGHT,COL6_LATEST_WEIGHT);
+                "\"%s\"  TEXT NOT NULL,\n" +
+                "\"%s\"  INTEGER NOT NULL\n" +
+                ");",TABLE_NAME,COL1_ID,COL2_NAME,COL3_BIRTHDATE,COL4_GENDER,COL5_LATEST_HEIGHT,COL6_LATEST_WEIGHT,COL7_ISACTIVE);
         public static final String QUERY_DROP_TABLE =String.format("DROP TABLE IF EXISTS \"%s\";",TABLE_NAME);
     }
 
