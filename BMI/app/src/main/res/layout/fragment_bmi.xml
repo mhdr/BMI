@@ -1,13 +1,53 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     tools:context="ir.mhdr.bmi.BmiFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="BMI Fragment" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_alignParentTop="true"
+            android:id="@+id/textViewProfileInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:textSize="24sp"/>
+
+        <RelativeLayout
+            android:layout_below="@+id/textViewProfileInfo"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="-25dp"
+            android:layout_height="wrap_content">
+
+            <com.sccomponents.widgets.ScArcGauge
+                android:id="@+id/ScArcGaugeBmiGauge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_centerInParent="true"
+                android:paddingTop="15dp"
+                android:paddingLeft="100dp"
+                android:paddingRight="100dp"/>
+
+            <TextView
+                android:id="@+id/textViewBMI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ScArcGaugeBmiGauge"
+                android:layout_centerInParent="true"
+                android:layout_gravity="bottom|center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textStyle="bold"
+                android:textSize="35sp"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
 
 </FrameLayout>

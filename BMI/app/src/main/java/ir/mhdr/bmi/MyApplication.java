@@ -2,6 +2,7 @@ package ir.mhdr.bmi;
 
 import android.app.Application;
 
+import net.danlew.android.joda.JodaTimeAndroid;
 import net.time4j.android.ApplicationStarter;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -19,6 +20,7 @@ public class MyApplication extends Application {
                 .build());
 
         ApplicationStarter.initialize(this, true); // time4j
+        JodaTimeAndroid.init(this); // joda
     }
 }
 

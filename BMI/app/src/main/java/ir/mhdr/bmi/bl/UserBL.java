@@ -83,6 +83,52 @@ public class UserBL {
         return user;
     }
 
+    public Cursor getActiveUserCursor()
+    {
+        SQLiteDatabase db = this.dbHandler.getReadableDatabase();
+
+        String[] column = {
+                DatabaseHandler.Schema_Users.COL1_ID,
+                DatabaseHandler.Schema_Users.COL2_NAME,
+                DatabaseHandler.Schema_Users.COL3_BIRTHDATE,
+                DatabaseHandler.Schema_Users.COL4_GENDER,
+                DatabaseHandler.Schema_Users.COL5_LATEST_HEIGHT,
+                DatabaseHandler.Schema_Users.COL6_LATEST_WEIGHT,
+                DatabaseHandler.Schema_Users.COL7_ISACTIVE
+        };
+
+        String selection = DatabaseHandler.Schema_Users.COL7_ISACTIVE + " = ?";
+
+        String isActive="1";
+
+        String[] selectionArgs = {isActive};
+
+        Cursor cursor = db.query(DatabaseHandler.Schema_Users.TABLE_NAME, column, selection, selectionArgs, null, null, null);
+
+        return cursor;
+    }
+
+    public User getActiveUser() {
+        Cursor cursor = this.getActiveUserCursor();
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+
+        User user = new User();
+        user.setId(cursor.getInt(cursor.getColumnIndex(DatabaseHandler.Schema_Users.COL1_ID)));
+        user.setName(cursor.getString(cursor.getColumnIndex(DatabaseHandler.Schema_Users.COL2_NAME)));
+        user.setBirthdate(cursor.getString(cursor.getColumnIndex(DatabaseHandler.Schema_Users.COL3_BIRTHDATE)));
+        user.setGender(cursor.getInt(cursor.getColumnIndex(DatabaseHandler.Schema_Users.COL4_GENDER)));
+        user.setLatestHeight(cursor.getString(cursor.getColumnIndex(DatabaseHandler.Schema_Users.COL5_LATEST_HEIGHT)));
+        user.setLatestWeight(cursor.getString(cursor.getColumnIndex(DatabaseHandler.Schema_Users.COL6_LATEST_WEIGHT)));
+        user.setIsActive(cursor.getInt(cursor.getColumnIndex(DatabaseHandler.Schema_Users.COL7_ISACTIVE)));
+
+        cursor.close();
+
+        return user;
+    }
+
     public Cursor getUsersCursor() {
         SQLiteDatabase db = this.dbHandler.getReadableDatabase();
 

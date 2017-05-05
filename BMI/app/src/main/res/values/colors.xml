@@ -5,4 +5,13 @@
     <color name="colorAccent">#8cac90</color>
     <color name="colorBottomNavigation">#f2f2f2</color>
     <color name="colorBackground">#d5e3d4</color>
+
+    <color name="color_bmi_range_1">#e6f2ff</color>
+    <color name="color_bmi_range_2">#cce5ff</color>
+    <color name="color_bmi_range_3">#b3d7ff</color>
+    <color name="color_bmi_range_4">#86b300</color>
+    <color name="color_bmi_range_5">#ff9933</color>
+    <color name="color_bmi_range_6">#ff8000</color>
+    <color name="color_bmi_range_7">#ff3300</color>
+    <color name="color_bmi_range_8">#cc2900</color>
 </resources>

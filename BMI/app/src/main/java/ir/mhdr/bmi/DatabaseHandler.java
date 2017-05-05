@@ -66,8 +66,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "\"%s\"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n" +
                 "\"%s\"  INTEGER NOT NULL,\n" +
                 "\"%s\"  TEXT NOT NULL,\n" +
-                "\"%s\"  TEXT NOT NULL,\n" +
-                "\"%s\"  INTEGER NOT NULL\n" +
+                "\"%s\"  TEXT NOT NULL\n" +
                 ");",TABLE_NAME,COL1_ID,COL2_USER_ID,COL3_DATETIME,COL4_VALUE);
         public static final String QUERY_DROP_TABLE =String.format("DROP TABLE IF EXISTS \"%s\";",TABLE_NAME);
     }

@@ -45,4 +45,13 @@
 
     <string name="profile_created_successful_msg">پروفایل جدید ایجاد شد</string>
     <string name="first_run_validation_msg">لطفا تمام فیلد ها را پر نمائید</string>
+
+    <string name="bmi_range_1">کمبود وزن بسیار شدید</string>
+    <string name="bmi_range_2">کمبود وزن شدید</string>
+    <string name="bmi_range_3">کمبود وزن</string>
+    <string name="bmi_range_4">عادی</string>
+    <string name="bmi_range_5">اضافه وزن</string>
+    <string name="bmi_range_6">چاقی متوسط</string>
+    <string name="bmi_range_7">چاقی شدید</string>
+    <string name="bmi_range_8">چاقی بسیار شدید</string>
 </resources>
