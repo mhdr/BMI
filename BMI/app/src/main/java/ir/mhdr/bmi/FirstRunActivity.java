@@ -49,7 +49,7 @@ public class FirstRunActivity extends AppCompatActivity {
         toolbarFirstRun = (Toolbar) findViewById(R.id.toolbarFirstRun);
         setSupportActionBar(toolbarFirstRun);
         ViewCompat.setLayoutDirection(toolbarFirstRun, ViewCompat.LAYOUT_DIRECTION_RTL);
-        getSupportActionBar().setTitle(R.string.first_run);
+        getSupportActionBar().setTitle(R.string.initial_info);
 
         textViewProfileName = (TextView) findViewById(R.id.textViewProfileName);
         textViewProfileName.requestFocusFromTouch();

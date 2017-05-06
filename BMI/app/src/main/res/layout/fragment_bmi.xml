@@ -16,12 +16,13 @@
             android:layout_centerInParent="true"
             android:layout_marginTop="5dp"
             android:textStyle="bold"
-            android:textSize="24sp"/>
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
 
         <RelativeLayout
             android:layout_below="@+id/textViewProfileInfo"
             android:layout_width="wrap_content"
-            android:layout_marginTop="-25dp"
+            android:layout_marginTop="-20dp"
             android:layout_height="wrap_content">
 
             <com.sccomponents.widgets.ScArcGauge
@@ -31,8 +32,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_centerInParent="true"
                 android:paddingTop="15dp"
-                android:paddingLeft="100dp"
-                android:paddingRight="100dp"/>
+                android:paddingLeft="120dp"
+                android:paddingRight="120dp"/>
 
             <TextView
                 android:id="@+id/textViewBMI"
@@ -41,11 +42,11 @@
                 android:layout_below="@+id/ScArcGaugeBmiGauge"
                 android:layout_centerInParent="true"
                 android:layout_gravity="bottom|center"
-                android:layout_marginLeft="5dp"
-                android:layout_marginStart="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textStyle="bold"
-                android:textSize="35sp"/>
+                android:textSize="24sp"
+                android:textStyle="bold" />
         </RelativeLayout>
     </RelativeLayout>
 

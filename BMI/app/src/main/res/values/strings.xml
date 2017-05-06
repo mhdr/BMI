@@ -25,7 +25,7 @@
         <item>زن</item>
     </string-array>
 
-    <string name="first_run">اجرای اول</string>
+    <string name="initial_info">اطلاعات اولیه</string>
     <string name="first_run_header1">به برنامه محاسبه شاخص توده بدنی خوش آمدید</string>
     <string name="first_run_header2">لطفا برای ایجاد پروفایل اطلاعات زیر را وارد نمائید</string>
     <string name="first_run_header3">لطفا برای محاسبه شاخص توده بدنی اطلاعات مربوط به وزن و قد خود را وارد نمائید</string>

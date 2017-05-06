@@ -38,6 +38,7 @@ import java.util.Date;
 
 import ir.mhdr.bmi.bl.UserBL;
 import ir.mhdr.bmi.lib.BMI;
+import ir.mhdr.bmi.lib.Resources;
 import ir.mhdr.bmi.model.User;
 
 
@@ -62,8 +63,9 @@ public class BmiFragment extends Fragment {
 
         String name=user.getName();
         String age= String.valueOf(calculateAge(user.getBirthdate()));
+        String height=String.valueOf(user.getLatestHeight());
 
-        String profileInfo=String.format("%s - %s ساله",name,age);
+        String profileInfo=String.format("%s   |   %s سال   |   %s سانتی متر",name,age,height);
         textViewProfileInfo.setText(profileInfo);
 
         final ScArcGauge gauge = (ScArcGauge) view.findViewById(R.id.ScArcGaugeBmiGauge);
@@ -76,6 +78,12 @@ public class BmiFragment extends Fragment {
         gauge.setAngleSweep(290);
         gauge.setStrokeSize(60);
         gauge.setHighValue(value, 12, 44);
+
+        int screenWidth= android.content.res.Resources.getSystem().getDisplayMetrics().widthPixels;
+        int screenHeight= android.content.res.Resources.getSystem().getDisplayMetrics().heightPixels;
+
+        int paddingLeftRight= (int) (screenWidth/3.5);
+        gauge.setPadding(paddingLeftRight,30,paddingLeftRight,5);
 
         textViewBMI.setText(String.valueOf(value));
 
