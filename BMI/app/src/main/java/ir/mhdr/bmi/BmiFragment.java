@@ -1,10 +1,7 @@
 package ir.mhdr.bmi;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -20,31 +17,23 @@ import com.sccomponents.widgets.ScNotches;
 import com.sccomponents.widgets.ScPointer;
 import com.sccomponents.widgets.ScWriter;
 
-import net.time4j.IsoDateUnit;
-import net.time4j.PlainDate;
-import net.time4j.TemporalType;
-import net.time4j.base.GregorianDate;
-import net.time4j.engine.TimeMetric;
-import net.time4j.format.TemporalFormatter;
-
 import org.joda.time.DateTime;
 import org.joda.time.Period;
-import org.joda.time.Years;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import ir.mhdr.bmi.bl.UserBL;
 import ir.mhdr.bmi.lib.BMI;
-import ir.mhdr.bmi.lib.Resources;
 import ir.mhdr.bmi.model.User;
 
 
 public class BmiFragment extends Fragment {
 
-    TextView textViewProfileInfo;
+    TextView textViewProfileInfoAge;
+    TextView textViewProfileInfoName;
+    TextView getTextViewProfileInfoHeight;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,7 +41,9 @@ public class BmiFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_bmi, container, false);
 
-        textViewProfileInfo= (TextView) view.findViewById(R.id.textViewProfileInfo);
+        textViewProfileInfoAge = (TextView) view.findViewById(R.id.textViewProfileInfoAge);
+        textViewProfileInfoName = (TextView) view.findViewById(R.id.textViewProfileInfoName);
+        getTextViewProfileInfoHeight = (TextView) view.findViewById(R.id.textViewProfileInfoHeight);
 
         float value = 24;
         UserBL userBL=new UserBL(getContext());
@@ -65,8 +56,9 @@ public class BmiFragment extends Fragment {
         String age= String.valueOf(calculateAge(user.getBirthdate()));
         String height=String.valueOf(user.getLatestHeight());
 
-        String profileInfo=String.format("%s   |   %s سال   |   %s سانتی متر",name,age,height);
-        textViewProfileInfo.setText(profileInfo);
+        textViewProfileInfoAge.setText(String.format("%s سال",age));
+        textViewProfileInfoName.setText(String.format("%s",name));
+        getTextViewProfileInfoHeight.setText(String.format("%s سانتی متر",height));
 
         final ScArcGauge gauge = (ScArcGauge) view.findViewById(R.id.ScArcGaugeBmiGauge);
 
