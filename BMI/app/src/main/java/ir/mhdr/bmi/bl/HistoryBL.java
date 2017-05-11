@@ -9,15 +9,15 @@ import ir.mhdr.bmi.DatabaseHandler;
 import ir.mhdr.bmi.model.History;
 import ir.mhdr.bmi.model.User;
 
-public class HistoyBL {
+public class HistoryBL {
 
     private DatabaseHandler dbHandler;
 
-    public HistoyBL(DatabaseHandler dbHandler) {
+    public HistoryBL(DatabaseHandler dbHandler) {
         this.dbHandler = dbHandler;
     }
 
-    public HistoyBL(Context context) {
+    public HistoryBL(Context context) {
         this.dbHandler = new DatabaseHandler(context);
     }
 

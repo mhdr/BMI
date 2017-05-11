@@ -180,4 +180,23 @@ public class UserBL {
 
         return result;
     }
+
+    public int update(User user) {
+        SQLiteDatabase db = this.dbHandler.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(DatabaseHandler.Schema_Users.COL2_NAME, user.getName());
+        values.put(DatabaseHandler.Schema_Users.COL3_BIRTHDATE,user.getBirthdate());
+        values.put(DatabaseHandler.Schema_Users.COL4_GENDER,user.getGender());
+        values.put(DatabaseHandler.Schema_Users.COL5_LATEST_HEIGHT,user.getLatestHeight());
+        values.put(DatabaseHandler.Schema_Users.COL6_LATEST_WEIGHT,user.getLatestWeight());
+        values.put(DatabaseHandler.Schema_Users.COL7_ISACTIVE,user.getIsActive());
+
+        int rows_affected = db.update(DatabaseHandler.Schema_Users.TABLE_NAME, values,
+                DatabaseHandler.Schema_Users.COL1_ID + " = ?",
+                new String[]{String.valueOf(user.getId())});
+        db.close();
+
+        return rows_affected;
+    }
 }

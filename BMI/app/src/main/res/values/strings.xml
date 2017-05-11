@@ -49,9 +49,14 @@
     <string name="bmi_range_1">کمبود وزن بسیار شدید</string>
     <string name="bmi_range_2">کمبود وزن شدید</string>
     <string name="bmi_range_3">کمبود وزن</string>
-    <string name="bmi_range_4">عادی</string>
+    <string name="bmi_range_4">ایده آل</string>
     <string name="bmi_range_5">اضافه وزن</string>
     <string name="bmi_range_6">چاقی متوسط</string>
     <string name="bmi_range_7">چاقی شدید</string>
     <string name="bmi_range_8">چاقی بسیار شدید</string>
+
+
+    <string name="weight">وزن</string>
+
+    <string name="new_weight_saved">وزن جدید ثبت شد</string>
 </resources>

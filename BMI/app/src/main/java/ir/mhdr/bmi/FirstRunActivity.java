@@ -16,14 +16,18 @@ import android.widget.Toast;
 
 import net.time4j.PlainDate;
 
+import org.joda.time.DateTime;
+
 import java.util.List;
 
 import ir.hamsaa.persiandatepicker.Listener;
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog;
 import ir.hamsaa.persiandatepicker.util.PersianCalendar;
+import ir.mhdr.bmi.bl.HistoryBL;
 import ir.mhdr.bmi.bl.UserBL;
 import ir.mhdr.bmi.lib.Gender;
 import ir.mhdr.bmi.lib.Resources;
+import ir.mhdr.bmi.model.History;
 import ir.mhdr.bmi.model.User;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -92,45 +96,40 @@ public class FirstRunActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            int validationError=0;
+            int validationError = 0;
 
             String name = editTextProfileName.getText().toString();
 
-            if (name.length()==0) {
+            if (name.length() == 0) {
                 validationError++;
             }
 
             String genderStr = (String) spinnerGender.getSelectedItem();
 
-            if (genderStr.length()==0)
-            {
+            if (genderStr.length() == 0) {
                 validationError++;
             }
 
             String birthdateStr = editTextBirthdate.getText().toString();
 
-            if (birthdateStr.length()==0)
-            {
+            if (birthdateStr.length() == 0) {
                 validationError++;
             }
 
             String height = editTextHeight.getText().toString();
 
-            if (height.length()==0)
-            {
+            if (height.length() == 0) {
                 validationError++;
             }
 
             String weight = editTextWeight.getText().toString();
 
-            if (weight.length()==0)
-            {
+            if (weight.length() == 0) {
                 validationError++;
             }
 
-            if (validationError>0)
-            {
-                Toast.makeText(getApplicationContext(), R.string.first_run_validation_msg,Toast.LENGTH_LONG).show();
+            if (validationError > 0) {
+                Toast.makeText(getApplicationContext(), R.string.first_run_validation_msg, Toast.LENGTH_LONG).show();
 
                 return;
             }
@@ -165,14 +164,28 @@ public class FirstRunActivity extends AppCompatActivity {
             UserBL userBL = new UserBL(FirstRunActivity.this);
             long id = userBL.insert(user);
 
+
             if (id > 0) {
 
-                Toast.makeText(getApplicationContext(), R.string.profile_created_successful_msg,Toast.LENGTH_LONG).show();
+                HistoryBL historyBL = new HistoryBL(FirstRunActivity.this);
 
-                Intent intent = new Intent(FirstRunActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                finish();
+                DateTime current = new DateTime();
+
+                History history = new History();
+                history.setUserId(id);
+                history.setValue(weight);
+                history.setDatetime(current.toString());
+
+                long historyId = historyBL.insert(history);
+
+                if (historyId > 0) {
+                    Toast.makeText(getApplicationContext(), R.string.profile_created_successful_msg, Toast.LENGTH_LONG).show();
+
+                    Intent intent = new Intent(FirstRunActivity.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                }
             }
         }
     };
@@ -230,22 +243,20 @@ public class FirstRunActivity extends AppCompatActivity {
 
     private void openPersianDatePickerDialog() {
 
-        String previousStr=editTextBirthdate.getText().toString();
-        PersianCalendar initDate=null;
+        String previousStr = editTextBirthdate.getText().toString();
+        PersianCalendar initDate = null;
 
-        if (previousStr.length()>0)
-        {
-            String[] previous=previousStr.split("/");
-            PersianCalendar previousBirthDate=new PersianCalendar();
+        if (previousStr.length() > 0) {
+            String[] previous = previousStr.split("/");
+            PersianCalendar previousBirthDate = new PersianCalendar();
 
-            int year=Integer.parseInt(previous[0]);
-            int month=Integer.parseInt(previous[1]);
-            int day=Integer.parseInt(previous[2]);
+            int year = Integer.parseInt(previous[0]);
+            int month = Integer.parseInt(previous[1]);
+            int day = Integer.parseInt(previous[2]);
 
-            previousBirthDate.setPersianDate(year,month,day);
-            initDate=previousBirthDate;
-        }
-        else {
+            previousBirthDate.setPersianDate(year, month, day);
+            initDate = previousBirthDate;
+        } else {
             initDate = new PersianCalendar();
             initDate.setPersianDate(1364, 3, 1);
         }
