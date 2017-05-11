@@ -83,14 +83,6 @@ public class BmiFragment extends Fragment {
         gauge.setStrokeColors(generateStrokeColors());
         gauge.setStrokeColorsMode(ScFeature.ColorsMode.SOLID);
 
-
-        gauge.setOnEventListener(new ScGauge.OnEventListener() {
-            @Override
-            public void onValueChange(float lowValue, float highValue) {
-                //counter.setText(String.valueOf(highValue));
-            }
-        });
-
         gauge.setOnDrawListener(new ScGauge.OnDrawListener() {
             @Override
             public void onBeforeDrawCopy(ScCopier.CopyInfo info) {
