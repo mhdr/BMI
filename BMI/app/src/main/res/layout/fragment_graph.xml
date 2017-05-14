@@ -4,10 +4,11 @@
     android:layout_height="match_parent"
     tools:context="ir.mhdr.bmi.GraphFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChartWeight"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Graph Fragment" />
+        android:layout_height="match_parent">
+
+    </com.github.mikephil.charting.charts.LineChart>
 
 </FrameLayout>

@@ -1,12 +1,14 @@
 package ir.mhdr.bmi.model;
 
 
+import org.joda.time.DateTime;
+
 public class History {
-    public long get_id() {
+    public long getId() {
         return _id;
     }
 
-    public void set_id(long _id) {
+    public void setId(long _id) {
         this._id = _id;
     }
 
@@ -41,4 +43,11 @@ public class History {
     private String datetime;
 
     private String value;
+
+    public DateTime getDatetime2()
+    {
+        DateTime dateTime=DateTime.parse(this.getDatetime());
+
+        return dateTime;
+    }
 }
