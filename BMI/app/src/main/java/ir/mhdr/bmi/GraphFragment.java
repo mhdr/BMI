@@ -10,15 +10,22 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
+import org.joda.time.DateTime;
+import org.joda.time.DurationFieldType;
+import org.joda.time.Period;
+
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import ir.mhdr.bmi.bl.HistoryBL;
 import ir.mhdr.bmi.bl.UserBL;
+import ir.mhdr.bmi.lib.DateAxisValueFormatter;
 import ir.mhdr.bmi.model.History;
 import ir.mhdr.bmi.model.User;
 
@@ -33,6 +40,8 @@ public class GraphFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_graph, container, false);
 
         lineChartWeight = (LineChart) view.findViewById(R.id.lineChartWeight);
+        XAxis xAxis= lineChartWeight.getXAxis();
+        xAxis.setValueFormatter(new DateAxisValueFormatter(lineChartWeight));
 
         return view;
     }
@@ -46,9 +55,13 @@ public class GraphFragment extends Fragment {
         User user = userBL.getActiveUser();
         List<History> historyList = historyBL.getHistory(user);
 
+        DateTime refDate=new DateTime(2017,1,1,0,0,0);
+
         for (History h : historyList) {
-            long millis=h.getDatetime2().getMillis();
-            Entry entry = new Entry(millis, Float.parseFloat(h.getValue()));
+            Period period=new Period(refDate,h.getDatetime2());
+            float seconds= Timestamp.valueOf(h.getDatetime()).getTime();
+            // todo continue
+            Entry entry = new Entry(seconds, Float.parseFloat(h.getValue()));
             entries.add(entry);
         }
 
@@ -56,6 +69,7 @@ public class GraphFragment extends Fragment {
         dataSet.setColor(getResources().getColor(R.color.colorPrimary));
         dataSet.setValueTextColor(getResources().getColor(R.color.colorPrimaryDark));
         dataSet.setCircleColor(getResources().getColor(R.color.colorGreenDark));
+        dataSet.setLineWidth(4);
         LineData lineData = new LineData(dataSet);
         lineChartWeight.setData(lineData);
         lineChartWeight.setBackgroundColor(getResources().getColor(R.color.colorBackground));
