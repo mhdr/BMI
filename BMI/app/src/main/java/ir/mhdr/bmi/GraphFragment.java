@@ -1,6 +1,7 @@
 package ir.mhdr.bmi;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,8 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -26,6 +31,7 @@ import java.util.List;
 import ir.mhdr.bmi.bl.HistoryBL;
 import ir.mhdr.bmi.bl.UserBL;
 import ir.mhdr.bmi.lib.DateAxisValueFormatter;
+import ir.mhdr.bmi.lib.TimeDiff;
 import ir.mhdr.bmi.model.History;
 import ir.mhdr.bmi.model.User;
 
@@ -40,8 +46,6 @@ public class GraphFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_graph, container, false);
 
         lineChartWeight = (LineChart) view.findViewById(R.id.lineChartWeight);
-        XAxis xAxis= lineChartWeight.getXAxis();
-        xAxis.setValueFormatter(new DateAxisValueFormatter(lineChartWeight));
 
         return view;
     }
@@ -55,24 +59,41 @@ public class GraphFragment extends Fragment {
         User user = userBL.getActiveUser();
         List<History> historyList = historyBL.getHistory(user);
 
-        DateTime refDate=new DateTime(2017,1,1,0,0,0);
-
         for (History h : historyList) {
-            Period period=new Period(refDate,h.getDatetime2());
-            float seconds= Timestamp.valueOf(h.getDatetime()).getTime();
-            // todo continue
-            Entry entry = new Entry(seconds, Float.parseFloat(h.getValue()));
+
+            TimeDiff timeDiff = new TimeDiff(h.getDatetime2());
+            float value = timeDiff.getMinutes();
+
+            Entry entry = new Entry(value, Float.parseFloat(h.getValue()));
             entries.add(entry);
         }
+
+        Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/BYekan.ttf");
 
         LineDataSet dataSet = new LineDataSet(entries, "Label");
         dataSet.setColor(getResources().getColor(R.color.colorPrimary));
         dataSet.setValueTextColor(getResources().getColor(R.color.colorPrimaryDark));
         dataSet.setCircleColor(getResources().getColor(R.color.colorGreenDark));
         dataSet.setLineWidth(4);
+        dataSet.setHighlightEnabled(false);
+        dataSet.setValueTypeface(typeface);
+        dataSet.setValueTextSize(10);
         LineData lineData = new LineData(dataSet);
-        lineChartWeight.setData(lineData);
+
+
         lineChartWeight.setBackgroundColor(getResources().getColor(R.color.colorBackground));
+        lineChartWeight.animateX(300, Easing.EasingOption.EaseInExpo);
+
+        XAxis xAxis = lineChartWeight.getXAxis();
+        xAxis.setValueFormatter(new DateAxisValueFormatter(lineChartWeight));
+        xAxis.setGranularity(1f); // restrict interval to 1 (minimum)
+        xAxis.setAvoidFirstLastClipping(true);
+        xAxis.setCenterAxisLabels(true);
+        xAxis.setGranularityEnabled(true);
+        xAxis.setLabelCount(3);
+        xAxis.setTypeface(typeface);
+
+        lineChartWeight.setData(lineData);
         lineChartWeight.invalidate();
     }
 
