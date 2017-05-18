@@ -80,7 +80,7 @@ public class GraphFragment extends Fragment {
         buttonGraphShowOneWeek.setOnClickListener(buttonGraphShowOneWeek_OnClickListener);
         buttonGraphShowOneYear.setOnClickListener(buttonGraphShowOneYear_OnClickListener);
 
-        defaultColorForText = getResources().getColor(android.R.color.tertiary_text_dark);
+        defaultColorForText = getResources().getColor(android.R.color.black);
         activeColorForText =getResources().getColor(R.color.colorPrimary);
 
         return view;
