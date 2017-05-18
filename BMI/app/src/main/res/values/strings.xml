@@ -36,6 +36,8 @@
 
     <string name="height_unit_text">قد ( سانتی متر )</string>
     <string name="weight_unit_text">وزن ( کیلوگرم )</string>
+    <string name="weight_unit_text2">وزن ( کیلوگرم ):</string>
+    <string name="date">زمان:</string>
 
     <string name="ok">تائید</string>
 
@@ -59,4 +61,12 @@
     <string name="weight">وزن</string>
 
     <string name="new_weight_saved">وزن جدید ثبت شد</string>
+
+    <string name="all">همه</string>
+    <string name="one_month">یک ماه</string>
+    <string name="one_week">یک هفته</string>
+    <string name="one_year">یک سال</string>
+    <string name="more2">...</string>
+
+    <string name="no_chart_data">داده ای برای نمایش وجود ندارد</string>
 </resources>

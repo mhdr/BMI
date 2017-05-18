@@ -6,7 +6,6 @@ import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -16,9 +15,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.View;
 
 import ir.mhdr.bmi.bl.UserBL;
+import ir.mhdr.bmi.lib.CustomViewPager;
+import ir.mhdr.bmi.lib.MainViewPagerAdapter;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     ActionBarDrawerToggle actionBarDrawerToggle;
     BottomNavigationView bottomNavigationView;
-    ViewPager viewPagerMain;
+    CustomViewPager viewPagerMain;
     boolean firstRun = false;
 
     @Override
@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
 
-        viewPagerMain = (ViewPager) findViewById(R.id.viewPagerMain);
+        viewPagerMain = (CustomViewPager) findViewById(R.id.viewPagerMain);
+        viewPagerMain.setPagingEnabled(false);
 
         MainViewPagerAdapter adapter = new MainViewPagerAdapter(getSupportFragmentManager());
         viewPagerMain.setAdapter(adapter);

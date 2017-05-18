@@ -1,6 +1,9 @@
 package ir.mhdr.bmi.lib;
 
 
+import net.time4j.PlainDate;
+import net.time4j.calendar.PersianCalendar;
+
 import org.joda.time.DateTime;
 import org.joda.time.Minutes;
 import org.joda.time.Period;
@@ -42,5 +45,12 @@ public class TimeDiff {
 
 
         return result;
+    }
+
+    public PersianCalendar getPersianCalendar()
+    {
+        PlainDate plainDate = PlainDate.of(dateTime.getYear(), dateTime.getMonthOfYear(), dateTime.getDayOfMonth());
+        PersianCalendar persianCalendar = plainDate.transform(PersianCalendar.class);
+        return persianCalendar;
     }
 }

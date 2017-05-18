@@ -1,4 +1,4 @@
-package ir.mhdr.bmi;
+package ir.mhdr.bmi.lib;
 
 
 import android.content.Context;

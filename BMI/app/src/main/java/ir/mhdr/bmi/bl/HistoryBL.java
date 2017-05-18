@@ -6,10 +6,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import org.joda.time.DateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import ir.mhdr.bmi.DatabaseHandler;
+import ir.mhdr.bmi.lib.DatabaseHandler;
 import ir.mhdr.bmi.model.History;
 import ir.mhdr.bmi.model.User;
 
@@ -77,6 +79,7 @@ public class HistoryBL {
             } while (cursor.moveToNext());
         }
 
+        cursor.close();
         return result;
     }
 }

@@ -1,7 +1,11 @@
 package ir.mhdr.bmi.model;
 
 
+import net.time4j.PlainDate;
+import net.time4j.calendar.PersianCalendar;
+
 import org.joda.time.DateTime;
+
 
 public class History {
     public long getId() {
@@ -49,5 +53,13 @@ public class History {
         DateTime dateTime=DateTime.parse(this.getDatetime());
 
         return dateTime;
+    }
+
+    public PersianCalendar getDatetime3()
+    {
+        DateTime dateTime=this.getDatetime2();
+        PlainDate plainDate = PlainDate.of(dateTime.getYear(), dateTime.getMonthOfYear(), dateTime.getDayOfMonth());
+        net.time4j.calendar.PersianCalendar persianCalendar = plainDate.transform(net.time4j.calendar.PersianCalendar.class);
+        return persianCalendar;
     }
 }

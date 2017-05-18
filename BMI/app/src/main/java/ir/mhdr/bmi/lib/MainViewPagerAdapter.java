@@ -1,8 +1,12 @@
-package ir.mhdr.bmi;
+package ir.mhdr.bmi.lib;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import ir.mhdr.bmi.BmiFragment;
+import ir.mhdr.bmi.GraphFragment;
+import ir.mhdr.bmi.TableFragment;
 
 
 public class MainViewPagerAdapter extends FragmentPagerAdapter {

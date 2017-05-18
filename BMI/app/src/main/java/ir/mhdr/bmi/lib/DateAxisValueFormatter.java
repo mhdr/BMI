@@ -32,8 +32,7 @@ public class DateAxisValueFormatter implements IAxisValueFormatter {
 
         int minutes = (int) value;
         DateTime dateTime = TimeDiff.fromMinutes(minutes).getDateTime();
-        PlainDate plainDate = PlainDate.of(dateTime.getYear(), dateTime.getMonthOfYear(), dateTime.getDayOfMonth());
-        PersianCalendar persianCalendar = plainDate.transform(PersianCalendar.class);
+        PersianCalendar persianCalendar = TimeDiff.fromMinutes(minutes).getPersianCalendar();
 
         String result = "";
 

@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import ir.mhdr.bmi.DatabaseHandler;
+import ir.mhdr.bmi.lib.DatabaseHandler;
 import ir.mhdr.bmi.model.User;
 
 public class UserBL {
@@ -79,7 +79,6 @@ public class UserBL {
         user.setIsActive(cursor.getInt(cursor.getColumnIndex(DatabaseHandler.Schema_Users.COL7_ISACTIVE)));
 
         cursor.close();
-
         return user;
     }
 
@@ -169,6 +168,7 @@ public class UserBL {
             } while (cursor.moveToNext());
         }
 
+        cursor.close();
         return result;
     }
 
@@ -177,7 +177,6 @@ public class UserBL {
         int result = cursor.getCount();
 
         cursor.close();
-
         return result;
     }
 
