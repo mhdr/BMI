@@ -22,50 +22,45 @@
                 android:layout_centerInParent="true"
                 android:background="@android:color/transparent"
                 android:gravity="center"
-                android:text="@string/one_month"
-                android:textColor="@color/colorPrimaryDark" />
+                android:text="@string/one_month" />
 
 
             <Button
-                android:layout_toRightOf="@+id/buttonGraphShowOneMonth"
-                android:layout_toEndOf="@+id/buttonGraphShowOneMonth"
                 android:id="@+id/buttonGraphShowOneWeek"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/buttonGraphShowOneMonth"
+                android:layout_toRightOf="@+id/buttonGraphShowOneMonth"
                 android:background="@android:color/transparent"
-                android:text="@string/one_week"
-                android:textColor="@color/colorPrimaryDark" />
+                android:text="@string/one_week" />
 
             <Button
-                android:layout_toRightOf="@+id/buttonGraphShowOneWeek"
-                android:layout_toEndOf="@+id/buttonGraphShowOneWeek"
                 android:id="@+id/buttonGraphShowAll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/buttonGraphShowOneWeek"
+                android:layout_toRightOf="@+id/buttonGraphShowOneWeek"
                 android:background="@android:color/transparent"
-                android:text="@string/all"
-                android:textColor="@color/colorPrimaryDark" />
+                android:text="@string/all" />
 
             <Button
-                android:layout_toLeftOf="@+id/buttonGraphShowOneMonth"
-                android:layout_toStartOf="@+id/buttonGraphShowOneMonth"
                 android:id="@+id/buttonGraphShowOneYear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/buttonGraphShowOneMonth"
+                android:layout_toStartOf="@+id/buttonGraphShowOneMonth"
                 android:background="@android:color/transparent"
-                android:text="@string/one_year"
-                android:textColor="@color/colorPrimaryDark" />
+                android:text="@string/one_year" />
 
 
             <Button
-                android:layout_toLeftOf="@+id/buttonGraphShowOneYear"
-                android:layout_toStartOf="@+id/buttonGraphShowOneYear"
                 android:id="@+id/buttonGraphShowMore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/buttonGraphShowOneYear"
+                android:layout_toStartOf="@+id/buttonGraphShowOneYear"
                 android:background="@android:color/transparent"
-                android:text="@string/more2"
-                android:textColor="@color/colorPrimaryDark" />
+                android:text="@string/more2" />
         </RelativeLayout>
 
         <com.github.mikephil.charting.charts.LineChart

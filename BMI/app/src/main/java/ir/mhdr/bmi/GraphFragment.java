@@ -1,6 +1,8 @@
 package ir.mhdr.bmi;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -53,6 +55,10 @@ public class GraphFragment extends Fragment {
     DateTime start;
     DateTime end;
 
+    int defaultColorForText;
+    int activeColorForText;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,17 +79,21 @@ public class GraphFragment extends Fragment {
         buttonGraphShowOneMonth.setOnClickListener(buttonGraphShowOneMonth_OnClickListener);
         buttonGraphShowOneWeek.setOnClickListener(buttonGraphShowOneWeek_OnClickListener);
         buttonGraphShowOneYear.setOnClickListener(buttonGraphShowOneYear_OnClickListener);
+
+        defaultColorForText = getResources().getColor(android.R.color.tertiary_text_dark);
+        activeColorForText =getResources().getColor(R.color.colorPrimary);
+
         return view;
     }
 
     View.OnClickListener buttonGraphShowAll_OnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            buttonGraphShowAll.setTextColor(getResources().getColor(android.R.color.black));
-            buttonGraphShowMore.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            buttonGraphShowOneMonth.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            buttonGraphShowOneWeek.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            buttonGraphShowOneYear.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            buttonGraphShowAll.setTextColor(activeColorForText);
+            buttonGraphShowMore.setTextColor(defaultColorForText);
+            buttonGraphShowOneMonth.setTextColor(defaultColorForText);
+            buttonGraphShowOneWeek.setTextColor(defaultColorForText);
+            buttonGraphShowOneYear.setTextColor(defaultColorForText);
 
             drawChart(Period.All);
         }
@@ -92,22 +102,22 @@ public class GraphFragment extends Fragment {
     View.OnClickListener buttonGraphShowMore_OnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            buttonGraphShowAll.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            buttonGraphShowMore.setTextColor(getResources().getColor(android.R.color.black));
-            buttonGraphShowOneMonth.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            buttonGraphShowOneWeek.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            buttonGraphShowOneYear.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            buttonGraphShowAll.setTextColor(defaultColorForText);
+            buttonGraphShowMore.setTextColor(activeColorForText);
+            buttonGraphShowOneMonth.setTextColor(defaultColorForText);
+            buttonGraphShowOneWeek.setTextColor(defaultColorForText);
+            buttonGraphShowOneYear.setTextColor(defaultColorForText);
         }
     };
 
     View.OnClickListener buttonGraphShowOneMonth_OnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            buttonGraphShowAll.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            buttonGraphShowMore.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            buttonGraphShowOneMonth.setTextColor(getResources().getColor(android.R.color.black));
-            buttonGraphShowOneWeek.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            buttonGraphShowOneYear.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            buttonGraphShowAll.setTextColor(defaultColorForText);
+            buttonGraphShowMore.setTextColor(defaultColorForText);
+            buttonGraphShowOneMonth.setTextColor(activeColorForText);
+            buttonGraphShowOneWeek.setTextColor(defaultColorForText);
+            buttonGraphShowOneYear.setTextColor(defaultColorForText);
 
             drawChart(Period.OneMonth);
         }
@@ -117,11 +127,11 @@ public class GraphFragment extends Fragment {
     View.OnClickListener buttonGraphShowOneWeek_OnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            buttonGraphShowAll.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            buttonGraphShowMore.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            buttonGraphShowOneMonth.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            buttonGraphShowOneWeek.setTextColor(getResources().getColor(android.R.color.black));
-            buttonGraphShowOneYear.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            buttonGraphShowAll.setTextColor(defaultColorForText);
+            buttonGraphShowMore.setTextColor(defaultColorForText);
+            buttonGraphShowOneMonth.setTextColor(defaultColorForText);
+            buttonGraphShowOneWeek.setTextColor(activeColorForText);
+            buttonGraphShowOneYear.setTextColor(defaultColorForText);
 
             drawChart(Period.OneWeek);
         }
@@ -130,11 +140,11 @@ public class GraphFragment extends Fragment {
     View.OnClickListener buttonGraphShowOneYear_OnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            buttonGraphShowAll.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            buttonGraphShowMore.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            buttonGraphShowOneMonth.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            buttonGraphShowOneWeek.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            buttonGraphShowOneYear.setTextColor(getResources().getColor(android.R.color.black));
+            buttonGraphShowAll.setTextColor(defaultColorForText);
+            buttonGraphShowMore.setTextColor(defaultColorForText);
+            buttonGraphShowOneMonth.setTextColor(defaultColorForText);
+            buttonGraphShowOneWeek.setTextColor(defaultColorForText);
+            buttonGraphShowOneYear.setTextColor(activeColorForText);
 
             drawChart(Period.OneWeek);
         }
@@ -237,11 +247,11 @@ public class GraphFragment extends Fragment {
 
         if (isVisibleToUser) {
 
-            buttonGraphShowAll.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            buttonGraphShowMore.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            buttonGraphShowOneMonth.setTextColor(getResources().getColor(android.R.color.black));
-            buttonGraphShowOneWeek.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            buttonGraphShowOneYear.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            buttonGraphShowAll.setTextColor(defaultColorForText);
+            buttonGraphShowMore.setTextColor(defaultColorForText);
+            buttonGraphShowOneMonth.setTextColor(activeColorForText);
+            buttonGraphShowOneWeek.setTextColor(defaultColorForText);
+            buttonGraphShowOneYear.setTextColor(defaultColorForText);
 
             drawChart(Period.OneMonth);
         }
