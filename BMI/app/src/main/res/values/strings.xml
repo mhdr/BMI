@@ -69,4 +69,7 @@
     <string name="more2">...</string>
 
     <string name="no_chart_data">داده ای برای نمایش وجود ندارد</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
