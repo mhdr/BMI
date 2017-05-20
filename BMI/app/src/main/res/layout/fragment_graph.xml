@@ -17,6 +17,7 @@
 
             <Button
                 android:id="@+id/buttonGraphShowOneMonth"
+                style="@style/Widget.AppCompat.Button.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -27,8 +28,11 @@
 
             <Button
                 android:id="@+id/buttonGraphShowOneWeek"
+                style="@style/Widget.AppCompat.Button.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_toEndOf="@+id/buttonGraphShowOneMonth"
                 android:layout_toRightOf="@+id/buttonGraphShowOneMonth"
                 android:background="@android:color/transparent"
@@ -36,31 +40,41 @@
 
             <Button
                 android:id="@+id/buttonGraphShowAll"
+                style="@style/Widget.AppCompat.Button.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_toEndOf="@+id/buttonGraphShowOneWeek"
                 android:layout_toRightOf="@+id/buttonGraphShowOneWeek"
                 android:background="@android:color/transparent"
                 android:text="@string/all" />
 
             <Button
-                android:id="@+id/buttonGraphShowOneYear"
+                android:id="@+id/buttonGraphShowThreeMonth"
+                style="@style/Widget.AppCompat.Button.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@+id/buttonGraphShowOneMonth"
                 android:layout_toStartOf="@+id/buttonGraphShowOneMonth"
+                android:background="@android:color/transparent"
+                android:text="@string/three_month" />
+
+            <Button
+                android:id="@+id/buttonGraphShowOneYear"
+                style="@style/Widget.AppCompat.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/buttonGraphShowThreeMonth"
+                android:layout_toStartOf="@+id/buttonGraphShowThreeMonth"
                 android:background="@android:color/transparent"
                 android:text="@string/one_year" />
 
 
-            <Button
-                android:id="@+id/buttonGraphShowMore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/buttonGraphShowOneYear"
-                android:layout_toStartOf="@+id/buttonGraphShowOneYear"
-                android:background="@android:color/transparent"
-                android:text="@string/more2" />
         </RelativeLayout>
 
         <com.github.mikephil.charting.charts.LineChart

@@ -50,7 +50,7 @@ public class GraphFragment extends Fragment {
     Button buttonGraphShowOneWeek;
     Button buttonGraphShowAll;
     Button buttonGraphShowOneYear;
-    Button buttonGraphShowMore;
+    Button buttonGraphShowThreeMonth;
 
     DateTime start;
     DateTime end;
@@ -68,20 +68,20 @@ public class GraphFragment extends Fragment {
         lineChartWeight = (LineChart) view.findViewById(R.id.lineChartWeight);
 
         buttonGraphShowAll = (Button) view.findViewById(R.id.buttonGraphShowAll);
-        buttonGraphShowMore = (Button) view.findViewById(R.id.buttonGraphShowMore);
+        buttonGraphShowThreeMonth = (Button) view.findViewById(R.id.buttonGraphShowThreeMonth);
         buttonGraphShowOneMonth = (Button) view.findViewById(R.id.buttonGraphShowOneMonth);
         buttonGraphShowOneWeek = (Button) view.findViewById(R.id.buttonGraphShowOneWeek);
         buttonGraphShowOneYear = (Button) view.findViewById(R.id.buttonGraphShowOneYear);
 
 
         buttonGraphShowAll.setOnClickListener(buttonGraphShowAll_OnClickListener);
-        buttonGraphShowMore.setOnClickListener((buttonGraphShowMore_OnClickListener));
+        buttonGraphShowThreeMonth.setOnClickListener((buttonGraphShowThreeMonth_OnClickListener));
         buttonGraphShowOneMonth.setOnClickListener(buttonGraphShowOneMonth_OnClickListener);
         buttonGraphShowOneWeek.setOnClickListener(buttonGraphShowOneWeek_OnClickListener);
         buttonGraphShowOneYear.setOnClickListener(buttonGraphShowOneYear_OnClickListener);
 
         defaultColorForText = getResources().getColor(android.R.color.black);
-        activeColorForText =getResources().getColor(R.color.colorPrimary);
+        activeColorForText = getResources().getColor(R.color.colorPrimary);
 
         return view;
     }
@@ -90,7 +90,7 @@ public class GraphFragment extends Fragment {
         @Override
         public void onClick(View v) {
             buttonGraphShowAll.setTextColor(activeColorForText);
-            buttonGraphShowMore.setTextColor(defaultColorForText);
+            buttonGraphShowThreeMonth.setTextColor(defaultColorForText);
             buttonGraphShowOneMonth.setTextColor(defaultColorForText);
             buttonGraphShowOneWeek.setTextColor(defaultColorForText);
             buttonGraphShowOneYear.setTextColor(defaultColorForText);
@@ -99,14 +99,16 @@ public class GraphFragment extends Fragment {
         }
     };
 
-    View.OnClickListener buttonGraphShowMore_OnClickListener = new View.OnClickListener() {
+    View.OnClickListener buttonGraphShowThreeMonth_OnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             buttonGraphShowAll.setTextColor(defaultColorForText);
-            buttonGraphShowMore.setTextColor(activeColorForText);
+            buttonGraphShowThreeMonth.setTextColor(activeColorForText);
             buttonGraphShowOneMonth.setTextColor(defaultColorForText);
             buttonGraphShowOneWeek.setTextColor(defaultColorForText);
             buttonGraphShowOneYear.setTextColor(defaultColorForText);
+
+            drawChart(Period.ThreeMonth);
         }
     };
 
@@ -114,7 +116,7 @@ public class GraphFragment extends Fragment {
         @Override
         public void onClick(View v) {
             buttonGraphShowAll.setTextColor(defaultColorForText);
-            buttonGraphShowMore.setTextColor(defaultColorForText);
+            buttonGraphShowThreeMonth.setTextColor(defaultColorForText);
             buttonGraphShowOneMonth.setTextColor(activeColorForText);
             buttonGraphShowOneWeek.setTextColor(defaultColorForText);
             buttonGraphShowOneYear.setTextColor(defaultColorForText);
@@ -128,7 +130,7 @@ public class GraphFragment extends Fragment {
         @Override
         public void onClick(View v) {
             buttonGraphShowAll.setTextColor(defaultColorForText);
-            buttonGraphShowMore.setTextColor(defaultColorForText);
+            buttonGraphShowThreeMonth.setTextColor(defaultColorForText);
             buttonGraphShowOneMonth.setTextColor(defaultColorForText);
             buttonGraphShowOneWeek.setTextColor(activeColorForText);
             buttonGraphShowOneYear.setTextColor(defaultColorForText);
@@ -141,7 +143,7 @@ public class GraphFragment extends Fragment {
         @Override
         public void onClick(View v) {
             buttonGraphShowAll.setTextColor(defaultColorForText);
-            buttonGraphShowMore.setTextColor(defaultColorForText);
+            buttonGraphShowThreeMonth.setTextColor(defaultColorForText);
             buttonGraphShowOneMonth.setTextColor(defaultColorForText);
             buttonGraphShowOneWeek.setTextColor(defaultColorForText);
             buttonGraphShowOneYear.setTextColor(activeColorForText);
@@ -248,7 +250,7 @@ public class GraphFragment extends Fragment {
         if (isVisibleToUser) {
 
             buttonGraphShowAll.setTextColor(defaultColorForText);
-            buttonGraphShowMore.setTextColor(defaultColorForText);
+            buttonGraphShowThreeMonth.setTextColor(defaultColorForText);
             buttonGraphShowOneMonth.setTextColor(activeColorForText);
             buttonGraphShowOneWeek.setTextColor(defaultColorForText);
             buttonGraphShowOneYear.setTextColor(defaultColorForText);
@@ -269,6 +271,10 @@ public class GraphFragment extends Fragment {
 
                 break;
 
+            case ThreeMonth:
+                this.end = dateTime;
+                this.start = dateTime.minusMonths(3);
+
             case OneWeek:
 
                 this.end = dateTime;
@@ -288,7 +294,7 @@ public class GraphFragment extends Fragment {
         All,
         OneWeek,
         OneMonth,
-        OneYear,
-        Custom
+        ThreeMonth,
+        OneYear
     }
 }
