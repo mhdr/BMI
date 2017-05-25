@@ -188,7 +188,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginEnd="10dp"
                         android:layout_marginRight="10dp"
-                        android:background="@color/color_bmi_range_1" />
+                        android:background="@drawable/color_bmi_range_1" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -224,7 +224,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginEnd="10dp"
                         android:layout_marginRight="10dp"
-                        android:background="@color/color_bmi_range_2" />
+                        android:background="@drawable/color_bmi_range_2" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -260,7 +260,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginEnd="10dp"
                         android:layout_marginRight="10dp"
-                        android:background="@color/color_bmi_range_3" />
+                        android:background="@drawable/color_bmi_range_3" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -296,7 +296,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginEnd="10dp"
                         android:layout_marginRight="10dp"
-                        android:background="@color/color_bmi_range_4" />
+                        android:background="@drawable/color_bmi_range_4" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -331,7 +331,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginEnd="10dp"
                         android:layout_marginRight="10dp"
-                        android:background="@color/color_bmi_range_5" />
+                        android:background="@drawable/color_bmi_range_5" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -367,7 +367,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginEnd="10dp"
                         android:layout_marginRight="10dp"
-                        android:background="@color/color_bmi_range_6" />
+                        android:background="@drawable/color_bmi_range_6" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -403,7 +403,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginEnd="10dp"
                         android:layout_marginRight="10dp"
-                        android:background="@color/color_bmi_range_7" />
+                        android:background="@drawable/color_bmi_range_7" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -440,7 +440,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginEnd="10dp"
                         android:layout_marginRight="10dp"
-                        android:background="@color/color_bmi_range_8" />
+                        android:background="@drawable/color_bmi_range_8" />
 
                     <TextView
                         android:layout_width="wrap_content"

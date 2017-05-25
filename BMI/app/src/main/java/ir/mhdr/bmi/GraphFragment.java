@@ -243,20 +243,32 @@ public class GraphFragment extends Fragment {
         lineChartWeight.invalidate();
     }
 
-    @Override
+   @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
 
-        if (isVisibleToUser) {
-
-            buttonGraphShowAll.setTextColor(defaultColorForText);
-            buttonGraphShowThreeMonth.setTextColor(defaultColorForText);
-            buttonGraphShowOneMonth.setTextColor(activeColorForText);
-            buttonGraphShowOneWeek.setTextColor(defaultColorForText);
-            buttonGraphShowOneYear.setTextColor(defaultColorForText);
-
-            drawChart(Period.OneMonth);
+        if (isVisibleToUser && isResumed()) {
+            onResume();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        super.onResume();
+        if (!getUserVisibleHint())
+        {
+            return;
+        }
+
+        buttonGraphShowAll.setTextColor(defaultColorForText);
+        buttonGraphShowThreeMonth.setTextColor(defaultColorForText);
+        buttonGraphShowOneMonth.setTextColor(activeColorForText);
+        buttonGraphShowOneWeek.setTextColor(defaultColorForText);
+        buttonGraphShowOneYear.setTextColor(defaultColorForText);
+
+        drawChart(Period.OneMonth);
     }
 
     private void calculateStartAndEndTime(Period period) {

@@ -8,6 +8,15 @@
     <color name="colorBottomNavigation">#f2f2f2</color>
     <color name="colorBackground">#d5e3d4</color>
 
+    <drawable name="color_bmi_range_1">#e6f2ff</drawable>
+    <drawable name="color_bmi_range_2">#cce5ff</drawable>
+    <drawable name="color_bmi_range_3">#b3d7ff</drawable>
+    <drawable name="color_bmi_range_4">#86b300</drawable>
+    <drawable name="color_bmi_range_5">#ff9933</drawable>
+    <drawable name="color_bmi_range_6">#ff8000</drawable>
+    <drawable name="color_bmi_range_7">#ff3300</drawable>
+    <drawable name="color_bmi_range_8">#cc2900</drawable>
+
     <color name="color_bmi_range_1">#e6f2ff</color>
     <color name="color_bmi_range_2">#cce5ff</color>
     <color name="color_bmi_range_3">#b3d7ff</color>
