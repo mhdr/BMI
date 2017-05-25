@@ -46,7 +46,9 @@ public class CustomMarkerView extends MarkerView {
         int year = timeDiff.getPersianCalendar().getYear();
         int month = timeDiff.getPersianCalendar().getMonth().getValue();
         int day = timeDiff.getPersianCalendar().getDayOfMonth();
-        String date = String.format("%d/%d/%d", year, month, day);
+        int hour=timeDiff.getDateTime().getHourOfDay();
+        int minute=timeDiff.getDateTime().getMinuteOfHour();
+        String date = String.format("%d/%d/%d %d:%d", year, month, day,hour,minute);
 
         textViewMarkerDateValue.setText(date);
 

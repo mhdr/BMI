@@ -25,6 +25,8 @@ import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter;
+import com.github.mikephil.charting.formatter.DefaultValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
@@ -198,6 +200,7 @@ public class GraphFragment extends Fragment {
         dataSet.setValueTypeface(typeface);
         dataSet.setValueTextSize(10);
         dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+        dataSet.setValueFormatter(new DefaultValueFormatter(1)); // like 80.1
 
         LineData lineData = new LineData(dataSet);
         lineData.setDrawValues(true);
