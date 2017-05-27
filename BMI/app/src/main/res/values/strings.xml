@@ -74,4 +74,9 @@
 
     <string name="edit">ویرایش</string>
     <string name="delete">حذف</string>
+
+    <string-array name="table_menu">
+        <item>ویرایش</item>
+        <item>حذف</item>
+    </string-array>
 </resources>

@@ -2,6 +2,9 @@ package ir.mhdr.bmi.lib;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.AttrRes;
+import android.support.v7.widget.ListPopupWindow;
+import android.support.v7.widget.MenuPopupWindow;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -9,8 +12,12 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+
+import org.w3c.dom.Attr;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -92,9 +99,9 @@ public class WeightTableAdapter extends RecyclerView.Adapter<WeightTableAdapter.
                 break;
         }
 
-        String datetimeStr=String.format("%d/%d/%d %d:%d",history.getDatetime3().getYear(),
-                history.getDatetime3().getMonth().getValue(),history.getDatetime3().getDayOfMonth(),
-                history.getDatetime2().getHourOfDay(),history.getDatetime2().getMinuteOfHour());
+        String datetimeStr = String.format("%d/%d/%d %d:%d", history.getDatetime3().getYear(),
+                history.getDatetime3().getMonth().getValue(), history.getDatetime3().getDayOfMonth(),
+                history.getDatetime2().getHourOfDay(), history.getDatetime2().getMinuteOfHour());
 
         holder.viewBMIColorForTable.setBackground(drawable);
         holder.textViewWeightForTable.setText(history.getValue());
@@ -105,33 +112,33 @@ public class WeightTableAdapter extends RecyclerView.Adapter<WeightTableAdapter.
         holder.buttonOptions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupMenu popup = new PopupMenu(context, button);
-                popup.inflate(R.menu.weight_table_menu);
-                //popup.setGravity(Gravity.END);
+                String[] menuItems = context.getResources().getStringArray(R.array.table_menu);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, R.layout.weight_table_menu,
+                        R.id.textViewTableMenuItem, menuItems);
 
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                final ListPopupWindow listPopupWindow = new ListPopupWindow(context);
+                listPopupWindow.setAdapter(adapter);
+                listPopupWindow.setAnchorView(button);
+                listPopupWindow.setWidth(420);
+                listPopupWindow.setHeight(ListPopupWindow.WRAP_CONTENT);
+                listPopupWindow.setHorizontalOffset(-380);
+                listPopupWindow.setVerticalOffset(-50);
+
+                listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.menuItemDelete:
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        if (position == 0) {
 
-                                //
-
-                                historyList.remove(viewHolder.getAdapterPosition());
-                                notifyItemRemoved(viewHolder.getAdapterPosition());
-                                return true;
-
-                            case R.id.menuItemEdit:
-
-                                //
-
-                                return true;
+                        } else if (position == 1) {
+                            historyList.remove(viewHolder.getAdapterPosition());
+                            notifyItemRemoved(viewHolder.getAdapterPosition());
                         }
-                        return false;
+
+                        listPopupWindow.dismiss();
                     }
                 });
 
-                popup.show();
+                listPopupWindow.show();
             }
         });
     }
