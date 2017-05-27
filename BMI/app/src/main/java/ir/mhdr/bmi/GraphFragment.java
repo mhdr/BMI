@@ -150,7 +150,7 @@ public class GraphFragment extends Fragment {
             buttonGraphShowOneWeek.setTextColor(defaultColorForText);
             buttonGraphShowOneYear.setTextColor(activeColorForText);
 
-            drawChart(Period.OneWeek);
+            drawChart(Period.OneYear);
         }
     };
 
@@ -285,11 +285,11 @@ public class GraphFragment extends Fragment {
                 this.start = dateTime.minusMonths(1);
 
                 break;
-
             case ThreeMonth:
                 this.end = dateTime;
                 this.start = dateTime.minusMonths(3);
 
+                break;
             case OneWeek:
 
                 this.end = dateTime;
