@@ -206,10 +206,10 @@ public class BmiFragment extends Fragment {
 
     private int[] generateStrokeColors() {
 
-        int length = 56;
+        int length = 58;
         int range1 = 4;
         int range2 = 2;
-        int range3 = 3;
+        int range3 = 5;
         int range4 = 13;
         int range5 = 10;
         int range6 = 10;
