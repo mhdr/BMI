@@ -2,14 +2,31 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+
+
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/itemSettings"
-            android:title="@string/settings" />
 
         <item
-            android:id="@+id/itemProfile"
-            android:title="@string/profile_management" />
+            android:id="@+id/itemMenuSelectProfile"
+            android:checkable="false"
+            android:enabled="true"
+            android:title=""
+            android:visible="true"
+            app:actionLayout="@layout/spinner_profile" />
+
+        <item
+            android:id="@+id/itemMenuProfile"
+            android:checkable="true"
+            android:enabled="true"
+            android:title="@string/profile_management"
+            android:visible="true" />
+
+        <item
+            android:id="@+id/itemMenuSettings"
+            android:checkable="true"
+            android:enabled="true"
+            android:title="@string/settings"
+            android:visible="true" />
 
     </group>
 
@@ -17,12 +34,18 @@
     <item android:title="@string/more">
         <menu>
             <item
-                android:id="@+id/itemAbout"
-                android:title="@string/about" />
+                android:id="@+id/itemMenuAbout"
+                android:checkable="true"
+                android:enabled="true"
+                android:title="@string/about"
+                android:visible="true" />
 
             <item
-                android:id="@+id/itemExit"
-                android:title="@string/exit" />
+                android:id="@+id/itemMenuExit"
+                android:checkable="true"
+                android:enabled="true"
+                android:title="@string/exit"
+                android:visible="true" />
         </menu>
     </item>
 </menu>
