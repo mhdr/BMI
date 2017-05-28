@@ -198,4 +198,14 @@ public class UserBL {
 
         return rows_affected;
     }
+
+    public int delete(User user) {
+        SQLiteDatabase db = this.dbHandler.getWritableDatabase();
+        int rows_affected = db.delete(DatabaseHandler.Schema_Users.TABLE_NAME,
+                DatabaseHandler.Schema_Users.COL1_ID + " = ?",
+                new String[]{String.valueOf(user.getId())});
+        db.close();
+
+        return rows_affected;
+    }
 }

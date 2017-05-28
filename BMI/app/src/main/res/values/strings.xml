@@ -61,6 +61,8 @@
     <string name="weight">وزن</string>
 
     <string name="new_weight_saved">وزن جدید ثبت شد</string>
+    <string name="weight_deleted">وزن مورد نظر شما حذف شد</string>
+    <string name="weight_edited">ویرایش وزن انجام شد</string>
 
     <string name="all">همه</string>
     <string name="one_month">یک ماه</string>

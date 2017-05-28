@@ -281,4 +281,26 @@ public class BmiFragment extends Fragment {
 
         return result;
     }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (isVisibleToUser && isResumed()) {
+            onResume();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        super.onResume();
+        if (!getUserVisibleHint())
+        {
+            return;
+        }
+
+        calculateAndShow();
+    }
 }

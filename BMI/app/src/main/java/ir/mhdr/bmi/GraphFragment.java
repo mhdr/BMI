@@ -168,6 +168,11 @@ public class GraphFragment extends Fragment {
         User user = userBL.getActiveUser();
         List<History> historyList = historyBL.getHistory(user);
 
+        if (historyList.size()==0)
+        {
+            return;
+        }
+
         for (History h : historyList) {
             if (period == Period.All) {
                 TimeDiff timeDiff = new TimeDiff(h.getDatetime2());
@@ -187,6 +192,11 @@ public class GraphFragment extends Fragment {
                     entries.add(entry);
                 }
             }
+        }
+
+        if (entries.size()==0)
+        {
+            return;
         }
 
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/BYekan.ttf");

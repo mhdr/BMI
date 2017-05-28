@@ -82,4 +82,45 @@ public class HistoryBL {
         cursor.close();
         return result;
     }
+
+    public int delete(History history) {
+        SQLiteDatabase db = this.dbHandler.getWritableDatabase();
+        int rows_affected = db.delete(DatabaseHandler.Schema_History.TABLE_NAME,
+                DatabaseHandler.Schema_History.COL1_ID + " = ?",
+                new String[]{String.valueOf(history.getId())});
+        db.close();
+
+        return rows_affected;
+    }
+
+    public int update(History history) {
+        SQLiteDatabase db = this.dbHandler.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(DatabaseHandler.Schema_History.COL2_USER_ID, history.getUserId());
+        values.put(DatabaseHandler.Schema_History.COL3_DATETIME, history.getDatetime());
+        values.put(DatabaseHandler.Schema_History.COL4_VALUE, history.getValue());
+
+        int rows_affected = db.update(DatabaseHandler.Schema_History.TABLE_NAME, values,
+                DatabaseHandler.Schema_History.COL1_ID + " = ?",
+                new String[]{String.valueOf(history.getId())});
+        db.close();
+
+        return rows_affected;
+    }
+
+    public History getLastHistory(User user) {
+        Cursor cursor = this.getHistoryCursor(user);
+        cursor.moveToLast();
+
+        History history = new History();
+        history.setId(cursor.getInt(cursor.getColumnIndex(DatabaseHandler.Schema_History.COL1_ID)));
+        history.setUserId(cursor.getInt(cursor.getColumnIndex(DatabaseHandler.Schema_History.COL2_USER_ID)));
+        history.setDatetime(cursor.getString(cursor.getColumnIndex(DatabaseHandler.Schema_History.COL3_DATETIME)));
+        history.setValue(cursor.getString(cursor.getColumnIndex(DatabaseHandler.Schema_History.COL4_VALUE)));
+
+        cursor.close();
+
+        return history;
+    }
 }

@@ -2,29 +2,26 @@ package ir.mhdr.bmi.lib;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.AttrRes;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ListPopupWindow;
-import android.support.v7.widget.MenuPopupWindow;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import org.w3c.dom.Attr;
+import org.joda.time.DateTime;
 
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import ir.mhdr.bmi.R;
+import ir.mhdr.bmi.WeightFragment;
+import ir.mhdr.bmi.bl.HistoryBL;
 import ir.mhdr.bmi.bl.UserBL;
 import ir.mhdr.bmi.model.History;
 import ir.mhdr.bmi.model.User;
@@ -127,11 +124,62 @@ public class WeightTableAdapter extends RecyclerView.Adapter<WeightTableAdapter.
                 listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                         if (position == 0) {
 
+                            final int itemPosition = viewHolder.getAdapterPosition();
+                            final History currentHistory = historyList.get(itemPosition);
+
+                            final UserBL userBL = new UserBL(context.getApplicationContext());
+                            final HistoryBL historyBL = new HistoryBL(context);
+
+                            final String valueStr = currentHistory.getValue();
+
+                            WeightFragment weightFragment = new WeightFragment();
+
+                            if (valueStr.length() > 0) {
+                                weightFragment.setWeightValue(Double.parseDouble(valueStr));
+                            }
+
+                            weightFragment.setOnSaveListener(new WeightFragment.OnSaveListener() {
+                                @Override
+                                public void onSave(double value) {
+                                    currentHistory.setValue(String.valueOf(value));
+                                    int rows_affected = historyBL.update(currentHistory);
+
+                                    if (itemPosition == 0) {
+                                        user.setLatestWeight(String.valueOf(value));
+                                        userBL.update(user);
+                                    }
+
+                                    notifyItemChanged(itemPosition,currentHistory);
+                                    Toast.makeText(context, R.string.weight_edited,Toast.LENGTH_LONG).show();
+                                }
+                            });
+                            FragmentManager manager = ((AppCompatActivity)context).getSupportFragmentManager();
+                            weightFragment.show(manager, "weight");
+
+
                         } else if (position == 1) {
-                            historyList.remove(viewHolder.getAdapterPosition());
-                            notifyItemRemoved(viewHolder.getAdapterPosition());
+
+                            int itemPosition = viewHolder.getAdapterPosition();
+
+                            UserBL userBL = new UserBL(context.getApplicationContext());
+                            HistoryBL historyBL = new HistoryBL(context.getApplicationContext());
+
+                            History historyToDelete = historyList.get(itemPosition);
+                            historyBL.delete(historyToDelete);
+
+                            if (itemPosition == 0) {
+                                History currentHistory = historyBL.getLastHistory(user);
+                                user.setLatestWeight(currentHistory.getValue());
+                                userBL.update(user);
+                            }
+
+                            historyList.remove(itemPosition);
+                            notifyItemRemoved(itemPosition);
+
+                            Toast.makeText(context, R.string.weight_deleted,Toast.LENGTH_LONG).show();
                         }
 
                         listPopupWindow.dismiss();
@@ -165,4 +213,5 @@ public class WeightTableAdapter extends RecyclerView.Adapter<WeightTableAdapter.
             textViewDateForTable = (TextView) itemView.findViewById(R.id.textViewDateForTable);
         }
     }
+
 }
