@@ -10,7 +10,6 @@
     tools:openDrawer="end"
     tools:context="ir.mhdr.bmi.MainActivity">
 
-
     <!--Content-->
     <RelativeLayout
         android:layout_width="match_parent"
@@ -64,7 +63,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        app:menu="@menu/drawer_menu">
+        app:menu="@menu/drawer_menu"
+        app:headerLayout="@layout/drawer_header">
 
     </android.support.design.widget.NavigationView>
 

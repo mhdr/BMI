@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     Spinner spinnerProfile;
     ArrayAdapter<String> spinnerAdapter;
 
-    List<User> profileList;
+    String[] profiles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +96,9 @@ public class MainActivity extends AppCompatActivity {
 
         navigationView.setNavigationItemSelectedListener(navigationView_OnNavigationItemSelectedListener);
 
-        spinnerProfile = (Spinner) navigationView.getMenu().findItem(R.id.itemMenuSelectProfile).getActionView();
+
+        View headerView = navigationView.getHeaderView(0);
+        spinnerProfile = (Spinner) headerView.findViewById(R.id.spinnerProfile);
         generateSpinnerProfile();
         spinnerProfile.setOnItemSelectedListener(spinnerProfile_OnItemSelectedListener);
     }
@@ -115,12 +117,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void generateSpinnerProfile() {
         UserBL userBL = new UserBL(MainActivity.this);
-        profileList = userBL.getUsers();
+        List<User> userList = userBL.getUsers();
         List<String> profileStrList = new ArrayList<>();
 
-        String[] profiles;
-
-        for (User u : profileList) {
+        for (User u : userList) {
             profileStrList.add(u.getName());
         }
 
@@ -160,6 +160,9 @@ public class MainActivity extends AppCompatActivity {
                 finish();
                 System.exit(0);
                 return true;
+            } else if (item.getItemId() == R.id.itemMenuProfile) {
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intent);
             }
 
             return false;

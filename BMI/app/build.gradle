@@ -54,5 +54,8 @@ dependencies {
     compile 'net.time4j:time4j-android:3.32-2017b'
     compile 'com.github.Paroca72:sc-widgets:2.1.6'
     compile 'net.danlew:android.joda:2.9.9'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 }
+
+android.defaultConfig.vectorDrawables.useSupportLibrary = true

@@ -5,15 +5,6 @@
 
 
     <group android:checkableBehavior="single">
-
-        <item
-            android:id="@+id/itemMenuSelectProfile"
-            android:checkable="false"
-            android:enabled="true"
-            android:title=""
-            android:visible="true"
-            app:actionLayout="@layout/spinner_profile" />
-
         <item
             android:id="@+id/itemMenuProfile"
             android:checkable="true"
