@@ -93,6 +93,16 @@ public class HistoryBL {
         return rows_affected;
     }
 
+    public int deleteAllByUser(User user) {
+        SQLiteDatabase db = this.dbHandler.getWritableDatabase();
+        int rows_affected = db.delete(DatabaseHandler.Schema_History.TABLE_NAME,
+                DatabaseHandler.Schema_History.COL2_USER_ID + " = ?",
+                new String[]{String.valueOf(user.getId())});
+        db.close();
+
+        return rows_affected;
+    }
+
     public int update(History history) {
         SQLiteDatabase db = this.dbHandler.getWritableDatabase();
 

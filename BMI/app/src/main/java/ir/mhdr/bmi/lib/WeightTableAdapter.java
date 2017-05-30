@@ -126,6 +126,8 @@ public class WeightTableAdapter extends RecyclerView.Adapter<WeightTableAdapter.
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                         if (position == 0) {
+                            // edit
+
 
                             final int itemPosition = viewHolder.getAdapterPosition();
                             final History currentHistory = historyList.get(itemPosition);
@@ -161,6 +163,7 @@ public class WeightTableAdapter extends RecyclerView.Adapter<WeightTableAdapter.
 
 
                         } else if (position == 1) {
+                            // delete
 
                             int itemPosition = viewHolder.getAdapterPosition();
 

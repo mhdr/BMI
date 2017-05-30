@@ -81,4 +81,13 @@
         <item>ویرایش</item>
         <item>حذف</item>
     </string-array>
+
+    <string-array name="profile_menu">
+        <item>ویرایش</item>
+        <item>حذف</item>
+    </string-array>
+
+    <string name="atleast_one_profile_is_needed">وجود حداقل یک پروفایل ضروری است</string>
+
+    <string name="user_removed">کاربر حذف شد</string>
 </resources>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     tools:context="ir.mhdr.bmi.ProfileActivity">
 
     <android.support.v7.widget.Toolbar
@@ -18,22 +19,22 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <ListView
-        android:id="@+id/listViewProfiles"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewProfiles"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbarProfile">
 
-    </ListView>
+    </android.support.v7.widget.RecyclerView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButtonNewProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_margin="8dp"
+        android:layout_alignParentStart="true"
+        android:layout_margin="20dp"
         android:visibility="visible"
         app:backgroundTint="@color/colorPrimary"
         app:elevation="8dp"
