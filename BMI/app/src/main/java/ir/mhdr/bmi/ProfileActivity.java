@@ -64,7 +64,8 @@ public class ProfileActivity extends AppCompatActivity {
     View.OnClickListener floatingActionButtonNewProfile_OnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            Intent intent=new Intent(ProfileActivity.this,NewProfileActivity.class);
+            startActivity(intent);
         }
     };
 

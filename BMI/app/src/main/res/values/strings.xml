@@ -90,4 +90,7 @@
     <string name="atleast_one_profile_is_needed">وجود حداقل یک پروفایل ضروری است</string>
 
     <string name="user_removed">کاربر حذف شد</string>
+
+    <string name="new_profile">پروفایل جدید</string>
+    <string name="edit_profile">ویرایش پروفایل</string>
 </resources>

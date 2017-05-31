@@ -2,6 +2,8 @@ package ir.mhdr.bmi.lib;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.widget.TextViewCompat;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.ListPopupWindow;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import ir.mhdr.bmi.EditProfileActivity;
 import ir.mhdr.bmi.R;
 import ir.mhdr.bmi.bl.HistoryBL;
 import ir.mhdr.bmi.bl.UserBL;
@@ -60,7 +63,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
     @Override
     public void onBindViewHolder(ProfileViewHolder holder, int position) {
 
-        User user = userList.get(position);
+        final User user = userList.get(position);
         holder.textViewProfile.setText(user.getName());
 
         final Button button = holder.buttonProfileOptions;
@@ -91,10 +94,16 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
                         if (position == 0) {
                             // edit
 
+                            User userToEdit = userList.get(itemPosition);
+                            Intent intent = new Intent(context, EditProfileActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putLong("userId", userToEdit.getId());
+                            context.startActivity(intent);
+
                         } else if (position == 1) {
                             // delete
 
-                            if (userList.size() == 0) {
+                            if (userList.size() == 1) {
                                 Toast.makeText(context, context.getResources().getString(R.string.atleast_one_profile_is_needed), Toast.LENGTH_LONG).show();
                                 return;
                             }
