@@ -35,11 +35,12 @@ import java.util.Date;
 import ir.mhdr.bmi.bl.HistoryBL;
 import ir.mhdr.bmi.bl.UserBL;
 import ir.mhdr.bmi.lib.BMI;
+import ir.mhdr.bmi.lib.ProfileChangedListener;
 import ir.mhdr.bmi.model.History;
 import ir.mhdr.bmi.model.User;
 
 
-public class BmiFragment extends Fragment {
+public class BmiFragment extends Fragment implements ProfileChangedListener{
 
     TextView textViewProfileInfoAge;
     TextView textViewProfileInfoName;
@@ -302,5 +303,10 @@ public class BmiFragment extends Fragment {
         }
 
         calculateAndShow();
+    }
+
+    @Override
+    public void onProfileChanged() {
+        onResume();
     }
 }

@@ -41,11 +41,12 @@ import ir.mhdr.bmi.bl.HistoryBL;
 import ir.mhdr.bmi.bl.UserBL;
 import ir.mhdr.bmi.lib.CustomMarkerView;
 import ir.mhdr.bmi.lib.DateAxisValueFormatter;
+import ir.mhdr.bmi.lib.ProfileChangedListener;
 import ir.mhdr.bmi.lib.TimeDiff;
 import ir.mhdr.bmi.model.History;
 import ir.mhdr.bmi.model.User;
 
-public class GraphFragment extends Fragment {
+public class GraphFragment extends Fragment implements ProfileChangedListener {
 
     LineChart lineChartWeight;
     Button buttonGraphShowOneMonth;
@@ -313,6 +314,11 @@ public class GraphFragment extends Fragment {
 
                 break;
         }
+    }
+
+    @Override
+    public void onProfileChanged() {
+        onResume();
     }
 
     private enum Period {

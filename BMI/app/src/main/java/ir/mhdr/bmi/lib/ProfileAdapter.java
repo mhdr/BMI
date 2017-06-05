@@ -121,6 +121,9 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
                             userBL.update(nextUser);
 
                             Toast.makeText(context, context.getResources().getString(R.string.user_removed), Toast.LENGTH_LONG).show();
+
+                            userList.remove(itemPosition);
+                            notifyItemRemoved(itemPosition);
                         }
                     }
                 });

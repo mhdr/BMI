@@ -17,11 +17,12 @@ import java.util.List;
 
 import ir.mhdr.bmi.bl.HistoryBL;
 import ir.mhdr.bmi.bl.UserBL;
+import ir.mhdr.bmi.lib.ProfileChangedListener;
 import ir.mhdr.bmi.lib.WeightTableAdapter;
 import ir.mhdr.bmi.model.History;
 
 
-public class TableFragment extends Fragment {
+public class TableFragment extends Fragment implements ProfileChangedListener{
 
     private RecyclerView recyclerViewTable;
     private WeightTableAdapter adapter;
@@ -69,5 +70,10 @@ public class TableFragment extends Fragment {
         List<History> historyList = historyBL.getHistory(userBL.getActiveUser());
         Collections.reverse(historyList);
         adapter.setHistoryList(historyList);
+    }
+
+    @Override
+    public void onProfileChanged() {
+        onResume();
     }
 }

@@ -3,11 +3,13 @@ package ir.mhdr.bmi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -16,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ScrollingTabContainerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +32,7 @@ import java.util.List;
 import ir.mhdr.bmi.bl.UserBL;
 import ir.mhdr.bmi.lib.CustomViewPager;
 import ir.mhdr.bmi.lib.MainViewPagerAdapter;
+import ir.mhdr.bmi.lib.ProfileChangedListener;
 import ir.mhdr.bmi.model.User;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -45,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> spinnerAdapter;
 
     String[] profiles;
+    MainViewPagerAdapter viewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
         viewPagerMain = (CustomViewPager) findViewById(R.id.viewPagerMain);
         viewPagerMain.setPagingEnabled(false);
 
-        MainViewPagerAdapter adapter = new MainViewPagerAdapter(getSupportFragmentManager());
-        viewPagerMain.setAdapter(adapter);
+        viewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
+        viewPagerMain.setAdapter(viewPagerAdapter);
 
         // set selected item
         bottomNavigationView.getMenu().getItem(1).setChecked(true);
@@ -106,7 +111,24 @@ public class MainActivity extends AppCompatActivity {
     AdapterView.OnItemSelectedListener spinnerProfile_OnItemSelectedListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            UserBL userBL = new UserBL(MainActivity.this);
+            List<User> userList = userBL.getUsers();
 
+            for (int i = 0; i < userList.size(); i++) {
+                User user = userList.get(i);
+
+                if (i == position) {
+                    user.setIsActiveX(true);
+                } else {
+                    user.setIsActiveX(false);
+                }
+
+                userBL.update(user);
+            }
+
+            int pos = viewPagerMain.getCurrentItem();
+            ProfileChangedListener profileChangedListener= (ProfileChangedListener) viewPagerAdapter.getRegisteredFragment(pos);
+            profileChangedListener.onProfileChanged();
         }
 
         @Override
@@ -120,8 +142,19 @@ public class MainActivity extends AppCompatActivity {
         List<User> userList = userBL.getUsers();
         List<String> profileStrList = new ArrayList<>();
 
+        int activeUserIndex=0;
+        int currentIndex=0;
+
         for (User u : userList) {
+
             profileStrList.add(u.getName());
+
+            if (u.getIsActiveX())
+            {
+                activeUserIndex=currentIndex;
+            }
+
+            currentIndex++;
         }
 
         profiles = profileStrList.toArray(new String[0]);
@@ -129,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
                 profiles);
 
         spinnerProfile.setAdapter(spinnerAdapter);
+        spinnerProfile.setSelection(activeUserIndex);
     }
 
     NavigationView.OnNavigationItemSelectedListener navigationView_OnNavigationItemSelectedListener = new NavigationView.OnNavigationItemSelectedListener() {

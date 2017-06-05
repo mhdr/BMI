@@ -129,7 +129,7 @@ public class FirstRunActivity extends AppCompatActivity {
             }
 
             if (validationError > 0) {
-                Toast.makeText(getApplicationContext(), R.string.first_run_validation_msg, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.new_profile_validation_msg, Toast.LENGTH_LONG).show();
 
                 return;
             }
@@ -230,7 +230,6 @@ public class FirstRunActivity extends AppCompatActivity {
             if (hasFocus) {
                 openWeightDialog();
             }
-
         }
     };
 
@@ -265,7 +264,7 @@ public class FirstRunActivity extends AppCompatActivity {
                 .setPositiveButtonString("تائید")
                 .setNegativeButton("انصراف")
                 .setTodayButton("امروز")
-                .setTodayButtonVisible(true)
+                .setTodayButtonVisible(false)
                 .setMaxYear(1450)
                 .setMinYear(1300)
                 .setInitDate(initDate)
