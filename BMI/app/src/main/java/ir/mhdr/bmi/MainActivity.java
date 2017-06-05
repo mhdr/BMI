@@ -107,19 +107,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             UserBL userBL = new UserBL(MainActivity.this);
-            List<User> userList = userBL.getUsers();
-
-            for (int i = 0; i < userList.size(); i++) {
-                User user = userList.get(i);
-
-                if (i == position) {
-                    user.setIsActiveX(true);
-                } else {
-                    user.setIsActiveX(false);
-                }
-
-                userBL.update(user);
-            }
+            userBL.SwitchActiveUser(userBL.getUsers().get(position));
 
             int pos = viewPagerMain.getCurrentItem();
             ProfileChangedListener profileChangedListener = (ProfileChangedListener) viewPagerAdapter.getRegisteredFragment(pos);

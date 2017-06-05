@@ -248,6 +248,9 @@ public class NewProfileActivity extends AppCompatActivity {
             UserBL userBL = new UserBL(NewProfileActivity.this);
             long id = userBL.insert(user);
 
+            // assign the created id for using this instance of User class later
+            user.setId(id);
+
             if (id > 0) {
 
                 HistoryBL historyBL = new HistoryBL(NewProfileActivity.this);
@@ -263,6 +266,9 @@ public class NewProfileActivity extends AppCompatActivity {
 
                 if (historyId > 0) {
                     Toast.makeText(getApplicationContext(), R.string.profile_created_successful_msg, Toast.LENGTH_LONG).show();
+
+
+                    userBL.SwitchActiveUser(user);
 
                     NavUtils.navigateUpFromSameTask(NewProfileActivity.this); // return to parent activity
                 }

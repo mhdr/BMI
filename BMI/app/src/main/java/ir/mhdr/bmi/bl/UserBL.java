@@ -208,4 +208,22 @@ public class UserBL {
 
         return rows_affected;
     }
+
+    public void SwitchActiveUser(User user)
+    {
+        List<User> userList = this.getUsers();
+
+        for (User u : userList)
+        {
+            if (u.getId()==user.getId())
+            {
+                u.setIsActiveX(true);
+            }
+            else {
+                u.setIsActiveX(false);
+            }
+
+            this.update(u);
+        }
+    }
 }
