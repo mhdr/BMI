@@ -113,8 +113,7 @@ public class MainActivity extends AppCompatActivity {
             ProfileChangedListener profileChangedListener = (ProfileChangedListener) viewPagerAdapter.getRegisteredFragment(pos);
             profileChangedListener.onProfileChanged();
 
-            if (drawerLayout.isDrawerOpen(GravityCompat.END))
-            {
+            if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
                 drawerLayout.closeDrawer(GravityCompat.END); // close the navigation drawer after changing profile
             }
         }
@@ -257,10 +256,9 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 drawerLayout.openDrawer(GravityCompat.END);
             }
-            return true;
         }
 
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     @Override
