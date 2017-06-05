@@ -3,23 +3,18 @@ package ir.mhdr.bmi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
-import android.provider.Settings;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.ScrollingTabContainerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -127,8 +122,13 @@ public class MainActivity extends AppCompatActivity {
             }
 
             int pos = viewPagerMain.getCurrentItem();
-            ProfileChangedListener profileChangedListener= (ProfileChangedListener) viewPagerAdapter.getRegisteredFragment(pos);
+            ProfileChangedListener profileChangedListener = (ProfileChangedListener) viewPagerAdapter.getRegisteredFragment(pos);
             profileChangedListener.onProfileChanged();
+
+            if (drawerLayout.isDrawerOpen(GravityCompat.END))
+            {
+                drawerLayout.closeDrawer(GravityCompat.END); // close the navigation drawer after changing profile
+            }
         }
 
         @Override
@@ -142,16 +142,15 @@ public class MainActivity extends AppCompatActivity {
         List<User> userList = userBL.getUsers();
         List<String> profileStrList = new ArrayList<>();
 
-        int activeUserIndex=0;
-        int currentIndex=0;
+        int activeUserIndex = 0;
+        int currentIndex = 0;
 
         for (User u : userList) {
 
             profileStrList.add(u.getName());
 
-            if (u.getIsActiveX())
-            {
-                activeUserIndex=currentIndex;
+            if (u.getIsActiveX()) {
+                activeUserIndex = currentIndex;
             }
 
             currentIndex++;
@@ -265,10 +264,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            if (drawerLayout.isDrawerOpen(Gravity.END)) {
-                drawerLayout.closeDrawer(Gravity.END);
+            if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
+                drawerLayout.closeDrawer(GravityCompat.END);
             } else {
-                drawerLayout.openDrawer(Gravity.END);
+                drawerLayout.openDrawer(GravityCompat.END);
             }
             return true;
         }
