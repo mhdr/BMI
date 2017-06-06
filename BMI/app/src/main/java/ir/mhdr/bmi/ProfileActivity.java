@@ -13,16 +13,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import ir.mhdr.bmi.bl.UserBL;
 import ir.mhdr.bmi.lib.ProfileAdapter;
-import ir.mhdr.bmi.model.History;
 import ir.mhdr.bmi.model.User;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -64,7 +60,7 @@ public class ProfileActivity extends AppCompatActivity {
     View.OnClickListener floatingActionButtonNewProfile_OnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent=new Intent(ProfileActivity.this,NewProfileActivity.class);
+            Intent intent=new Intent(ProfileActivity.this,NewEditProfileActivity.class);
             startActivity(intent);
         }
     };

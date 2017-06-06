@@ -165,6 +165,12 @@ public class WeightTableAdapter extends RecyclerView.Adapter<WeightTableAdapter.
                         } else if (position == 1) {
                             // delete
 
+                            if (historyList.size()==1)
+                            {
+                                Toast.makeText(context, context.getResources().getString(R.string.atleast_one_weight_is_needed), Toast.LENGTH_LONG).show();
+                                return;
+                            }
+
                             int itemPosition = viewHolder.getAdapterPosition();
 
                             UserBL userBL = new UserBL(context.getApplicationContext());

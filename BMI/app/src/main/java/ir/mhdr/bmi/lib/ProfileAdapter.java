@@ -4,7 +4,7 @@ package ir.mhdr.bmi.lib;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.TextViewCompat;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.RecyclerView;
@@ -14,15 +14,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.List;
 
-import ir.mhdr.bmi.EditProfileActivity;
+import ir.mhdr.bmi.NewEditProfileActivity;
 import ir.mhdr.bmi.R;
 import ir.mhdr.bmi.bl.HistoryBL;
 import ir.mhdr.bmi.bl.UserBL;
-import ir.mhdr.bmi.model.History;
 import ir.mhdr.bmi.model.User;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileViewHolder> {
@@ -66,13 +66,34 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
         final User user = userList.get(position);
         holder.textViewProfile.setText(user.getName());
 
+        if (user.getIsActiveX()) {
+            holder.imageViewActiveProfileStar.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.imageViewActiveProfileStar.setVisibility(View.INVISIBLE);
+        }
+
         final Button button = holder.buttonProfileOptions;
         final ProfileViewHolder viewHolder = holder;
+
+        holder.relativeLayoutProfileRow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserBL userBL = new UserBL(context.getApplicationContext());
+                int itemPosition = viewHolder.getAdapterPosition();
+                User userToEdit = userList.get(itemPosition);
+                userBL.SwitchActiveUser(userToEdit);
+                userList = userBL.getUsers();
+                notifyDataSetChanged();
+
+                Toast.makeText(context, context.getResources().getString(R.string.change_profile_successful), Toast.LENGTH_LONG).show();
+            }
+        });
 
         holder.buttonProfileOptions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ListPopupWindow listPopupWindow = new ListPopupWindow(context);
+                final ListPopupWindow listPopupWindow = new ListPopupWindow(context);
 
                 String[] menuItems = context.getResources().getStringArray(R.array.profile_menu);
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, R.layout.profile_menu,
@@ -95,11 +116,10 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
                             // edit
 
                             User userToEdit = userList.get(itemPosition);
-                            Intent intent = new Intent(context, EditProfileActivity.class);
-                            Bundle bundle = new Bundle();
-                            bundle.putLong("userId", userToEdit.getId());
+                            Intent intent = new Intent(context, NewEditProfileActivity.class);
+                            intent.putExtra("userId", userToEdit.getId());
                             context.startActivity(intent);
-
+                            listPopupWindow.dismiss();
                         } else if (position == 1) {
                             // delete
 
@@ -122,8 +142,10 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
 
                             Toast.makeText(context, context.getResources().getString(R.string.user_removed), Toast.LENGTH_LONG).show();
 
-                            userList.remove(itemPosition);
-                            notifyItemRemoved(itemPosition);
+                            userList=userBL.getUsers();
+                            notifyDataSetChanged();
+
+                            listPopupWindow.dismiss();
                         }
                     }
                 });
@@ -140,14 +162,18 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
 
     public class ProfileViewHolder extends RecyclerView.ViewHolder {
 
-        AppCompatTextView textViewProfile;
+        public AppCompatTextView textViewProfile;
         public Button buttonProfileOptions;
+        public AppCompatImageView imageViewActiveProfileStar;
+        public RelativeLayout relativeLayoutProfileRow;
 
         public ProfileViewHolder(View itemView) {
             super(itemView);
 
             textViewProfile = (AppCompatTextView) itemView.findViewById(R.id.textViewProfile);
             buttonProfileOptions = (Button) itemView.findViewById(R.id.buttonProfileOptions);
+            imageViewActiveProfileStar = (AppCompatImageView) itemView.findViewById(R.id.imageViewActiveProfileStar);
+            relativeLayoutProfileRow = (RelativeLayout) itemView.findViewById(R.id.relativeLayoutProfileRow);
         }
     }
 

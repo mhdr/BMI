@@ -23,12 +23,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".NewProfileActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ProfileActivity" />
-        </activity>
-        <activity android:name=".EditProfileActivity">
+        <activity android:name=".NewEditProfileActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ProfileActivity" />

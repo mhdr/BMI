@@ -1,7 +1,6 @@
 package ir.mhdr.bmi;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +19,9 @@ import net.time4j.PlainDate;
 
 import org.joda.time.DateTime;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import ir.hamsaa.persiandatepicker.Listener;
@@ -33,7 +35,7 @@ import ir.mhdr.bmi.model.History;
 import ir.mhdr.bmi.model.User;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class NewProfileActivity extends AppCompatActivity {
+public class NewEditProfileActivity extends AppCompatActivity {
 
     Toolbar toolbarNewProfile;
     List<String> genderList;
@@ -46,35 +48,53 @@ public class NewProfileActivity extends AppCompatActivity {
     TextView textViewNewProfileName;
     Button buttonNewProfileSave;
 
+    boolean editMode = false;
+    User userToEdit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_profile);
+        setContentView(R.layout.activity_new_edit_profile);
+
+        Bundle bundle = getIntent().getExtras();
+
+        if (bundle != null) {
+            if (bundle.containsKey("userId")) {
+                editMode = true;
+                UserBL userBL = new UserBL(NewEditProfileActivity.this);
+                userToEdit = userBL.getUser(bundle.getLong("userId"));
+            }
+        }
 
         toolbarNewProfile = (Toolbar) findViewById(R.id.toolbarNewProfile);
         setSupportActionBar(toolbarNewProfile);
         ViewCompat.setLayoutDirection(toolbarNewProfile, ViewCompat.LAYOUT_DIRECTION_RTL);
-        getSupportActionBar().setTitle(R.string.new_profile);
+
+        if (editMode) {
+            getSupportActionBar().setTitle(R.string.edit_profile);
+        } else {
+            getSupportActionBar().setTitle(R.string.new_profile);
+        }
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        textViewNewProfileName= (TextView) findViewById(R.id.textViewNewProfileName);
+        textViewNewProfileName = (TextView) findViewById(R.id.textViewNewProfileName);
         textViewNewProfileName.requestFocusFromTouch();
 
-        editTextNewProfileName= (EditText) findViewById(R.id.editTextNewProfileName);
-        spinnerNewProfileGender= (Spinner) findViewById(R.id.spinnerNewProfileGender);
-        editTextNewProfileBirthdate= (EditText) findViewById(R.id.editTextNewProfileBirthdate);
-        editTextNewProfileHeight= (EditText) findViewById(R.id.editTextNewProfileHeight);
-        editTextNewProfileWeight= (EditText) findViewById(R.id.editTextNewProfileWeight);
-        buttonNewProfileSave= (Button) findViewById(R.id.buttonNewProfileSave);
-
+        editTextNewProfileName = (EditText) findViewById(R.id.editTextNewProfileName);
+        spinnerNewProfileGender = (Spinner) findViewById(R.id.spinnerNewProfileGender);
+        editTextNewProfileBirthdate = (EditText) findViewById(R.id.editTextNewProfileBirthdate);
+        editTextNewProfileHeight = (EditText) findViewById(R.id.editTextNewProfileHeight);
+        editTextNewProfileWeight = (EditText) findViewById(R.id.editTextNewProfileWeight);
+        buttonNewProfileSave = (Button) findViewById(R.id.buttonNewProfileSave);
 
         ViewCompat.setLayoutDirection(editTextNewProfileName, ViewCompat.LAYOUT_DIRECTION_RTL);
 
-        Resources resources = new Resources(NewProfileActivity.this);
+        Resources resources = new Resources(NewEditProfileActivity.this);
         genderList = resources.getGenderList();
 
-        spinnerAdapter = new ArrayAdapter<String>(NewProfileActivity.this, android.R.layout.simple_spinner_item, genderList);
+        spinnerAdapter = new ArrayAdapter<String>(NewEditProfileActivity.this, android.R.layout.simple_spinner_item, genderList);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerNewProfileGender.setAdapter(spinnerAdapter);
         ViewCompat.setLayoutDirection(spinnerNewProfileGender, ViewCompat.LAYOUT_DIRECTION_RTL);
@@ -89,6 +109,39 @@ public class NewProfileActivity extends AppCompatActivity {
 
         editTextNewProfileWeight.setOnFocusChangeListener(editTextNewProfileWeight_OnFocusChangeListener);
         editTextNewProfileWeight.setOnClickListener(editTextNewProfileWeight_OnClickListener);
+
+        if (editMode) {
+            // load data
+
+            editTextNewProfileName.setText(userToEdit.getName());
+
+            if (userToEdit.getGenderX() == Gender.Male) {
+                spinnerNewProfileGender.setSelection(0);
+            } else if (userToEdit.getGenderX() == Gender.Female) {
+                spinnerNewProfileGender.setSelection(1);
+            }
+
+            String pattern = "yyyy-MM-dd";
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+            Date birth = null;
+
+            try {
+                birth = dateFormat.parse(userToEdit.getBirthdate());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            DateTime dateTime = new DateTime(birth);
+            PlainDate plainDate=PlainDate.of(dateTime.getYear(),dateTime.getMonthOfYear(), dateTime.getDayOfMonth());
+            net.time4j.calendar.PersianCalendar persianCalendar=plainDate.transform(net.time4j.calendar.PersianCalendar.class);
+            String dateStr = String.format("%d/%d/%d", persianCalendar.getYear(), persianCalendar.getMonth().getValue(),
+                    persianCalendar.getDayOfMonth());
+
+            editTextNewProfileBirthdate.setText(dateStr);
+            editTextNewProfileHeight.setText(userToEdit.getLatestHeight());
+            editTextNewProfileWeight.setText(userToEdit.getLatestWeight());
+        }
     }
 
     private void openHeightDialog() {
@@ -148,7 +201,7 @@ public class NewProfileActivity extends AppCompatActivity {
             initDate.setPersianDate(1364, 3, 1);
         }
 
-        PersianDatePickerDialog dialog = new PersianDatePickerDialog(NewProfileActivity.this)
+        PersianDatePickerDialog dialog = new PersianDatePickerDialog(NewEditProfileActivity.this)
                 .setPositiveButtonString("تائید")
                 .setNegativeButton("انصراف")
                 .setTodayButton("امروز")
@@ -237,40 +290,63 @@ public class NewProfileActivity extends AppCompatActivity {
             net.time4j.calendar.PersianCalendar persianCalendar = net.time4j.calendar.PersianCalendar.of(year, month, day);
             PlainDate birthdate = persianCalendar.transform(PlainDate.class);
 
-            User user = new User();
-            user.setName(name);
-            user.setGenderX(gender);
-            user.setBirthdate(birthdate.toString());
-            user.setLatestHeight(height);
-            user.setLatestWeight(weight);
-            user.setIsActiveX(false);
+            if (editMode) {
+                UserBL userBL = new UserBL(NewEditProfileActivity.this);
 
-            UserBL userBL = new UserBL(NewProfileActivity.this);
-            long id = userBL.insert(user);
+                User user = userToEdit;
+                user.setName(name);
+                user.setGenderX(gender);
+                user.setBirthdate(birthdate.toString());
+                user.setLatestHeight(height);
+                user.setLatestWeight(weight);
 
-            // assign the created id for using this instance of User class later
-            user.setId(id);
+                userBL.update(user);
 
-            if (id > 0) {
-
-                HistoryBL historyBL = new HistoryBL(NewProfileActivity.this);
-
-                DateTime current = new DateTime();
-
-                History history = new History();
-                history.setUserId(id);
+                HistoryBL historyBL=new HistoryBL(NewEditProfileActivity.this);
+                History history= historyBL.getLastHistory(user);
                 history.setValue(weight);
-                history.setDatetime(current.toString());
 
-                long historyId = historyBL.insert(history);
+                historyBL.update(history);
 
-                if (historyId > 0) {
-                    Toast.makeText(getApplicationContext(), R.string.profile_created_successful_msg, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.profile_edit_successful, Toast.LENGTH_LONG).show();
 
+                NavUtils.navigateUpFromSameTask(NewEditProfileActivity.this); // return to parent activity
 
-                    userBL.SwitchActiveUser(user);
+            } else {
+                User user = new User();
+                user.setName(name);
+                user.setGenderX(gender);
+                user.setBirthdate(birthdate.toString());
+                user.setLatestHeight(height);
+                user.setLatestWeight(weight);
+                user.setIsActiveX(false);
 
-                    NavUtils.navigateUpFromSameTask(NewProfileActivity.this); // return to parent activity
+                UserBL userBL = new UserBL(NewEditProfileActivity.this);
+                long id = userBL.insert(user);
+
+                // assign the created id for using this instance of User class later
+                user.setId(id);
+
+                if (id > 0) {
+
+                    HistoryBL historyBL = new HistoryBL(NewEditProfileActivity.this);
+
+                    DateTime current = new DateTime();
+
+                    History history = new History();
+                    history.setUserId(id);
+                    history.setValue(weight);
+                    history.setDatetime(current.toString());
+
+                    long historyId = historyBL.insert(history);
+
+                    if (historyId > 0) {
+                        Toast.makeText(getApplicationContext(), R.string.profile_created_successful_msg, Toast.LENGTH_LONG).show();
+
+                        userBL.SwitchActiveUser(user);
+
+                        NavUtils.navigateUpFromSameTask(NewEditProfileActivity.this); // return to parent activity
+                    }
                 }
             }
         }

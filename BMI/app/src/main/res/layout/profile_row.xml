@@ -1,23 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingBottom="5dp"
-    android:paddingTop="5dp"
+    android:id="@+id/relativeLayoutProfileRow"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp">
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/textViewProfile"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:gravity="center"
-        android:text="پروفایل"
-        android:textSize="16sp" />
+        android:gravity="center">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/imageViewActiveProfileStar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@+id/textViewProfile"
+            android:layout_toRightOf="@+id/textViewProfile"
+            android:scaleType="fitCenter"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/star2" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textViewProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="پروفایل"
+            android:textSize="16sp" />
+    </RelativeLayout>
 
     <Button
         android:id="@+id/buttonProfileOptions"

@@ -88,6 +88,7 @@
     </string-array>
 
     <string name="atleast_one_profile_is_needed">وجود حداقل یک پروفایل ضروری است</string>
+    <string name="atleast_one_weight_is_needed">وجود حداقل یک وزن ضروری است</string>
 
     <string name="user_removed">کاربر حذف شد</string>
 
@@ -95,4 +96,8 @@
     <string name="edit_profile">ویرایش پروفایل</string>
 
     <string name="save">ذخیره</string>
+
+    <string name="profile_edit_successful">ویرایش پروفایل انجام شد</string>
+
+    <string name="change_profile_successful">تغییر پروفایل انجام شد</string>
 </resources>
