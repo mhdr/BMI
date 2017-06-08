@@ -19,6 +19,12 @@
             android:title="@string/settings"
             android:visible="false" />
 
+        <item
+            android:id="@+id/itemMenuAddNewWeight"
+            android:checkable="true"
+            android:enabled="true"
+            android:title="@string/add_new_weight"
+            android:visible="true"/>
     </group>
 
 

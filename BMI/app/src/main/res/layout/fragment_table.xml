@@ -2,14 +2,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="ir.mhdr.bmi.TableFragment"
     android:background="@color/colorBackground">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewTable"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewTable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/floatingActionButtonNewWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="20dp"
+            android:visibility="visible"
+            app:backgroundTint="@color/colorPrimary"
+            app:elevation="8dp"
+            app:fabSize="normal"
+            app:srcCompat="@drawable/ic_add_white_24dp" />
+
+    </RelativeLayout>
 
 </FrameLayout>

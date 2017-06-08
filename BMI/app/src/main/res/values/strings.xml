@@ -100,4 +100,6 @@
     <string name="profile_edit_successful">ویرایش پروفایل انجام شد</string>
 
     <string name="change_profile_successful">تغییر پروفایل انجام شد</string>
+
+    <string name="add_new_weight">افزودن وزن جدید</string>
 </resources>

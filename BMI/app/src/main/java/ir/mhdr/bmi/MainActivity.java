@@ -20,14 +20,19 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.mhdr.bmi.bl.HistoryBL;
 import ir.mhdr.bmi.bl.UserBL;
 import ir.mhdr.bmi.lib.CustomViewPager;
 import ir.mhdr.bmi.lib.MainViewPagerAdapter;
 import ir.mhdr.bmi.lib.ProfileChangedListener;
+import ir.mhdr.bmi.model.History;
 import ir.mhdr.bmi.model.User;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -184,10 +189,58 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
             }
+            else if (item.getItemId()==R.id.itemMenuAddNewWeight)
+            {
+                openWeightDialog();
+                drawerLayout.closeDrawer(GravityCompat.END);
+                item.setChecked(false);
+            }
 
             return false;
         }
     };
+
+    private void openWeightDialog() {
+
+        final UserBL userBL = new UserBL(MainActivity.this);
+        final HistoryBL historyBL = new HistoryBL(MainActivity.this);
+        final User user = userBL.getActiveUser();
+
+        String valueStr = user.getLatestWeight();
+
+        WeightFragment weightFragment = new WeightFragment();
+
+        if (valueStr.length() > 0) {
+            weightFragment.setWeightValue(Double.parseDouble(valueStr));
+        }
+
+        weightFragment.setOnSaveListener(new WeightFragment.OnSaveListener() {
+            @Override
+            public void onSave(double value) {
+                user.setLatestWeight(String.valueOf(value));
+                int rows_affected = userBL.update(user);
+
+                DateTime current = new DateTime();
+
+                History history = new History();
+                history.setUserId(user.getId());
+                history.setValue(String.valueOf(value));
+                history.setDatetime(current.toString());
+
+                long historyId = historyBL.insert(history);
+
+                if (historyId > 0) {
+                    Toast.makeText(MainActivity.this, R.string.new_weight_saved, Toast.LENGTH_LONG).show();
+                }
+
+                int pos = viewPagerMain.getCurrentItem();
+                ProfileChangedListener profileChangedListener = (ProfileChangedListener) viewPagerAdapter.getRegisteredFragment(pos);
+                profileChangedListener.onProfileChanged();
+            }
+        });
+
+        weightFragment.show(getSupportFragmentManager(), "weight");
+    }
 
     BottomNavigationView.OnNavigationItemSelectedListener bottomNavigationView_OnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
