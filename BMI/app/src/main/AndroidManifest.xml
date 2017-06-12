@@ -5,6 +5,7 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/bmi"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/bmi"

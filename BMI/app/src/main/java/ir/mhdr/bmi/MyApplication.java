@@ -1,6 +1,7 @@
 package ir.mhdr.bmi;
 
 import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 import net.time4j.android.ApplicationStarter;
@@ -8,7 +9,7 @@ import net.time4j.android.ApplicationStarter;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 
-public class MyApplication extends Application {
+public class MyApplication extends MultiDexApplication {
 
     @Override
     public void onCreate() {

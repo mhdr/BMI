@@ -1,12 +1,24 @@
 package ir.mhdr.bmi;
 
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.AppCompatSpinner;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,15 +46,15 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class FirstRunActivity extends AppCompatActivity {
 
     List<String> genderList;
-    EditText editTextProfileName;
-    Spinner spinnerGender;
+    AppCompatEditText editTextProfileName;
+    AppCompatSpinner spinnerGender;
     ArrayAdapter<String> spinnerAdapter;
-    EditText editTextBirthdate;
+    AppCompatEditText editTextBirthdate;
     Toolbar toolbarFirstRun;
-    EditText editTextHeight;
-    EditText editTextWeight;
-    TextView textViewProfileName;
-    Button buttonStart;
+    AppCompatEditText editTextHeight;
+    AppCompatEditText editTextWeight;
+    AppCompatTextView textViewProfileName;
+    AppCompatButton buttonStart;
 
 
     @Override
@@ -55,13 +67,22 @@ public class FirstRunActivity extends AppCompatActivity {
         ViewCompat.setLayoutDirection(toolbarFirstRun, ViewCompat.LAYOUT_DIRECTION_RTL);
         getSupportActionBar().setTitle(R.string.initial_info);
 
-        textViewProfileName = (TextView) findViewById(R.id.textViewProfileName);
+        textViewProfileName = (AppCompatTextView) findViewById(R.id.textViewProfileName);
+
+        textViewProfileName.setFocusable(true);
+        textViewProfileName.setFocusableInTouchMode(true);
         textViewProfileName.requestFocusFromTouch();
 
-        editTextProfileName = (EditText) findViewById(R.id.editTextProfileName);
-        ViewCompat.setLayoutDirection(editTextProfileName, ViewCompat.LAYOUT_DIRECTION_RTL);
 
-        spinnerGender = (Spinner) findViewById(R.id.spinnerGender);
+        editTextProfileName = (AppCompatEditText) findViewById(R.id.editTextProfileName);
+
+        ViewCompat.setLayoutDirection(editTextProfileName, ViewCompat.LAYOUT_DIRECTION_RTL);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            editTextProfileName.setGravity(Gravity.NO_GRAVITY);
+            ViewCompat.setLayoutDirection(editTextProfileName, ViewCompat.LAYOUT_DIRECTION_RTL);
+        }
+
+        spinnerGender = (AppCompatSpinner) findViewById(R.id.spinnerGender);
 
         Resources resources = new Resources(FirstRunActivity.this);
         genderList = resources.getGenderList();
@@ -70,17 +91,20 @@ public class FirstRunActivity extends AppCompatActivity {
         spinnerAdapter = new ArrayAdapter<String>(FirstRunActivity.this, android.R.layout.simple_spinner_item, genderList);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGender.setAdapter(spinnerAdapter);
-        ViewCompat.setLayoutDirection(spinnerGender, ViewCompat.LAYOUT_DIRECTION_RTL);
 
-        editTextBirthdate = (EditText) findViewById(R.id.editTextBirthdate);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ViewCompat.setLayoutDirection(spinnerGender, ViewCompat.LAYOUT_DIRECTION_RTL);
+        }
+
+        editTextBirthdate = (AppCompatEditText) findViewById(R.id.editTextBirthdate);
         editTextBirthdate.setOnFocusChangeListener(editTextBirthdate_OnFocusChangeListener);
         editTextBirthdate.setOnClickListener(editTextBirthdate_OnClickListener);
 
-        editTextHeight = (EditText) findViewById(R.id.editTextHeight);
+        editTextHeight = (AppCompatEditText) findViewById(R.id.editTextHeight);
         editTextHeight.setOnFocusChangeListener(editTextHeight_OnFocusChangeListener);
         editTextHeight.setOnClickListener(editTextHeight_OnClickListener);
 
-        editTextWeight = (EditText) findViewById(R.id.editTextWeight);
+        editTextWeight = (AppCompatEditText) findViewById(R.id.editTextWeight);
         editTextWeight.setOnFocusChangeListener(editTextWeight_OnFocusChangeListener);
         editTextWeight.setOnClickListener(editTextWeight_OnClickListener);
 
@@ -88,7 +112,7 @@ public class FirstRunActivity extends AppCompatActivity {
     }
 
     private void initializeButtonStart() {
-        buttonStart = (Button) findViewById(R.id.buttonStart);
+        buttonStart = (AppCompatButton) findViewById(R.id.buttonStart);
         buttonStart.setOnClickListener(buttonStart_OnClickListener);
     }
 
