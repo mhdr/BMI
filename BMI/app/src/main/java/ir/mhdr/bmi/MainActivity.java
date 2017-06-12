@@ -3,6 +3,7 @@ package ir.mhdr.bmi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,8 +19,10 @@ import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -148,7 +151,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         profiles = profileStrList.toArray(new String[0]);
-        spinnerAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, profiles);
+        spinnerAdapter = new ArrayAdapter<String>(MainActivity.this, R.layout.simple_spinner_dropdown_item_rtl, profiles);
+        spinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_rtl);
         spinnerProfile.setAdapter(spinnerAdapter);
         spinnerProfile.setSelection(activeUserIndex);
 

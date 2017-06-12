@@ -82,7 +82,8 @@ public class FirstRunActivity extends AppCompatActivity {
         genderList = resources.getGenderList();
 
 
-        spinnerAdapter = new ArrayAdapter<String>(FirstRunActivity.this, android.R.layout.simple_spinner_item, genderList);
+        spinnerAdapter = new ArrayAdapter<String>(FirstRunActivity.this, R.layout.simple_spinner_dropdown_item_rtl, genderList);
+        spinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_rtl);
         spinnerGender.setAdapter(spinnerAdapter);
 
         editTextBirthdate = (AppCompatEditText) findViewById(R.id.editTextBirthdate);

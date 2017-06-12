@@ -95,7 +95,8 @@ public class NewEditProfileActivity extends AppCompatActivity {
         Resources resources = new Resources(NewEditProfileActivity.this);
         genderList = resources.getGenderList();
 
-        spinnerAdapter = new ArrayAdapter<String>(NewEditProfileActivity.this, android.R.layout.simple_spinner_item, genderList);
+        spinnerAdapter = new ArrayAdapter<String>(NewEditProfileActivity.this, R.layout.simple_spinner_dropdown_item_rtl, genderList);
+        spinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_rtl);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerNewProfileGender.setAdapter(spinnerAdapter);
 

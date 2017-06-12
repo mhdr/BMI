@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl">
 
 
     <group android:checkableBehavior="single">
@@ -11,7 +13,8 @@
             android:layoutDirection="rtl"
             android:textDirection="rtl"
             android:title="@string/profile_management"
-            android:visible="true" />
+            android:visible="true"
+            app:showAsAction="never" />
 
         <item
             android:id="@+id/itemMenuSettings"
@@ -20,7 +23,8 @@
             android:layoutDirection="rtl"
             android:textDirection="rtl"
             android:title="@string/settings"
-            android:visible="false" />
+            android:visible="false"
+            app:showAsAction="never" />
     </group>
 
 
@@ -33,7 +37,8 @@
                 android:layoutDirection="rtl"
                 android:textDirection="rtl"
                 android:title="@string/about"
-                android:visible="false" />
+                android:visible="false"
+                app:showAsAction="never" />
 
             <item
                 android:id="@+id/itemMenuExit"
@@ -42,7 +47,8 @@
                 android:layoutDirection="rtl"
                 android:textDirection="rtl"
                 android:title="@string/exit"
-                android:visible="true" />
+                android:visible="true"
+                app:showAsAction="never" />
         </menu>
     </item>
 </menu>
