@@ -97,7 +97,7 @@
                     android:paddingRight="120dp"
                     android:paddingTop="15dp" />
 
-                <TextView
+                <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/textViewBMI"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
