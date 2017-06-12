@@ -5,6 +5,10 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.AppCompatSpinner;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,13 +44,13 @@ public class NewEditProfileActivity extends AppCompatActivity {
     Toolbar toolbarNewProfile;
     List<String> genderList;
     ArrayAdapter<String> spinnerAdapter;
-    EditText editTextNewProfileName;
-    Spinner spinnerNewProfileGender;
-    EditText editTextNewProfileBirthdate;
-    EditText editTextNewProfileHeight;
-    EditText editTextNewProfileWeight;
-    TextView textViewNewProfileName;
-    Button buttonNewProfileSave;
+    AppCompatEditText editTextNewProfileName;
+    AppCompatSpinner spinnerNewProfileGender;
+    AppCompatEditText editTextNewProfileBirthdate;
+    AppCompatEditText editTextNewProfileHeight;
+    AppCompatEditText editTextNewProfileWeight;
+    AppCompatTextView textViewNewProfileName;
+    AppCompatButton buttonNewProfileSave;
 
     boolean editMode = false;
     User userToEdit;
@@ -68,7 +72,6 @@ public class NewEditProfileActivity extends AppCompatActivity {
 
         toolbarNewProfile = (Toolbar) findViewById(R.id.toolbarNewProfile);
         setSupportActionBar(toolbarNewProfile);
-        ViewCompat.setLayoutDirection(toolbarNewProfile, ViewCompat.LAYOUT_DIRECTION_RTL);
 
         if (editMode) {
             getSupportActionBar().setTitle(R.string.edit_profile);
@@ -79,17 +82,15 @@ public class NewEditProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        textViewNewProfileName = (TextView) findViewById(R.id.textViewNewProfileName);
+        textViewNewProfileName = (AppCompatTextView) findViewById(R.id.textViewNewProfileName);
         textViewNewProfileName.requestFocusFromTouch();
 
-        editTextNewProfileName = (EditText) findViewById(R.id.editTextNewProfileName);
-        spinnerNewProfileGender = (Spinner) findViewById(R.id.spinnerNewProfileGender);
-        editTextNewProfileBirthdate = (EditText) findViewById(R.id.editTextNewProfileBirthdate);
-        editTextNewProfileHeight = (EditText) findViewById(R.id.editTextNewProfileHeight);
-        editTextNewProfileWeight = (EditText) findViewById(R.id.editTextNewProfileWeight);
-        buttonNewProfileSave = (Button) findViewById(R.id.buttonNewProfileSave);
-
-        ViewCompat.setLayoutDirection(editTextNewProfileName, ViewCompat.LAYOUT_DIRECTION_RTL);
+        editTextNewProfileName = (AppCompatEditText) findViewById(R.id.editTextNewProfileName);
+        spinnerNewProfileGender = (AppCompatSpinner) findViewById(R.id.spinnerNewProfileGender);
+        editTextNewProfileBirthdate = (AppCompatEditText) findViewById(R.id.editTextNewProfileBirthdate);
+        editTextNewProfileHeight = (AppCompatEditText) findViewById(R.id.editTextNewProfileHeight);
+        editTextNewProfileWeight = (AppCompatEditText) findViewById(R.id.editTextNewProfileWeight);
+        buttonNewProfileSave = (AppCompatButton) findViewById(R.id.buttonNewProfileSave);
 
         Resources resources = new Resources(NewEditProfileActivity.this);
         genderList = resources.getGenderList();
@@ -97,7 +98,6 @@ public class NewEditProfileActivity extends AppCompatActivity {
         spinnerAdapter = new ArrayAdapter<String>(NewEditProfileActivity.this, android.R.layout.simple_spinner_item, genderList);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerNewProfileGender.setAdapter(spinnerAdapter);
-        ViewCompat.setLayoutDirection(spinnerNewProfileGender, ViewCompat.LAYOUT_DIRECTION_RTL);
 
         buttonNewProfileSave.setOnClickListener(buttonNewProfileSave_OnClickListener);
 

@@ -7,7 +7,7 @@
     android:background="@color/colorLightYellow"
     android:minWidth="160dp">
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewMarkerWeightLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         android:textColor="@android:color/black"
         android:textStyle="bold" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewMarkerWeightValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
         android:text="value" />
 
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewMarkerDateLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
         android:textColor="@android:color/black"
         android:textStyle="bold" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewMarkerDateValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

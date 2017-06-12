@@ -14,6 +14,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     CustomViewPager viewPagerMain;
     NavigationView navigationView;
     boolean firstRun = false;
-    Spinner spinnerProfile;
+    AppCompatSpinner spinnerProfile;
     ArrayAdapter<String> spinnerAdapter;
 
     String[] profiles;
@@ -70,11 +71,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         navigationView = (NavigationView) findViewById(R.id.navigationView);
-        ViewCompat.setLayoutDirection(navigationView, ViewCompat.LAYOUT_DIRECTION_RTL);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ViewCompat.setLayoutDirection(toolbar, ViewCompat.LAYOUT_DIRECTION_RTL);
         getSupportActionBar().setTitle(R.string.app_name_fa);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -103,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         View headerView = navigationView.getHeaderView(0);
-        spinnerProfile = (Spinner) headerView.findViewById(R.id.spinnerProfile);
+        spinnerProfile = (AppCompatSpinner) headerView.findViewById(R.id.spinnerProfile);
         generateSpinnerProfile();
         spinnerProfile.setOnItemSelectedListener(spinnerProfile_OnItemSelectedListener);
     }
@@ -149,11 +148,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         profiles = profileStrList.toArray(new String[0]);
-        spinnerAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_dropdown_item,
-                profiles);
-
+        spinnerAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, profiles);
         spinnerProfile.setAdapter(spinnerAdapter);
         spinnerProfile.setSelection(activeUserIndex);
+
     }
 
     NavigationView.OnNavigationItemSelectedListener navigationView_OnNavigationItemSelectedListener = new NavigationView.OnNavigationItemSelectedListener() {

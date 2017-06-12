@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ir.mhdr.bmi.EditProfileActivity"
+    tools:context="ir.mhdr.bmi.NewEditProfileActivity"
     android:background="@color/colorBackground">
 
     <android.support.v7.widget.Toolbar
@@ -14,6 +14,8 @@
         android:layout_alignParentTop="true"
         android:background="@color/colorPrimary"
         android:fitsSystemWindows="true"
+        android:layoutDirection="rtl"
+        android:textDirection="rtl"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 

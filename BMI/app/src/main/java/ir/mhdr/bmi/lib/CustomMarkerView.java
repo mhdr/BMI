@@ -1,6 +1,7 @@
 package ir.mhdr.bmi.lib;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatTextView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -13,10 +14,10 @@ import ir.mhdr.bmi.R;
 
 public class CustomMarkerView extends MarkerView {
 
-    TextView textViewMarkerWeightValue;
-    TextView textViewMarkerDateValue;
-    TextView textViewMarkerWeightLabel;
-    TextView textViewMarkerDateLabel;
+    AppCompatTextView textViewMarkerWeightValue;
+    AppCompatTextView textViewMarkerDateValue;
+    AppCompatTextView textViewMarkerWeightLabel;
+    AppCompatTextView textViewMarkerDateLabel;
     MPPointF mOffset;
     RelativeLayout relativeLayoutMarkerView;
 
@@ -29,10 +30,10 @@ public class CustomMarkerView extends MarkerView {
     public CustomMarkerView(Context context, int layoutResource) {
         super(context, layoutResource);
 
-        textViewMarkerDateValue = (TextView) findViewById(R.id.textViewMarkerDateValue);
-        textViewMarkerWeightValue = (TextView) findViewById(R.id.textViewMarkerWeightValue);
-        textViewMarkerWeightLabel = (TextView) findViewById(R.id.textViewMarkerWeightLabel);
-        textViewMarkerDateLabel = (TextView) findViewById(R.id.textViewMarkerDateLabel);
+        textViewMarkerDateValue = (AppCompatTextView) findViewById(R.id.textViewMarkerDateValue);
+        textViewMarkerWeightValue = (AppCompatTextView) findViewById(R.id.textViewMarkerWeightValue);
+        textViewMarkerWeightLabel = (AppCompatTextView) findViewById(R.id.textViewMarkerWeightLabel);
+        textViewMarkerDateLabel = (AppCompatTextView) findViewById(R.id.textViewMarkerDateLabel);
         relativeLayoutMarkerView = (RelativeLayout) findViewById(R.id.relativeLayoutMarkerView);
     }
 

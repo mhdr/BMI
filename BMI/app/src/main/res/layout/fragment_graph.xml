@@ -15,7 +15,7 @@
             android:layout_height="40dp"
             android:layout_alignParentBottom="true">
 
-            <Button
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/buttonGraphShowOneMonth"
                 style="@style/Widget.AppCompat.Button.Small"
                 android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
                 android:text="@string/one_month" />
 
 
-            <Button
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/buttonGraphShowOneWeek"
                 style="@style/Widget.AppCompat.Button.Small"
                 android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
                 android:background="@android:color/transparent"
                 android:text="@string/one_week" />
 
-            <Button
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/buttonGraphShowAll"
                 style="@style/Widget.AppCompat.Button.Small"
                 android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
                 android:background="@android:color/transparent"
                 android:text="@string/all" />
 
-            <Button
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/buttonGraphShowThreeMonth"
                 style="@style/Widget.AppCompat.Button.Small"
                 android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
                 android:background="@android:color/transparent"
                 android:text="@string/three_month" />
 
-            <Button
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/buttonGraphShowOneYear"
                 style="@style/Widget.AppCompat.Button.Small"
                 android:layout_width="wrap_content"

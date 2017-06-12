@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.AppCompatImageButton;
+import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -42,21 +44,21 @@ import ir.mhdr.bmi.model.User;
 
 public class BmiFragment extends Fragment implements ProfileChangedListener{
 
-    TextView textViewProfileInfoAge;
-    TextView textViewProfileInfoName;
-    TextView textViewProfileInfoHeight;
-    TextView textViewWeightRange1;
-    TextView textViewWeightRange2;
-    TextView textViewWeightRange3;
-    TextView textViewWeightRange4;
-    TextView textViewWeightRange5;
-    TextView textViewWeightRange6;
-    TextView textViewWeightRange7;
-    TextView textViewWeightRange8;
-    TextView textViewCurrentWeight;
-    ImageButton imageButtonAddNewWeight;
+    AppCompatTextView textViewProfileInfoAge;
+    AppCompatTextView textViewProfileInfoName;
+    AppCompatTextView textViewProfileInfoHeight;
+    AppCompatTextView textViewWeightRange1;
+    AppCompatTextView textViewWeightRange2;
+    AppCompatTextView textViewWeightRange3;
+    AppCompatTextView textViewWeightRange4;
+    AppCompatTextView textViewWeightRange5;
+    AppCompatTextView textViewWeightRange6;
+    AppCompatTextView textViewWeightRange7;
+    AppCompatTextView textViewWeightRange8;
+    AppCompatTextView textViewCurrentWeight;
+    AppCompatImageButton imageButtonAddNewWeight;
     ScArcGauge gauge;
-    TextView textViewBMI;
+    AppCompatTextView textViewBMI;
     Bitmap indicator;
 
     @Override
@@ -65,12 +67,12 @@ public class BmiFragment extends Fragment implements ProfileChangedListener{
 
         View view = inflater.inflate(R.layout.fragment_bmi, container, false);
 
-        textViewProfileInfoAge = (TextView) view.findViewById(R.id.textViewProfileInfoAge);
-        textViewProfileInfoName = (TextView) view.findViewById(R.id.textViewProfileInfoName);
-        textViewProfileInfoHeight = (TextView) view.findViewById(R.id.textViewProfileInfoHeight);
+        textViewProfileInfoAge = (AppCompatTextView) view.findViewById(R.id.textViewProfileInfoAge);
+        textViewProfileInfoName = (AppCompatTextView) view.findViewById(R.id.textViewProfileInfoName);
+        textViewProfileInfoHeight = (AppCompatTextView) view.findViewById(R.id.textViewProfileInfoHeight);
 
         gauge = (ScArcGauge) view.findViewById(R.id.ScArcGaugeBmiGauge);
-        textViewBMI = (TextView) view.findViewById(R.id.textViewBMI);
+        textViewBMI = (AppCompatTextView) view.findViewById(R.id.textViewBMI);
         indicator = BitmapFactory.decodeResource(this.getResources(), R.drawable.indicator);
 
         gauge.setAngleStart(-235);
@@ -109,18 +111,18 @@ public class BmiFragment extends Fragment implements ProfileChangedListener{
             }
         });
 
-        textViewWeightRange1 = (TextView) view.findViewById(R.id.textViewWeightRange1);
-        textViewWeightRange2 = (TextView) view.findViewById(R.id.textViewWeightRange2);
-        textViewWeightRange3 = (TextView) view.findViewById(R.id.textViewWeightRange3);
-        textViewWeightRange4 = (TextView) view.findViewById(R.id.textViewWeightRange4);
-        textViewWeightRange5 = (TextView) view.findViewById(R.id.textViewWeightRange5);
-        textViewWeightRange6 = (TextView) view.findViewById(R.id.textViewWeightRange6);
-        textViewWeightRange7 = (TextView) view.findViewById(R.id.textViewWeightRange7);
-        textViewWeightRange8 = (TextView) view.findViewById(R.id.textViewWeightRange8);
+        textViewWeightRange1 = (AppCompatTextView) view.findViewById(R.id.textViewWeightRange1);
+        textViewWeightRange2 = (AppCompatTextView) view.findViewById(R.id.textViewWeightRange2);
+        textViewWeightRange3 = (AppCompatTextView) view.findViewById(R.id.textViewWeightRange3);
+        textViewWeightRange4 = (AppCompatTextView) view.findViewById(R.id.textViewWeightRange4);
+        textViewWeightRange5 = (AppCompatTextView) view.findViewById(R.id.textViewWeightRange5);
+        textViewWeightRange6 = (AppCompatTextView) view.findViewById(R.id.textViewWeightRange6);
+        textViewWeightRange7 = (AppCompatTextView) view.findViewById(R.id.textViewWeightRange7);
+        textViewWeightRange8 = (AppCompatTextView) view.findViewById(R.id.textViewWeightRange8);
 
-        textViewCurrentWeight = (TextView) view.findViewById(R.id.textViewCurrentWeight);
+        textViewCurrentWeight = (AppCompatTextView) view.findViewById(R.id.textViewCurrentWeight);
 
-        imageButtonAddNewWeight = (ImageButton) view.findViewById(R.id.imageButtonAddNewWeight);
+        imageButtonAddNewWeight = (AppCompatImageButton) view.findViewById(R.id.imageButtonAddNewWeight);
         imageButtonAddNewWeight.setOnClickListener(imageButtonAddNewWeight_OnClickListener);
 
         calculateAndShow();

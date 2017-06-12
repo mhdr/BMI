@@ -37,7 +37,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         toolbarProfile = (Toolbar) findViewById(R.id.toolbarProfile);
         setSupportActionBar(toolbarProfile);
-        ViewCompat.setLayoutDirection(toolbarProfile, ViewCompat.LAYOUT_DIRECTION_RTL);
         getSupportActionBar().setTitle(R.string.profile_management);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

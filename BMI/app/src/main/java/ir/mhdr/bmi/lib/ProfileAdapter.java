@@ -4,6 +4,8 @@ package ir.mhdr.bmi.lib;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.ListPopupWindow;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -73,7 +76,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
             holder.imageViewActiveProfileStar.setVisibility(View.INVISIBLE);
         }
 
-        final Button button = holder.buttonProfileOptions;
+        final AppCompatImageButton button = holder.buttonProfileOptions;
         final ProfileViewHolder viewHolder = holder;
 
         holder.relativeLayoutProfileRow.setOnClickListener(new View.OnClickListener() {
@@ -163,7 +166,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
     public class ProfileViewHolder extends RecyclerView.ViewHolder {
 
         public AppCompatTextView textViewProfile;
-        public Button buttonProfileOptions;
+        public AppCompatImageButton buttonProfileOptions;
         public AppCompatImageView imageViewActiveProfileStar;
         public RelativeLayout relativeLayoutProfileRow;
 
@@ -171,7 +174,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
             super(itemView);
 
             textViewProfile = (AppCompatTextView) itemView.findViewById(R.id.textViewProfile);
-            buttonProfileOptions = (Button) itemView.findViewById(R.id.buttonProfileOptions);
+            buttonProfileOptions = (AppCompatImageButton) itemView.findViewById(R.id.buttonProfileOptions);
             imageViewActiveProfileStar = (AppCompatImageView) itemView.findViewById(R.id.imageViewActiveProfileStar);
             relativeLayoutProfileRow = (RelativeLayout) itemView.findViewById(R.id.relativeLayoutProfileRow);
         }

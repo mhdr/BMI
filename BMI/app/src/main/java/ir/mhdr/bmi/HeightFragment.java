@@ -3,6 +3,7 @@ package ir.mhdr.bmi;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import android.widget.TextView;
 public class HeightFragment extends DialogFragment {
 
     NumberPicker numberPickerHeight;
-    Button buttonSaveHeight;
+    AppCompatButton buttonSaveHeight;
 
     OnSaveListener onSaveListener;
     int initialHeightValue = -1;
@@ -30,7 +31,7 @@ public class HeightFragment extends DialogFragment {
         View view = inflater.inflate(R.layout.fragment_height, container, false);
 
         numberPickerHeight = (NumberPicker) view.findViewById(R.id.numberPickerHeight);
-        buttonSaveHeight = (Button) view.findViewById(R.id.buttonSaveHeight);
+        buttonSaveHeight = (AppCompatButton) view.findViewById(R.id.buttonSaveHeight);
 
         numberPickerHeight.setMaxValue(999);
         numberPickerHeight.setMinValue(0);

@@ -22,6 +22,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,7 +65,6 @@ public class FirstRunActivity extends AppCompatActivity {
 
         toolbarFirstRun = (Toolbar) findViewById(R.id.toolbarFirstRun);
         setSupportActionBar(toolbarFirstRun);
-        ViewCompat.setLayoutDirection(toolbarFirstRun, ViewCompat.LAYOUT_DIRECTION_RTL);
         getSupportActionBar().setTitle(R.string.initial_info);
 
         textViewProfileName = (AppCompatTextView) findViewById(R.id.textViewProfileName);
@@ -76,12 +76,6 @@ public class FirstRunActivity extends AppCompatActivity {
 
         editTextProfileName = (AppCompatEditText) findViewById(R.id.editTextProfileName);
 
-        ViewCompat.setLayoutDirection(editTextProfileName, ViewCompat.LAYOUT_DIRECTION_RTL);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            editTextProfileName.setGravity(Gravity.NO_GRAVITY);
-            ViewCompat.setLayoutDirection(editTextProfileName, ViewCompat.LAYOUT_DIRECTION_RTL);
-        }
-
         spinnerGender = (AppCompatSpinner) findViewById(R.id.spinnerGender);
 
         Resources resources = new Resources(FirstRunActivity.this);
@@ -89,12 +83,7 @@ public class FirstRunActivity extends AppCompatActivity {
 
 
         spinnerAdapter = new ArrayAdapter<String>(FirstRunActivity.this, android.R.layout.simple_spinner_item, genderList);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGender.setAdapter(spinnerAdapter);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            ViewCompat.setLayoutDirection(spinnerGender, ViewCompat.LAYOUT_DIRECTION_RTL);
-        }
 
         editTextBirthdate = (AppCompatEditText) findViewById(R.id.editTextBirthdate);
         editTextBirthdate.setOnFocusChangeListener(editTextBirthdate_OnFocusChangeListener);

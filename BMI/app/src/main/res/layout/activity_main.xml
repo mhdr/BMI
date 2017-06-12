@@ -23,6 +23,8 @@
             android:background="@color/colorPrimary"
             android:fitsSystemWindows="true"
             android:minHeight="?attr/actionBarSize"
+            android:layoutDirection="rtl"
+            android:textDirection="rtl"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         </android.support.v7.widget.Toolbar>
@@ -64,6 +66,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="end"
         app:menu="@menu/drawer_menu"
+        android:layoutDirection="rtl"
+        android:textDirection="rtl"
         app:headerLayout="@layout/drawer_header">
 
     </android.support.design.widget.NavigationView>

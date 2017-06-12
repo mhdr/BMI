@@ -14,6 +14,8 @@
         android:layout_alignParentTop="true"
         android:background="@color/colorPrimary"
         android:fitsSystemWindows="true"
+        android:layoutDirection="rtl"
+        android:textDirection="rtl"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -34,7 +36,7 @@
             android:paddingStart="5dp"
             android:paddingTop="10dp">
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/textViewNewProfileHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -42,7 +44,7 @@
                 android:text="@string/first_run_header2"
                 android:textSize="18sp" />
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/textViewNewProfileName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,71 +53,77 @@
                 android:layout_below="@+id/textViewNewProfileHeader"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:gravity="center|start"
+                android:layoutDirection="rtl"
+                android:textDirection="rtl"
                 android:text="@string/profile_name"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <EditText
+            <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/editTextNewProfileName"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/textViewNewProfileName"
-                android:gravity="start"
+                android:layoutDirection="rtl"
+                android:textDirection="rtl"
                 android:inputType="text" />
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/textViewNewProfileGender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/editTextNewProfileName"
-                android:gravity="center|start"
+                android:layoutDirection="rtl"
+                android:textDirection="rtl"
                 android:text="@string/gender"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <Spinner
+            <android.support.v7.widget.AppCompatSpinner
                 android:id="@+id/spinnerNewProfileGender"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/textViewNewProfileGender"
-                android:gravity="end">
+                android:layoutDirection="rtl"
+                android:textDirection="rtl">
 
-            </Spinner>
+            </android.support.v7.widget.AppCompatSpinner>
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/textViewNewProfileBirthdate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/spinnerNewProfileGender"
-                android:gravity="center|start"
+                android:layoutDirection="rtl"
+                android:textDirection="rtl"
                 android:text="@string/birth_date"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <EditText
+            <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/editTextNewProfileBirthdate"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/textViewNewProfileBirthdate"
-                android:gravity="start"
+                android:layoutDirection="ltr"
+                android:textDirection="ltr"
                 android:inputType="none"
                 android:textIsSelectable="true" />
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/textViewNewProfileHeader2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -126,32 +134,34 @@
                 android:textSize="18sp" />
 
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/textViewNewProfileHeight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/textViewNewProfileHeader2"
-                android:gravity="center|start"
+                android:layoutDirection="rtl"
+                android:textDirection="rtl"
                 android:text="@string/height_unit_text"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <EditText
+            <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/editTextNewProfileHeight"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/textViewNewProfileHeight"
-                android:gravity="start"
+                android:layoutDirection="ltr"
+                android:textDirection="ltr"
                 android:inputType="none"
                 android:textIsSelectable="true" />
 
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/textViewNewProfileWeight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -159,20 +169,22 @@
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/editTextNewProfileHeight"
                 android:layout_marginTop="10dp"
-                android:gravity="center|start"
+                android:layoutDirection="rtl"
+                android:textDirection="rtl"
                 android:text="@string/weight_unit_text"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <EditText
+            <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/editTextNewProfileWeight"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/textViewNewProfileWeight"
-                android:gravity="start"
+                android:layoutDirection="ltr"
+                android:textDirection="ltr"
                 android:inputType="none"
                 android:textIsSelectable="true" />
 
@@ -182,7 +194,7 @@
                 android:layout_below="@+id/editTextNewProfileWeight"
                 android:background="@drawable/gradient_color">
 
-                <Button
+                <android.support.v7.widget.AppCompatButton
                     android:id="@+id/buttonNewProfileSave"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

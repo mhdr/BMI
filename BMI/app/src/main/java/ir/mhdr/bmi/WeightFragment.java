@@ -4,6 +4,7 @@ package ir.mhdr.bmi;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ public class WeightFragment extends DialogFragment {
 
     NumberPicker numberPickerWeight1;
     NumberPicker numberPickerWeight2;
-    Button buttonSaveWeight;
+    AppCompatButton buttonSaveWeight;
 
     OnSaveListener onSaveListener;
     double initialWeightValue = -1;
@@ -37,7 +38,7 @@ public class WeightFragment extends DialogFragment {
 
         numberPickerWeight1 = (NumberPicker) view.findViewById(R.id.numberPickerWeight1);
         numberPickerWeight2 = (NumberPicker) view.findViewById(R.id.numberPickerWeight2);
-        buttonSaveWeight = (Button) view.findViewById(R.id.buttonSaveWeight);
+        buttonSaveWeight = (AppCompatButton) view.findViewById(R.id.buttonSaveWeight);
 
 
         Map<Integer, Integer> extractedValue = extractWeigtValue();

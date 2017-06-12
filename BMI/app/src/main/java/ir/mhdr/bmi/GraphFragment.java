@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.AppCompatButton;
 import android.text.AndroidCharacter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,11 +50,11 @@ import ir.mhdr.bmi.model.User;
 public class GraphFragment extends Fragment implements ProfileChangedListener {
 
     LineChart lineChartWeight;
-    Button buttonGraphShowOneMonth;
-    Button buttonGraphShowOneWeek;
-    Button buttonGraphShowAll;
-    Button buttonGraphShowOneYear;
-    Button buttonGraphShowThreeMonth;
+    AppCompatButton buttonGraphShowOneMonth;
+    AppCompatButton buttonGraphShowOneWeek;
+    AppCompatButton buttonGraphShowAll;
+    AppCompatButton buttonGraphShowOneYear;
+    AppCompatButton buttonGraphShowThreeMonth;
 
     DateTime start;
     DateTime end;
@@ -70,11 +71,11 @@ public class GraphFragment extends Fragment implements ProfileChangedListener {
 
         lineChartWeight = (LineChart) view.findViewById(R.id.lineChartWeight);
 
-        buttonGraphShowAll = (Button) view.findViewById(R.id.buttonGraphShowAll);
-        buttonGraphShowThreeMonth = (Button) view.findViewById(R.id.buttonGraphShowThreeMonth);
-        buttonGraphShowOneMonth = (Button) view.findViewById(R.id.buttonGraphShowOneMonth);
-        buttonGraphShowOneWeek = (Button) view.findViewById(R.id.buttonGraphShowOneWeek);
-        buttonGraphShowOneYear = (Button) view.findViewById(R.id.buttonGraphShowOneYear);
+        buttonGraphShowAll = (AppCompatButton) view.findViewById(R.id.buttonGraphShowAll);
+        buttonGraphShowThreeMonth = (AppCompatButton) view.findViewById(R.id.buttonGraphShowThreeMonth);
+        buttonGraphShowOneMonth = (AppCompatButton) view.findViewById(R.id.buttonGraphShowOneMonth);
+        buttonGraphShowOneWeek = (AppCompatButton) view.findViewById(R.id.buttonGraphShowOneWeek);
+        buttonGraphShowOneYear = (AppCompatButton) view.findViewById(R.id.buttonGraphShowOneYear);
 
 
         buttonGraphShowAll.setOnClickListener(buttonGraphShowAll_OnClickListener);

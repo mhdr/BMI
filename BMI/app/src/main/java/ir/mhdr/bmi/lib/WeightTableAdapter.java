@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -104,7 +106,7 @@ public class WeightTableAdapter extends RecyclerView.Adapter<WeightTableAdapter.
         holder.textViewWeightForTable.setText(history.getValue());
         holder.textViewDateForTable.setText(datetimeStr);
 
-        final Button button = holder.buttonOptions;
+        final AppCompatButton button = holder.buttonOptions;
 
         holder.buttonOptions.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,19 +209,19 @@ public class WeightTableAdapter extends RecyclerView.Adapter<WeightTableAdapter.
 
     public class WeightTableViewHolder extends RecyclerView.ViewHolder {
 
-        public Button buttonOptions;
+        public AppCompatButton buttonOptions;
         public View viewBMIColorForTable;
-        public TextView textViewWeightForTable;
-        public TextView textViewDateForTable;
+        public AppCompatTextView textViewWeightForTable;
+        public AppCompatTextView textViewDateForTable;
 
         public WeightTableViewHolder(View itemView) {
             super(itemView);
 
 
-            buttonOptions = (Button) itemView.findViewById(R.id.buttonOptions);
+            buttonOptions = (AppCompatButton) itemView.findViewById(R.id.buttonOptions);
             viewBMIColorForTable = itemView.findViewById(R.id.viewBMIColorForTable);
-            textViewWeightForTable = (TextView) itemView.findViewById(R.id.textViewWeightForTable);
-            textViewDateForTable = (TextView) itemView.findViewById(R.id.textViewDateForTable);
+            textViewWeightForTable = (AppCompatTextView) itemView.findViewById(R.id.textViewWeightForTable);
+            textViewDateForTable = (AppCompatTextView) itemView.findViewById(R.id.textViewDateForTable);
         }
     }
 

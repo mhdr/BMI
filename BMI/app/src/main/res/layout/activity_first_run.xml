@@ -15,6 +15,8 @@
         android:background="@color/colorPrimary"
         android:fitsSystemWindows="true"
         android:minHeight="?attr/actionBarSize"
+        android:textDirection="rtl"
+        android:layoutDirection="rtl"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
     </android.support.v7.widget.Toolbar>
@@ -68,11 +70,12 @@
                 android:id="@+id/editTextProfileName"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:gravity="start"
-                android:inputType="text"
-                android:layout_below="@+id/textViewProfileName"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_below="@+id/textViewProfileName"
+                android:inputType="text"
+                android:layoutDirection="rtl"
+                android:textDirection="rtl" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/textViewGender"
@@ -91,7 +94,8 @@
                 android:id="@+id/spinnerGender"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:gravity="end"
+                android:layoutDirection="rtl"
+                android:textDirection="rtl"
                 android:layout_below="@+id/textViewGender"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true">
@@ -118,7 +122,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/textViewBirthdate"
-                android:gravity="start"
+                android:layoutDirection="ltr"
+                android:textDirection="ltr"
                 android:inputType="none"
                 android:textIsSelectable="true" />
 
@@ -150,7 +155,8 @@
                 android:id="@+id/editTextHeight"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:gravity="start"
+                android:layoutDirection="ltr"
+                android:textDirection="ltr"
                 android:layout_below="@+id/textViewHeight"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
@@ -176,7 +182,8 @@
                 android:id="@+id/editTextWeight"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:gravity="start"
+                android:layoutDirection="ltr"
+                android:textDirection="ltr"
                 android:layout_below="@+id/textViewWeight"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"

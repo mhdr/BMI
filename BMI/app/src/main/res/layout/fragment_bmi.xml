@@ -21,7 +21,7 @@
                 android:layout_height="30dp"
                 android:layout_alignParentTop="true">
 
-                <TextView
+                <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/textViewProfileInfoAge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                     android:background="@color/colorPrimary"
                     app:layout_heightPercent="60%" />
 
-                <TextView
+                <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/textViewProfileInfoName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
                     android:textStyle="bold"
                     app:layout_widthPercent="30%" />
 
-                <TextView
+                <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/textViewProfileInfoHeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <TextView
+                    <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/textViewCurrentWeightLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -146,7 +146,7 @@
                         android:layout_toStartOf="@id/textViewCurrentWeightLabel"
                         android:background="@android:color/transparent">
 
-                        <ImageButton
+                        <android.support.v7.widget.AppCompatImageButton
                             android:id="@+id/imageButtonAddNewWeight"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
@@ -158,7 +158,7 @@
                     </FrameLayout>
 
 
-                    <TextView
+                    <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/textViewCurrentWeight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -195,7 +195,7 @@
                         android:layout_marginRight="10dp"
                         android:background="@drawable/color_bmi_range_1" />
 
-                    <TextView
+                    <android.support.v7.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -205,7 +205,7 @@
                         android:layout_toStartOf="@id/viewBMIColor1"
                         android:text="@string/bmi_range_1" />
 
-                    <TextView
+                    <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/textViewWeightRange1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -231,7 +231,7 @@
                         android:layout_marginRight="10dp"
                         android:background="@drawable/color_bmi_range_2" />
 
-                    <TextView
+                    <android.support.v7.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -241,7 +241,7 @@
                         android:layout_toStartOf="@id/viewBMIColor2"
                         android:text="@string/bmi_range_2" />
 
-                    <TextView
+                    <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/textViewWeightRange2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -267,7 +267,7 @@
                         android:layout_marginRight="10dp"
                         android:background="@drawable/color_bmi_range_3" />
 
-                    <TextView
+                    <android.support.v7.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -277,7 +277,7 @@
                         android:layout_toStartOf="@id/viewBMIColor3"
                         android:text="@string/bmi_range_3" />
 
-                    <TextView
+                    <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/textViewWeightRange3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -303,7 +303,7 @@
                         android:layout_marginRight="10dp"
                         android:background="@drawable/color_bmi_range_4" />
 
-                    <TextView
+                    <android.support.v7.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -313,7 +313,7 @@
                         android:layout_toStartOf="@id/viewBMIColor4"
                         android:text="@string/bmi_range_4" />
 
-                    <TextView
+                    <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/textViewWeightRange4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -338,7 +338,7 @@
                         android:layout_marginRight="10dp"
                         android:background="@drawable/color_bmi_range_5" />
 
-                    <TextView
+                    <android.support.v7.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -348,7 +348,7 @@
                         android:layout_toStartOf="@id/viewBMIColor5"
                         android:text="@string/bmi_range_5" />
 
-                    <TextView
+                    <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/textViewWeightRange5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -374,7 +374,7 @@
                         android:layout_marginRight="10dp"
                         android:background="@drawable/color_bmi_range_6" />
 
-                    <TextView
+                    <android.support.v7.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -384,7 +384,7 @@
                         android:layout_toStartOf="@id/viewBMIColor6"
                         android:text="@string/bmi_range_6" />
 
-                    <TextView
+                    <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/textViewWeightRange6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -410,7 +410,7 @@
                         android:layout_marginRight="10dp"
                         android:background="@drawable/color_bmi_range_7" />
 
-                    <TextView
+                    <android.support.v7.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -420,7 +420,7 @@
                         android:layout_toStartOf="@id/viewBMIColor7"
                         android:text="@string/bmi_range_7" />
 
-                    <TextView
+                    <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/textViewWeightRange7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -447,7 +447,7 @@
                         android:layout_marginRight="10dp"
                         android:background="@drawable/color_bmi_range_8" />
 
-                    <TextView
+                    <android.support.v7.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -458,7 +458,7 @@
                         android:text="@string/bmi_range_8" />
 
 
-                    <TextView
+                    <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/textViewWeightRange8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
