@@ -7,5 +7,7 @@
     android:layout_height="wrap_content"
     android:ellipsize="marquee"
     android:maxLines="1"
+    android:paddingTop="7dp"
+    android:paddingBottom="7dp"
     android:textAlignment="textStart"
     android:gravity="start"/>
