@@ -1,6 +1,5 @@
 package ir.mhdr.bmi;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -11,6 +10,7 @@ import net.time4j.android.ApplicationStarter;
 
 import java.util.Locale;
 
+import ir.mhdr.bmi.lib.Update;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 

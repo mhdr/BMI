@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.sccomponents.widgets.ScArcGauge;
 import com.sccomponents.widgets.ScCopier;
 import com.sccomponents.widgets.ScDrawer;
@@ -62,11 +63,17 @@ public class BmiFragment extends Fragment implements ProfileChangedListener{
     AppCompatTextView textViewBMI;
     Bitmap indicator;
 
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_bmi, container, false);
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+
 
         textViewProfileInfoAge = (AppCompatTextView) view.findViewById(R.id.textViewProfileInfoAge);
         textViewProfileInfoName = (AppCompatTextView) view.findViewById(R.id.textViewProfileInfoName);

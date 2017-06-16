@@ -27,6 +27,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import net.time4j.PlainDate;
 
 import org.joda.time.DateTime;
@@ -58,11 +60,15 @@ public class FirstRunActivity extends AppCompatActivity {
     AppCompatTextView textViewProfileName;
     AppCompatButton buttonStart;
 
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_run);
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         toolbarFirstRun = (Toolbar) findViewById(R.id.toolbarFirstRun);
         setSupportActionBar(toolbarFirstRun);

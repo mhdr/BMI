@@ -30,6 +30,7 @@ import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter;
 import com.github.mikephil.charting.formatter.DefaultValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.joda.time.DateTime;
 import org.joda.time.DurationFieldType;
@@ -62,12 +63,16 @@ public class GraphFragment extends Fragment implements ProfileChangedListener {
     int defaultColorForText;
     int activeColorForText;
 
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_graph, container, false);
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
 
         lineChartWeight = (LineChart) view.findViewById(R.id.lineChartWeight);
 

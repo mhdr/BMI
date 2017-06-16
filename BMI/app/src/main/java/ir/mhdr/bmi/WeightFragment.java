@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Locale;
@@ -27,6 +29,8 @@ public class WeightFragment extends DialogFragment {
     OnSaveListener onSaveListener;
     double initialWeightValue = -1;
 
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     public WeightFragment() {
         // Required empty public constructor
     }
@@ -36,6 +40,9 @@ public class WeightFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weight, container, false);
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
 
         numberPickerWeight1 = (NumberPicker) view.findViewById(R.id.numberPickerWeight1);
         numberPickerWeight2 = (NumberPicker) view.findViewById(R.id.numberPickerWeight2);

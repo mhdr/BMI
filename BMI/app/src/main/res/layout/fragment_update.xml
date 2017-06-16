@@ -1,0 +1,33 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
+    tools:context="ir.mhdr.bmi.UpdateFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ProgressBar
+            android:id="@+id/progressBarUpdate"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:indeterminate="true"
+            android:max="100" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/buttonStopUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/progressBarUpdate"
+            android:text="@string/cancelDownload" />
+
+    </RelativeLayout>
+
+</FrameLayout>

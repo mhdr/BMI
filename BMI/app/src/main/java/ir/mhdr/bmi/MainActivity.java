@@ -1,5 +1,6 @@
 package ir.mhdr.bmi;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -26,6 +27,9 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.crash.FirebaseCrash;
+
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -36,6 +40,7 @@ import ir.mhdr.bmi.bl.UserBL;
 import ir.mhdr.bmi.lib.CustomViewPager;
 import ir.mhdr.bmi.lib.MainViewPagerAdapter;
 import ir.mhdr.bmi.lib.ProfileChangedListener;
+import ir.mhdr.bmi.lib.Update;
 import ir.mhdr.bmi.model.History;
 import ir.mhdr.bmi.model.User;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -55,10 +60,21 @@ public class MainActivity extends AppCompatActivity {
     String[] profiles;
     MainViewPagerAdapter viewPagerAdapter;
 
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        // check for update
+        //Update update = new Update();
+        //update.setUpdateListener(updateListener);
+        //update.Check();
+        //
 
         UserBL userBL = new UserBL(MainActivity.this);
 
@@ -239,6 +255,24 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onPageScrollStateChanged(int state) {
+
+        }
+    };
+
+    Update.UpdateListener updateListener = new Update.UpdateListener() {
+        @Override
+        public void newUpdateAvailable(Update.UpdateInfo updateInfo) {
+
+            final Update.UpdateInfo localUpdateInfo = updateInfo;
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    UpdateFragment updateFragment = new UpdateFragment();
+                    updateFragment.setUpdateInfo(localUpdateInfo);
+                    updateFragment.show(getSupportFragmentManager(), "update");
+                }
+            });
 
         }
     };

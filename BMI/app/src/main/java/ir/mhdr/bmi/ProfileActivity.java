@@ -14,6 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,10 +32,15 @@ public class ProfileActivity extends AppCompatActivity {
     private ProfileAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         toolbarProfile = (Toolbar) findViewById(R.id.toolbarProfile);
         setSupportActionBar(toolbarProfile);

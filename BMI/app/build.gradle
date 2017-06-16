@@ -57,8 +57,11 @@ dependencies {
     compile 'net.time4j:time4j-android:3.32-2017b'
     compile 'com.github.mhdr:sc-widgets:2.2.1'
     compile 'net.danlew:android.joda:2.9.9'
-    testCompile 'junit:junit:4.12'
     compile 'com.android.support:multidex:1.0.1'
+    testCompile 'junit:junit:4.12'
+    compile 'com.google.firebase:firebase-crash:11.0.1'
+    compile 'com.google.firebase:firebase-core:11.0.1'
 }
 
 android.defaultConfig.vectorDrawables.useSupportLibrary = true
+apply plugin: 'com.google.gms.google-services'

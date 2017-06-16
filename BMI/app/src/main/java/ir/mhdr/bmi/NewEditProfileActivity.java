@@ -19,6 +19,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import net.time4j.PlainDate;
 
 import org.joda.time.DateTime;
@@ -56,10 +58,15 @@ public class NewEditProfileActivity extends AppCompatActivity {
     boolean editMode = false;
     User userToEdit;
 
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_edit_profile);
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         Bundle bundle = getIntent().getExtras();
 

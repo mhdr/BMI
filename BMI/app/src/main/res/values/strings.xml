@@ -102,4 +102,8 @@
     <string name="change_profile_successful">تغییر پروفایل انجام شد</string>
 
     <string name="add_new_weight">افزودن وزن جدید</string>
+
+    <string name="updating">در حال دریافت بروزرسانی …</string>
+
+    <string name="cancelDownload">انصراف</string>
 </resources>

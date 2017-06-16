@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -34,6 +36,8 @@ public class TableFragment extends Fragment implements ProfileChangedListener {
     private RecyclerView.LayoutManager layoutManager;
     FloatingActionButton floatingActionButtonNewWeight;
 
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     HistoryBL historyBL;
     UserBL userBL;
 
@@ -42,6 +46,9 @@ public class TableFragment extends Fragment implements ProfileChangedListener {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_table, container, false);
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
 
         userBL = new UserBL(view.getContext());
         historyBL = new HistoryBL(view.getContext());
