@@ -32,6 +32,7 @@ import net.time4j.PlainDate;
 import org.joda.time.DateTime;
 
 import java.util.List;
+import java.util.Locale;
 
 import ir.hamsaa.persiandatepicker.Listener;
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog;
@@ -289,7 +290,7 @@ public class FirstRunActivity extends AppCompatActivity {
                         int month = persianCalendar.getPersianMonth();
                         int day = persianCalendar.getPersianDay();
 
-                        String output = String.format("%s/%s/%s", year, month, day);
+                        String output = String.format(Locale.US,"%s/%s/%s", year, month, day);
                         editTextBirthdate.setText(output);
                     }
 

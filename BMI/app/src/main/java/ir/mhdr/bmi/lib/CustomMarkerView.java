@@ -10,6 +10,8 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.utils.MPPointF;
 
+import java.util.Locale;
+
 import ir.mhdr.bmi.R;
 
 public class CustomMarkerView extends MarkerView {
@@ -49,7 +51,7 @@ public class CustomMarkerView extends MarkerView {
         int day = timeDiff.getPersianCalendar().getDayOfMonth();
         int hour=timeDiff.getDateTime().getHourOfDay();
         int minute=timeDiff.getDateTime().getMinuteOfHour();
-        String date = String.format("%d/%d/%d %d:%d", year, month, day,hour,minute);
+        String date = String.format(Locale.US,"%d/%d/%d %d:%d", year, month, day,hour,minute);
 
         textViewMarkerDateValue.setText(date);
 

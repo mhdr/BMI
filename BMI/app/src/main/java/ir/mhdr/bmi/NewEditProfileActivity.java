@@ -27,6 +27,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import ir.hamsaa.persiandatepicker.Listener;
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog;
@@ -136,7 +137,7 @@ public class NewEditProfileActivity extends AppCompatActivity {
             DateTime dateTime = new DateTime(birth);
             PlainDate plainDate=PlainDate.of(dateTime.getYear(),dateTime.getMonthOfYear(), dateTime.getDayOfMonth());
             net.time4j.calendar.PersianCalendar persianCalendar=plainDate.transform(net.time4j.calendar.PersianCalendar.class);
-            String dateStr = String.format("%d/%d/%d", persianCalendar.getYear(), persianCalendar.getMonth().getValue(),
+            String dateStr = String.format(Locale.US,"%d/%d/%d", persianCalendar.getYear(), persianCalendar.getMonth().getValue(),
                     persianCalendar.getDayOfMonth());
 
             editTextNewProfileBirthdate.setText(dateStr);
@@ -217,7 +218,7 @@ public class NewEditProfileActivity extends AppCompatActivity {
                         int month = persianCalendar.getPersianMonth();
                         int day = persianCalendar.getPersianDay();
 
-                        String output = String.format("%s/%s/%s", year, month, day);
+                        String output = String.format(Locale.US,"%s/%s/%s", year, month, day);
                         editTextNewProfileBirthdate.setText(output);
                     }
 

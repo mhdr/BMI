@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class WeightFragment extends DialogFragment {
@@ -75,7 +76,7 @@ public class WeightFragment extends DialogFragment {
             int num2 = numberPickerWeight2.getValue();
 
             double temp1 = num2 / 10f;
-            double temp2= Double.parseDouble(String.format("%.1f",temp1));
+            double temp2= Double.parseDouble(String.format(Locale.US,"%.1f",temp1));
             double value = num1 + temp2;
 
             if (onSaveListener != null) {

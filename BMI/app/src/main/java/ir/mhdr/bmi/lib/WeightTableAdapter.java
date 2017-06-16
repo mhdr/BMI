@@ -20,6 +20,7 @@ import android.widget.Toast;
 import org.joda.time.DateTime;
 
 import java.util.List;
+import java.util.Locale;
 
 import ir.mhdr.bmi.R;
 import ir.mhdr.bmi.WeightFragment;
@@ -98,7 +99,7 @@ public class WeightTableAdapter extends RecyclerView.Adapter<WeightTableAdapter.
                 break;
         }
 
-        String datetimeStr = String.format("%d/%d/%d %d:%d", history.getDatetime3().getYear(),
+        String datetimeStr = String.format(Locale.US,"%d/%d/%d %d:%d", history.getDatetime3().getYear(),
                 history.getDatetime3().getMonth().getValue(), history.getDatetime3().getDayOfMonth(),
                 history.getDatetime2().getHourOfDay(), history.getDatetime2().getMinuteOfHour());
 

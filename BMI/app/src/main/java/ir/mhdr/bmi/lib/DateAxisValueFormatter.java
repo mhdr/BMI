@@ -16,6 +16,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Period;
 
 import java.util.List;
+import java.util.Locale;
 
 public class DateAxisValueFormatter implements IAxisValueFormatter {
 
@@ -42,26 +43,26 @@ public class DateAxisValueFormatter implements IAxisValueFormatter {
         if (visibleRange < 60) {
             // less than 1 hour
 
-            result = String.format("%d:%d", dateTime.getHourOfDay(), dateTime.getMinuteOfHour());
+            result = String.format(Locale.US,"%d:%d", dateTime.getHourOfDay(), dateTime.getMinuteOfHour());
 
         } else if (visibleRange < 60 * 24) {
             // less than 1 day
 
-            result = String.format("%d:%d", dateTime.getHourOfDay(), dateTime.getMinuteOfHour());
+            result = String.format(Locale.US,"%d:%d", dateTime.getHourOfDay(), dateTime.getMinuteOfHour());
 
         } else if (visibleRange < 60 * 24 * 30) {
             // less than 1 month
 
-            result = String.format("%d %s", persianCalendar.getDayOfMonth(), this.getMonthName(persianCalendar.getMonth().getValue()));
+            result = String.format(Locale.US,"%d %s", persianCalendar.getDayOfMonth(), this.getMonthName(persianCalendar.getMonth().getValue()));
 
         } else if (visibleRange < 60 * 24 * 30 * 12) {
             // less than 1 year
 
-            result = String.format("%s", persianCalendar.getMonth().toString());
+            result = String.format(Locale.US,"%s", persianCalendar.getMonth().toString());
 
         } else if (visibleRange > 60 * 24 * 30 * 12) {
             // more than 1 year
-            result=String.format("%d",persianCalendar.getYear());
+            result=String.format(Locale.US,"%d",persianCalendar.getYear());
 
         } else {
 
