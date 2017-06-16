@@ -279,9 +279,9 @@ public class FirstRunActivity extends AppCompatActivity {
                 .setNegativeButton("انصراف")
                 .setTodayButton("امروز")
                 .setTodayButtonVisible(false)
+                .setInitDate(initDate)
                 .setMaxYear(1450)
                 .setMinYear(1300)
-                .setInitDate(initDate)
                 .setListener(new Listener() {
                     @Override
                     public void onDateSelected(PersianCalendar persianCalendar) {
