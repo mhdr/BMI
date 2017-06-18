@@ -25,8 +25,8 @@ android {
         applicationId "ir.mhdr.bmi"
         minSdkVersion 17
         targetSdkVersion 25
-        versionName '1.0.4'
-        versionCode 4
+        versionName '1.0.5-debug'
+        versionCode 5
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -60,6 +60,7 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.google.firebase:firebase-crash:11.0.1'
     compile 'com.google.firebase:firebase-core:11.0.1'
+    compile 'com.android.support:gridlayout-v7:25.3.1'
     testCompile 'junit:junit:4.12'
 }
 

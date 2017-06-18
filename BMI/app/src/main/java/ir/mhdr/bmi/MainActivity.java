@@ -70,10 +70,10 @@ public class MainActivity extends AppCompatActivity {
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
-        // check for update
-        //Update update = new Update();
-        //update.setUpdateListener(updateListener);
-        //update.Check();
+        //check for update
+        Update update = new Update();
+        update.setUpdateListener(updateListener);
+        update.Check();
         //
 
         UserBL userBL = new UserBL(MainActivity.this);
@@ -268,9 +268,9 @@ public class MainActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    UpdateFragment updateFragment = new UpdateFragment();
-                    updateFragment.setUpdateInfo(localUpdateInfo);
-                    updateFragment.show(getSupportFragmentManager(), "update");
+                    ConfirmUpdateFragment confirmUpdateFragment = new ConfirmUpdateFragment();
+                    confirmUpdateFragment.setUpdateInfo(localUpdateInfo);
+                    confirmUpdateFragment.show(getSupportFragmentManager(), "confirm_update");
                 }
             });
 

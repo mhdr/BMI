@@ -104,6 +104,10 @@
     <string name="add_new_weight">افزودن وزن جدید</string>
 
     <string name="updating">در حال دریافت بروزرسانی …</string>
+    <string name="check_update">بروزرسانی …</string>
 
     <string name="cancelDownload">انصراف</string>
+
+    <string name="yes">بلی</string>
+    <string name="no">خیر</string>
 </resources>
