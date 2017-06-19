@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.crash.FirebaseCrash;
 
 import net.time4j.PlainDate;
 
@@ -36,6 +37,7 @@ import ir.hamsaa.persiandatepicker.PersianDatePickerDialog;
 import ir.hamsaa.persiandatepicker.util.PersianCalendar;
 import ir.mhdr.bmi.bl.HistoryBL;
 import ir.mhdr.bmi.bl.UserBL;
+import ir.mhdr.bmi.lib.FirebaseUtils;
 import ir.mhdr.bmi.lib.Gender;
 import ir.mhdr.bmi.lib.Resources;
 import ir.mhdr.bmi.model.History;
@@ -65,8 +67,10 @@ public class NewEditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_edit_profile);
 
-        // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        if (FirebaseUtils.checkPlayServices(this)) {
+            // Obtain the FirebaseAnalytics instance.
+            mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        }
 
         Bundle bundle = getIntent().getExtras();
 
@@ -139,6 +143,7 @@ public class NewEditProfileActivity extends AppCompatActivity {
                 birth = dateFormat.parse(userToEdit.getBirthdate());
             } catch (ParseException e) {
                 e.printStackTrace();
+                FirebaseCrash.report(e);
             }
 
             DateTime dateTime = new DateTime(birth);

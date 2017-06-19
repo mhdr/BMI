@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.RecyclerView;
@@ -107,7 +108,7 @@ public class WeightTableAdapter extends RecyclerView.Adapter<WeightTableAdapter.
         holder.textViewWeightForTable.setText(history.getValue());
         holder.textViewDateForTable.setText(datetimeStr);
 
-        final AppCompatButton button = holder.buttonOptions;
+        final AppCompatImageButton button = holder.buttonOptions;
 
         holder.buttonOptions.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,7 +211,7 @@ public class WeightTableAdapter extends RecyclerView.Adapter<WeightTableAdapter.
 
     public class WeightTableViewHolder extends RecyclerView.ViewHolder {
 
-        public AppCompatButton buttonOptions;
+        public AppCompatImageButton buttonOptions;
         public View viewBMIColorForTable;
         public AppCompatTextView textViewWeightForTable;
         public AppCompatTextView textViewDateForTable;
@@ -219,7 +220,7 @@ public class WeightTableAdapter extends RecyclerView.Adapter<WeightTableAdapter.
             super(itemView);
 
 
-            buttonOptions = (AppCompatButton) itemView.findViewById(R.id.buttonOptions);
+            buttonOptions = (AppCompatImageButton) itemView.findViewById(R.id.buttonOptions);
             viewBMIColorForTable = itemView.findViewById(R.id.viewBMIColorForTable);
             textViewWeightForTable = (AppCompatTextView) itemView.findViewById(R.id.textViewWeightForTable);
             textViewDateForTable = (AppCompatTextView) itemView.findViewById(R.id.textViewDateForTable);

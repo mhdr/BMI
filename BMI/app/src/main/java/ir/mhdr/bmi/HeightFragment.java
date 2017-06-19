@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import ir.mhdr.bmi.lib.FirebaseUtils;
+
 public class HeightFragment extends DialogFragment {
 
     NumberPicker numberPickerHeight;
@@ -34,8 +36,12 @@ public class HeightFragment extends DialogFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_height, container, false);
 
-        // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+        if (FirebaseUtils.checkPlayServices(getContext())) {
+
+            // Obtain the FirebaseAnalytics instance.
+            mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+
+        }
 
         numberPickerHeight = (NumberPicker) view.findViewById(R.id.numberPickerHeight);
         buttonSaveHeight = (AppCompatButton) view.findViewById(R.id.buttonSaveHeight);

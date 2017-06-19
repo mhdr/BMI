@@ -20,6 +20,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import ir.mhdr.bmi.lib.FirebaseUtils;
+
 public class WeightFragment extends DialogFragment {
 
     NumberPicker numberPickerWeight1;
@@ -41,8 +43,12 @@ public class WeightFragment extends DialogFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weight, container, false);
 
-        // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+        if (FirebaseUtils.checkPlayServices(getContext())) {
+
+            // Obtain the FirebaseAnalytics instance.
+            mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+
+        }
 
         numberPickerWeight1 = (NumberPicker) view.findViewById(R.id.numberPickerWeight1);
         numberPickerWeight2 = (NumberPicker) view.findViewById(R.id.numberPickerWeight2);

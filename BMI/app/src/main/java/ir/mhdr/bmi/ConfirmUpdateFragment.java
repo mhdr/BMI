@@ -10,6 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.crash.FirebaseCrash;
+
+import ir.mhdr.bmi.lib.FirebaseUtils;
 import ir.mhdr.bmi.lib.Update;
 
 
@@ -28,6 +32,8 @@ public class ConfirmUpdateFragment extends DialogFragment {
 
     Update.UpdateInfo updateInfo;
 
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     public ConfirmUpdateFragment() {
         // Required empty public constructor
     }
@@ -39,7 +45,16 @@ public class ConfirmUpdateFragment extends DialogFragment {
 
         View view = inflater.inflate(R.layout.fragment_confirm_update, container, false);
 
-        getDialog().setTitle(getResources().getString(R.string.check_update));
+        if (FirebaseUtils.checkPlayServices(getContext())) {
+
+            // Obtain the FirebaseAnalytics instance.
+            mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+
+        }
+
+        this.setCancelable(false);
+        this.getDialog().setTitle(getResources().getString(R.string.check_update));
+
 
         textViewUpdateAvailableText = (AppCompatTextView) view.findViewById(R.id.textViewUpdateAvailableText);
         buttonUpdateYes = (AppCompatButton) view.findViewById(R.id.buttonUpdateYes);
@@ -63,10 +78,18 @@ public class ConfirmUpdateFragment extends DialogFragment {
     View.OnClickListener buttonUpdateYes_OnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            UpdateFragment updateFragment = new UpdateFragment();
-            updateFragment.setUpdateInfo(updateInfo);
-            updateFragment.show(getFragmentManager(), "update");
-            dismiss();
+            try {
+                UpdateFragment updateFragment = new UpdateFragment();
+                updateFragment.setStyle(STYLE_NORMAL, R.style.CustomDialog);
+                updateFragment.setUpdateInfo(updateInfo);
+                updateFragment.show(getFragmentManager(), "update");
+                dismiss();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                FirebaseCrash.report(ex);
+                dismiss();
+            }
+
         }
     };
 

@@ -1,5 +1,7 @@
 package ir.mhdr.bmi.lib;
 
+import com.google.firebase.crash.FirebaseCrash;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -57,6 +59,7 @@ public class Update {
 
                 } catch (Exception e) {
                     e.printStackTrace();
+                    FirebaseCrash.report(e);
                 }
             }
         });

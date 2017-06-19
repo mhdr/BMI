@@ -43,6 +43,7 @@ import ir.mhdr.bmi.bl.HistoryBL;
 import ir.mhdr.bmi.bl.UserBL;
 import ir.mhdr.bmi.lib.CustomMarkerView;
 import ir.mhdr.bmi.lib.DateAxisValueFormatter;
+import ir.mhdr.bmi.lib.FirebaseUtils;
 import ir.mhdr.bmi.lib.ProfileChangedListener;
 import ir.mhdr.bmi.lib.TimeDiff;
 import ir.mhdr.bmi.model.History;
@@ -71,6 +72,12 @@ public class GraphFragment extends Fragment implements ProfileChangedListener {
 
         View view = inflater.inflate(R.layout.fragment_graph, container, false);
 
+        if (FirebaseUtils.checkPlayServices(getContext())) {
+
+            // Obtain the FirebaseAnalytics instance.
+            mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+
+        }
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
 

@@ -16,12 +16,12 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.provider"
+            android:authorities="ir.mhdr.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/file_paths" />
         </provider>
 
         <activity android:name=".MainActivity">
@@ -43,7 +43,9 @@
                 android:value=".ProfileActivity" />
         </activity>
 
-        <meta-data android:name="firebase_performance_logcat_enabled" android:value="true" />
+        <meta-data
+            android:name="firebase_performance_logcat_enabled"
+            android:value="true" />
     </application>
 
 </manifest>

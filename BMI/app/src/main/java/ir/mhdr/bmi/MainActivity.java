@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
@@ -27,6 +28,8 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.crash.FirebaseCrash;
 
@@ -38,8 +41,10 @@ import java.util.List;
 import ir.mhdr.bmi.bl.HistoryBL;
 import ir.mhdr.bmi.bl.UserBL;
 import ir.mhdr.bmi.lib.CustomViewPager;
+import ir.mhdr.bmi.lib.FirebaseUtils;
 import ir.mhdr.bmi.lib.MainViewPagerAdapter;
 import ir.mhdr.bmi.lib.ProfileChangedListener;
+import ir.mhdr.bmi.lib.Statics;
 import ir.mhdr.bmi.lib.Update;
 import ir.mhdr.bmi.model.History;
 import ir.mhdr.bmi.model.User;
@@ -62,19 +67,28 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAnalytics mFirebaseAnalytics;
 
+    private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        if (FirebaseUtils.checkPlayServices(this)) {
+            // Obtain the FirebaseAnalytics instance.
+            mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        }
 
-        //check for update
-        Update update = new Update();
-        update.setUpdateListener(updateListener);
-        update.Check();
-        //
+
+        if (!Statics.isCheckedForUpdate)
+        {
+            //check for update just once
+            Update update = new Update();
+            update.setUpdateListener(updateListener);
+            update.Check();
+            //
+        }
+
 
         UserBL userBL = new UserBL(MainActivity.this);
 
@@ -264,13 +278,20 @@ public class MainActivity extends AppCompatActivity {
         public void newUpdateAvailable(Update.UpdateInfo updateInfo) {
 
             final Update.UpdateInfo localUpdateInfo = updateInfo;
+            Statics.isCheckedForUpdate=true;
 
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ConfirmUpdateFragment confirmUpdateFragment = new ConfirmUpdateFragment();
-                    confirmUpdateFragment.setUpdateInfo(localUpdateInfo);
-                    confirmUpdateFragment.show(getSupportFragmentManager(), "confirm_update");
+                    try {
+                        ConfirmUpdateFragment confirmUpdateFragment = new ConfirmUpdateFragment();
+                        confirmUpdateFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
+                        confirmUpdateFragment.setUpdateInfo(localUpdateInfo);
+                        confirmUpdateFragment.show(getSupportFragmentManager(), "confirm_update");
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        FirebaseCrash.report(ex);
+                    }
                 }
             });
 

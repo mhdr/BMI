@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ir.mhdr.bmi.bl.UserBL;
+import ir.mhdr.bmi.lib.FirebaseUtils;
 import ir.mhdr.bmi.lib.ProfileAdapter;
 import ir.mhdr.bmi.model.User;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -39,8 +40,10 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        if (FirebaseUtils.checkPlayServices(this)) {
+            // Obtain the FirebaseAnalytics instance.
+            mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        }
 
         toolbarProfile = (Toolbar) findViewById(R.id.toolbarProfile);
         setSupportActionBar(toolbarProfile);

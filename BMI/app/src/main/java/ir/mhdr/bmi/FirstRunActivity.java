@@ -41,6 +41,7 @@ import ir.hamsaa.persiandatepicker.PersianDatePickerDialog;
 import ir.hamsaa.persiandatepicker.util.PersianCalendar;
 import ir.mhdr.bmi.bl.HistoryBL;
 import ir.mhdr.bmi.bl.UserBL;
+import ir.mhdr.bmi.lib.FirebaseUtils;
 import ir.mhdr.bmi.lib.Gender;
 import ir.mhdr.bmi.lib.Resources;
 import ir.mhdr.bmi.model.History;
@@ -67,8 +68,10 @@ public class FirstRunActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_run);
 
-        // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        if (FirebaseUtils.checkPlayServices(this)) {
+            // Obtain the FirebaseAnalytics instance.
+            mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        }
 
         toolbarFirstRun = (Toolbar) findViewById(R.id.toolbarFirstRun);
         setSupportActionBar(toolbarFirstRun);

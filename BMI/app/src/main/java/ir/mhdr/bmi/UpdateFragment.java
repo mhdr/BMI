@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Locale;
 
+import ir.mhdr.bmi.lib.FirebaseUtils;
 import ir.mhdr.bmi.lib.Update;
 
 
@@ -58,19 +60,22 @@ public class UpdateFragment extends DialogFragment {
 
         View view = inflater.inflate(R.layout.fragment_update, container, false);
 
-        // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+        if (FirebaseUtils.checkPlayServices(getContext())) {
 
+            // Obtain the FirebaseAnalytics instance.
+            mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+
+        }
+        
         // set this dialog modal
-        setCancelable(false);
+        this.setCancelable(false);
+        getDialog().setTitle(getResources().getString(R.string.updating));
 
         progressBarUpdate = (ProgressBar) view.findViewById(R.id.progressBarUpdate);
         buttonStopUpdate = (AppCompatButton) view.findViewById(R.id.buttonStopUpdate);
         buttonStopUpdate.setOnClickListener(buttonStopUpdate_OnClickListener);
         textViewProgressBytes = (AppCompatTextView) view.findViewById(R.id.textViewProgressBytes);
         textViewProgressPercent = (AppCompatTextView) view.findViewById(R.id.textViewProgressPercent);
-
-        getDialog().setTitle(getResources().getString(R.string.updating));
 
 
         Thread thread = new Thread(new Runnable() {
@@ -100,6 +105,7 @@ public class UpdateFragment extends DialogFragment {
         try {
 
             if (updateInfo == null) {
+                dismiss();
                 return;
             }
 
@@ -130,11 +136,15 @@ public class UpdateFragment extends DialogFragment {
             // input stream to read file - with 8k buffer
             InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
-            // Output stream to write file
-            //OutputStream output = new FileOutputStream(saveFile, false);
+            File folder = getContext().getFilesDir();
 
-            String path = getContext().getCacheDir() + "/" + updateInfo.file;
-            FileOutputStream output = getContext().openFileOutput(updateInfo.file, Context.MODE_PRIVATE);
+            String path = folder.getAbsolutePath() + "/" + updateInfo.file;
+            File saveFile = new File(path);
+
+            saveFile.createNewFile();
+
+            // Output stream to write file
+            OutputStream output = new FileOutputStream(saveFile, false);
 
             byte data[] = new byte[1024];
 
@@ -176,29 +186,31 @@ public class UpdateFragment extends DialogFragment {
             output.close();
             input.close();
 
-            File saveFile = new File(path);
+            saveFile = new File(path);
 
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                saveFile.setReadable(true, false);
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.setDataAndType(Uri.fromFile(saveFile), "application/vnd.android.package-archive");
-                getContext().startActivity(intent);
+                getContext().getApplicationContext().startActivity(intent);
             } else {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                Uri fileUri = android.support.v4.content.FileProvider.getUriForFile(getContext(),
-                        getContext().getApplicationContext().getApplicationContext().getPackageName() + ".provider",
+                Uri fileUri = FileProvider.getUriForFile(getContext(),
+                        "ir.mhdr.provider",
                         saveFile);
+
                 intent.setDataAndType(fileUri, "application/vnd.android.package-archive");
                 intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 startActivity(intent);
             }
 
-
             dismiss();
 
         } catch (Exception e) {
             e.printStackTrace();
+            FirebaseCrash.report(e);
+            dismiss();
         }
     }
-
 }

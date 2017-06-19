@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.crash.FirebaseCrash;
 import com.sccomponents.widgets.ScArcGauge;
 import com.sccomponents.widgets.ScCopier;
 import com.sccomponents.widgets.ScDrawer;
@@ -39,12 +40,13 @@ import java.util.Locale;
 import ir.mhdr.bmi.bl.HistoryBL;
 import ir.mhdr.bmi.bl.UserBL;
 import ir.mhdr.bmi.lib.BMI;
+import ir.mhdr.bmi.lib.FirebaseUtils;
 import ir.mhdr.bmi.lib.ProfileChangedListener;
 import ir.mhdr.bmi.model.History;
 import ir.mhdr.bmi.model.User;
 
 
-public class BmiFragment extends Fragment implements ProfileChangedListener{
+public class BmiFragment extends Fragment implements ProfileChangedListener {
 
     AppCompatTextView textViewProfileInfoAge;
     AppCompatTextView textViewProfileInfoName;
@@ -71,9 +73,11 @@ public class BmiFragment extends Fragment implements ProfileChangedListener{
 
         View view = inflater.inflate(R.layout.fragment_bmi, container, false);
 
-        // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+        if (FirebaseUtils.checkPlayServices(getContext())) {
 
+            // Obtain the FirebaseAnalytics instance.
+            mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+        }
 
         textViewProfileInfoAge = (AppCompatTextView) view.findViewById(R.id.textViewProfileInfoAge);
         textViewProfileInfoName = (AppCompatTextView) view.findViewById(R.id.textViewProfileInfoName);
@@ -144,30 +148,30 @@ public class BmiFragment extends Fragment implements ProfileChangedListener{
         User user = userBL.getActiveUser();
 
         BMI bmi = new BMI(user.getLatestHeight(), user.getLatestWeight());
-        value = Float.parseFloat(String.format(Locale.US,"%.2f", bmi.calculate()));
+        value = Float.parseFloat(String.format(Locale.US, "%.2f", bmi.calculate()));
 
         String name = user.getName();
         String age = String.valueOf(calculateAge(user.getBirthdate()));
         String height = String.valueOf(user.getLatestHeight());
 
-        textViewProfileInfoAge.setText(String.format(Locale.US,"%s سال", age));
-        textViewProfileInfoName.setText(String.format(Locale.US,"%s", name));
-        textViewProfileInfoHeight.setText(String.format(Locale.US,"%s سانتی متر", height));
+        textViewProfileInfoAge.setText(String.format(Locale.US, "%s سال", age));
+        textViewProfileInfoName.setText(String.format(Locale.US, "%s", name));
+        textViewProfileInfoHeight.setText(String.format(Locale.US, "%s سانتی متر", height));
 
         gauge.setHighValue(value, 12, 44);
 
         textViewBMI.setText(String.valueOf(value));
 
-        textViewWeightRange1.setText(String.format(Locale.US,"کمتر از %.2f کیلوگرم", bmi.weightPoint1()));
-        textViewWeightRange2.setText(String.format(Locale.US,"%.2f - %.2f کیلوگرم", bmi.weightPoint1(), bmi.weightPoint2()));
-        textViewWeightRange3.setText(String.format(Locale.US,"%.2f - %.2f کیلوگرم", bmi.weightPoint2(), bmi.weightPoint3()));
-        textViewWeightRange4.setText(String.format(Locale.US,"%.2f - %.2f کیلوگرم", bmi.weightPoint3(), bmi.weightPoint4()));
-        textViewWeightRange5.setText(String.format(Locale.US,"%.2f - %.2f کیلوگرم", bmi.weightPoint4(), bmi.weightPoint5()));
-        textViewWeightRange6.setText(String.format(Locale.US,"%.2f - %.2f کیلوگرم", bmi.weightPoint5(), bmi.weightPoint6()));
-        textViewWeightRange7.setText(String.format(Locale.US,"%.2f - %.2f کیلوگرم", bmi.weightPoint6(), bmi.weightPoint7()));
-        textViewWeightRange8.setText(String.format(Locale.US,"بیشتر از %.2f کیلوگرم", bmi.weightPoint7()));
+        textViewWeightRange1.setText(String.format(Locale.US, "کمتر از %.2f کیلوگرم", bmi.weightPoint1()));
+        textViewWeightRange2.setText(String.format(Locale.US, "%.2f - %.2f کیلوگرم", bmi.weightPoint1(), bmi.weightPoint2()));
+        textViewWeightRange3.setText(String.format(Locale.US, "%.2f - %.2f کیلوگرم", bmi.weightPoint2(), bmi.weightPoint3()));
+        textViewWeightRange4.setText(String.format(Locale.US, "%.2f - %.2f کیلوگرم", bmi.weightPoint3(), bmi.weightPoint4()));
+        textViewWeightRange5.setText(String.format(Locale.US, "%.2f - %.2f کیلوگرم", bmi.weightPoint4(), bmi.weightPoint5()));
+        textViewWeightRange6.setText(String.format(Locale.US, "%.2f - %.2f کیلوگرم", bmi.weightPoint5(), bmi.weightPoint6()));
+        textViewWeightRange7.setText(String.format(Locale.US, "%.2f - %.2f کیلوگرم", bmi.weightPoint6(), bmi.weightPoint7()));
+        textViewWeightRange8.setText(String.format(Locale.US, "بیشتر از %.2f کیلوگرم", bmi.weightPoint7()));
 
-        textViewCurrentWeight.setText(String.format(Locale.US,"%s کیلوگرم", user.getLatestWeight()));
+        textViewCurrentWeight.setText(String.format(Locale.US, "%s کیلوگرم", user.getLatestWeight()));
     }
 
     View.OnClickListener imageButtonAddNewWeight_OnClickListener = new View.OnClickListener() {
@@ -282,6 +286,7 @@ public class BmiFragment extends Fragment implements ProfileChangedListener{
             birth = dateFormat.parse(birthdate);
         } catch (ParseException e) {
             e.printStackTrace();
+            FirebaseCrash.report(e);
         }
 
         DateTime dateTime1 = new DateTime(birth);
@@ -307,8 +312,7 @@ public class BmiFragment extends Fragment implements ProfileChangedListener{
         super.onResume();
 
         super.onResume();
-        if (!getUserVisibleHint())
-        {
+        if (!getUserVisibleHint()) {
             return;
         }
 

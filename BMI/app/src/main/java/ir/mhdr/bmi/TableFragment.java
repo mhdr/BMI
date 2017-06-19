@@ -23,6 +23,7 @@ import java.util.List;
 
 import ir.mhdr.bmi.bl.HistoryBL;
 import ir.mhdr.bmi.bl.UserBL;
+import ir.mhdr.bmi.lib.FirebaseUtils;
 import ir.mhdr.bmi.lib.ProfileChangedListener;
 import ir.mhdr.bmi.lib.WeightTableAdapter;
 import ir.mhdr.bmi.model.History;
@@ -47,8 +48,12 @@ public class TableFragment extends Fragment implements ProfileChangedListener {
 
         View view = inflater.inflate(R.layout.fragment_table, container, false);
 
-        // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+        if (FirebaseUtils.checkPlayServices(getContext())) {
+
+            // Obtain the FirebaseAnalytics instance.
+            mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+
+        }
 
         userBL = new UserBL(view.getContext());
         historyBL = new HistoryBL(view.getContext());

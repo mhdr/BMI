@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.support.multidex.MultiDexApplication;
+import android.support.v4.app.DialogFragment;
+
+import com.google.firebase.crash.FirebaseCrash;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 import net.time4j.android.ApplicationStarter;

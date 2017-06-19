@@ -12,6 +12,8 @@
 
 
         <ProgressBar
+            android:layoutDirection="ltr"
+            android:textDirection="ltr"
             android:id="@+id/progressBarUpdate"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
@@ -26,19 +28,19 @@
             android:id="@+id/textViewProgressPercent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
             android:layout_below="@+id/progressBarUpdate"
             android:layout_marginBottom="20dp"
-            android:layout_marginRight="15dp" />
+            android:layout_marginLeft="15dp" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/textViewProgressBytes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:layout_below="@+id/progressBarUpdate"
             android:layout_marginBottom="20dp"
-            android:layout_marginLeft="15dp" />
+            android:layout_marginRight="15dp" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/buttonStopUpdate"

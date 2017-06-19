@@ -45,8 +45,8 @@
         android:layout_centerInParent="false"
         android:layout_centerVertical="true"
         android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
+        android:src="@drawable/ic_more_vert"
         android:textAppearance="?android:textAppearanceLarge"
-        app:srcCompat="@drawable/ic_more_vert_black_24dp" />
+        app:srcCompat="@drawable/ic_more_vert" />
 
 </RelativeLayout>

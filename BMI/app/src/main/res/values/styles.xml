@@ -7,4 +7,10 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="CustomDialog" parent="@style/Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">false</item>'
+        <item name="android:layoutDirection">rtl</item>
+        <item name="android:textDirection">rtl</item>
+    </style>
 </resources>
