@@ -80,8 +80,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        if (!Statics.isCheckedForUpdate)
-        {
+        if (!Statics.isCheckedForUpdate) {
             //check for update just once
             Update update = new Update();
             update.setUpdateListener(updateListener);
@@ -278,14 +277,18 @@ public class MainActivity extends AppCompatActivity {
         public void newUpdateAvailable(Update.UpdateInfo updateInfo) {
 
             final Update.UpdateInfo localUpdateInfo = updateInfo;
-            Statics.isCheckedForUpdate=true;
+            Statics.isCheckedForUpdate = true;
 
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     try {
                         ConfirmUpdateFragment confirmUpdateFragment = new ConfirmUpdateFragment();
-                        confirmUpdateFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            confirmUpdateFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
+                        }
+
                         confirmUpdateFragment.setUpdateInfo(localUpdateInfo);
                         confirmUpdateFragment.show(getSupportFragmentManager(), "confirm_update");
                     } catch (Exception ex) {
