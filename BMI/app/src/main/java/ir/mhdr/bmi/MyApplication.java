@@ -4,15 +4,11 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.support.multidex.MultiDexApplication;
-import android.support.v4.app.DialogFragment;
-
-import com.google.firebase.crash.FirebaseCrash;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
 import java.util.Locale;
 
-import ir.mhdr.bmi.lib.Update;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 

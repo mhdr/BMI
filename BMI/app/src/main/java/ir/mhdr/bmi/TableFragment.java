@@ -1,7 +1,5 @@
 package ir.mhdr.bmi;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -25,6 +23,7 @@ import ir.mhdr.bmi.bl.HistoryBL;
 import ir.mhdr.bmi.bl.UserBL;
 import ir.mhdr.bmi.lib.FirebaseUtils;
 import ir.mhdr.bmi.lib.ProfileChangedListener;
+import ir.mhdr.bmi.lib.Statics;
 import ir.mhdr.bmi.lib.WeightTableAdapter;
 import ir.mhdr.bmi.model.History;
 import ir.mhdr.bmi.model.User;
@@ -52,7 +51,8 @@ public class TableFragment extends Fragment implements ProfileChangedListener {
 
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
-
+            mFirebaseAnalytics.setCurrentScreen(this.getActivity(),"TableFragment",this.getClass().getSimpleName());
+            mFirebaseAnalytics.setUserProperty("InstallSource", Statics.InstallSource);
         }
 
         userBL = new UserBL(view.getContext());

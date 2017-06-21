@@ -3,24 +3,21 @@ package ir.mhdr.bmi;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.NumberPicker;
-import android.widget.TextView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
 import ir.mhdr.bmi.lib.FirebaseUtils;
+import ir.mhdr.bmi.lib.Statics;
 
 public class WeightFragment extends DialogFragment {
 
@@ -47,7 +44,8 @@ public class WeightFragment extends DialogFragment {
 
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
-
+            mFirebaseAnalytics.setCurrentScreen(this.getActivity(), "WeightFragment", this.getClass().getSimpleName());
+            mFirebaseAnalytics.setUserProperty("InstallSource", Statics.InstallSource);
         }
 
         numberPickerWeight1 = (NumberPicker) view.findViewById(R.id.numberPickerWeight1);
@@ -89,7 +87,7 @@ public class WeightFragment extends DialogFragment {
             int num2 = numberPickerWeight2.getValue();
 
             double temp1 = num2 / 10f;
-            double temp2= Double.parseDouble(String.format(Locale.US,"%.1f",temp1));
+            double temp2 = Double.parseDouble(String.format(Locale.US, "%.1f", temp1));
             double value = num1 + temp2;
 
             if (onSaveListener != null) {

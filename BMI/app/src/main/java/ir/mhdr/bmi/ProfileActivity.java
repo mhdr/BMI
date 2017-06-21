@@ -2,11 +2,10 @@ package ir.mhdr.bmi;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NavUtils;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +21,7 @@ import java.util.List;
 import ir.mhdr.bmi.bl.UserBL;
 import ir.mhdr.bmi.lib.FirebaseUtils;
 import ir.mhdr.bmi.lib.ProfileAdapter;
+import ir.mhdr.bmi.lib.Statics;
 import ir.mhdr.bmi.model.User;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -43,6 +43,8 @@ public class ProfileActivity extends AppCompatActivity {
         if (FirebaseUtils.checkPlayServices(this)) {
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+            mFirebaseAnalytics.setCurrentScreen(this,"ProfileActivity",this.getClass().getSimpleName());
+            mFirebaseAnalytics.setUserProperty("InstallSource", Statics.InstallSource);
         }
 
         toolbarProfile = (Toolbar) findViewById(R.id.toolbarProfile);

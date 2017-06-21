@@ -1,10 +1,9 @@
 package ir.mhdr.bmi;
 
 import android.content.Context;
-import android.support.v4.app.NavUtils;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatSpinner;
@@ -13,15 +12,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.crash.FirebaseCrash;
-
 
 import org.joda.time.DateTime;
 
@@ -39,6 +33,7 @@ import ir.mhdr.bmi.bl.UserBL;
 import ir.mhdr.bmi.lib.FirebaseUtils;
 import ir.mhdr.bmi.lib.Gender;
 import ir.mhdr.bmi.lib.Resources;
+import ir.mhdr.bmi.lib.Statics;
 import ir.mhdr.bmi.model.History;
 import ir.mhdr.bmi.model.User;
 import ir.pupli.jalalicalendarlib.JCalendar;
@@ -70,6 +65,8 @@ public class NewEditProfileActivity extends AppCompatActivity {
         if (FirebaseUtils.checkPlayServices(this)) {
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+            mFirebaseAnalytics.setCurrentScreen(this,"NewEditProfileActivity",this.getClass().getSimpleName());
+            mFirebaseAnalytics.setUserProperty("InstallSource", Statics.InstallSource);
         }
 
         Bundle bundle = getIntent().getExtras();

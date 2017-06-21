@@ -2,19 +2,17 @@ package ir.mhdr.bmi;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.NumberPicker;
-import android.widget.TextView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import ir.mhdr.bmi.lib.FirebaseUtils;
+import ir.mhdr.bmi.lib.Statics;
 
 public class HeightFragment extends DialogFragment {
 
@@ -40,7 +38,8 @@ public class HeightFragment extends DialogFragment {
 
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
-
+            mFirebaseAnalytics.setCurrentScreen(this.getActivity(),"HeightFragment",this.getClass().getSimpleName());
+            mFirebaseAnalytics.setUserProperty("InstallSource", Statics.InstallSource);
         }
 
         numberPickerHeight = (NumberPicker) view.findViewById(R.id.numberPickerHeight);

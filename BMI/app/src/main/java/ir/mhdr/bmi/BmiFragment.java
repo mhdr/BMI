@@ -1,28 +1,20 @@
 package ir.mhdr.bmi;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.crash.FirebaseCrash;
 import com.sccomponents.widgets.ScArcGauge;
 import com.sccomponents.widgets.ScCopier;
-import com.sccomponents.widgets.ScDrawer;
 import com.sccomponents.widgets.ScFeature;
 import com.sccomponents.widgets.ScGauge;
 import com.sccomponents.widgets.ScNotches;
@@ -42,6 +34,7 @@ import ir.mhdr.bmi.bl.UserBL;
 import ir.mhdr.bmi.lib.BMI;
 import ir.mhdr.bmi.lib.FirebaseUtils;
 import ir.mhdr.bmi.lib.ProfileChangedListener;
+import ir.mhdr.bmi.lib.Statics;
 import ir.mhdr.bmi.model.History;
 import ir.mhdr.bmi.model.User;
 
@@ -77,6 +70,8 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
 
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+            mFirebaseAnalytics.setCurrentScreen(this.getActivity(),"BmiFragment",this.getClass().getSimpleName());
+            mFirebaseAnalytics.setUserProperty("InstallSource", Statics.InstallSource);
         }
 
         textViewProfileInfoAge = (AppCompatTextView) view.findViewById(R.id.textViewProfileInfoAge);

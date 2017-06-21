@@ -1,18 +1,14 @@
 package ir.mhdr.bmi;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -21,32 +17,20 @@ import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.RelativeLayout;
-import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.crash.FirebaseCrash;
-
-import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ir.mhdr.bmi.bl.HistoryBL;
 import ir.mhdr.bmi.bl.UserBL;
 import ir.mhdr.bmi.lib.CustomViewPager;
 import ir.mhdr.bmi.lib.FirebaseUtils;
 import ir.mhdr.bmi.lib.MainViewPagerAdapter;
 import ir.mhdr.bmi.lib.ProfileChangedListener;
 import ir.mhdr.bmi.lib.Statics;
-import ir.mhdr.bmi.lib.Update;
-import ir.mhdr.bmi.model.History;
 import ir.mhdr.bmi.model.User;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -77,17 +61,9 @@ public class MainActivity extends AppCompatActivity {
         if (FirebaseUtils.checkPlayServices(this)) {
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+            mFirebaseAnalytics.setCurrentScreen(this,"MainActivity",this.getClass().getSimpleName());
+            mFirebaseAnalytics.setUserProperty("InstallSource",Statics.InstallSource);
         }
-
-
-        /*if (!Statics.isCheckedForUpdate) {
-            //check for update just once
-            Update update = new Update();
-            update.setUpdateListener(updateListener);
-            update.Check();
-            //
-        }*/
-
 
         UserBL userBL = new UserBL(MainActivity.this);
 
@@ -268,35 +244,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onPageScrollStateChanged(int state) {
-
-        }
-    };
-
-    Update.UpdateListener updateListener = new Update.UpdateListener() {
-        @Override
-        public void newUpdateAvailable(Update.UpdateInfo updateInfo) {
-
-            final Update.UpdateInfo localUpdateInfo = updateInfo;
-            Statics.isCheckedForUpdate = true;
-
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        ConfirmUpdateFragment confirmUpdateFragment = new ConfirmUpdateFragment();
-
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            confirmUpdateFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
-                        }
-
-                        confirmUpdateFragment.setUpdateInfo(localUpdateInfo);
-                        confirmUpdateFragment.show(getSupportFragmentManager(), "confirm_update");
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                        FirebaseCrash.report(ex);
-                    }
-                }
-            });
 
         }
     };

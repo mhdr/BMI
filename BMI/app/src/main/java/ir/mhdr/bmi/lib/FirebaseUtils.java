@@ -13,6 +13,12 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class FirebaseUtils {
 
+
+    public final static String Bazaar = "Bazaar";
+    public final static String GooglePlayStore = "Bazaar";
+    public final static String IranApps = "Bazaar";
+    public final static String AvalMarket = "Bazaar";
+
     /**
      * check google play service availability
      *
