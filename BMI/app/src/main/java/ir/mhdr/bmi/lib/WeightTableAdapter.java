@@ -100,8 +100,8 @@ public class WeightTableAdapter extends RecyclerView.Adapter<WeightTableAdapter.
                 break;
         }
 
-        String datetimeStr = String.format(Locale.US,"%d/%d/%d %d:%d", history.getDatetime3().getYear(),
-                history.getDatetime3().getMonth().getValue(), history.getDatetime3().getDayOfMonth(),
+        String datetimeStr = String.format(Locale.US, "%d/%d/%d %d:%d", history.getDatetime3().getYear(),
+                history.getDatetime3().getMonth(), history.getDatetime3().getDay(),
                 history.getDatetime2().getHourOfDay(), history.getDatetime2().getMinuteOfHour());
 
         holder.viewBMIColorForTable.setBackground(drawable);
@@ -158,19 +158,18 @@ public class WeightTableAdapter extends RecyclerView.Adapter<WeightTableAdapter.
                                         userBL.update(user);
                                     }
 
-                                    notifyItemChanged(itemPosition,currentHistory);
-                                    Toast.makeText(context, R.string.weight_edited,Toast.LENGTH_LONG).show();
+                                    notifyItemChanged(itemPosition, currentHistory);
+                                    Toast.makeText(context, R.string.weight_edited, Toast.LENGTH_LONG).show();
                                 }
                             });
-                            FragmentManager manager = ((AppCompatActivity)context).getSupportFragmentManager();
+                            FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
                             weightFragment.show(manager, "weight");
 
 
                         } else if (position == 1) {
                             // delete
 
-                            if (historyList.size()==1)
-                            {
+                            if (historyList.size() == 1) {
                                 Toast.makeText(context, context.getResources().getString(R.string.atleast_one_weight_is_needed), Toast.LENGTH_LONG).show();
                                 return;
                             }
@@ -192,7 +191,7 @@ public class WeightTableAdapter extends RecyclerView.Adapter<WeightTableAdapter.
                             historyList.remove(itemPosition);
                             notifyItemRemoved(itemPosition);
 
-                            Toast.makeText(context, R.string.weight_deleted,Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, R.string.weight_deleted, Toast.LENGTH_LONG).show();
                         }
 
                         listPopupWindow.dismiss();

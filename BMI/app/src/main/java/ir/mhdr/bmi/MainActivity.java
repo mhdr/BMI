@@ -80,13 +80,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        if (!Statics.isCheckedForUpdate) {
+        /*if (!Statics.isCheckedForUpdate) {
             //check for update just once
             Update update = new Update();
             update.setUpdateListener(updateListener);
             update.Check();
             //
-        }
+        }*/
 
 
         UserBL userBL = new UserBL(MainActivity.this);

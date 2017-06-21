@@ -1,10 +1,9 @@
 package ir.mhdr.bmi.model;
 
 
-import net.time4j.PlainDate;
-import net.time4j.calendar.PersianCalendar;
-
 import org.joda.time.DateTime;
+
+import ir.pupli.jalalicalendarlib.JCalendar;
 
 
 public class History {
@@ -55,11 +54,12 @@ public class History {
         return dateTime;
     }
 
-    public PersianCalendar getDatetime3()
+    public JCalendar getDatetime3()
     {
         DateTime dateTime=this.getDatetime2();
-        PlainDate plainDate = PlainDate.of(dateTime.getYear(), dateTime.getMonthOfYear(), dateTime.getDayOfMonth());
-        net.time4j.calendar.PersianCalendar persianCalendar = plainDate.transform(net.time4j.calendar.PersianCalendar.class);
-        return persianCalendar;
+
+        JCalendar jCalendar=new JCalendar(dateTime.getYear(), dateTime.getMonthOfYear(), dateTime.getDayOfMonth(),true);
+
+        return  jCalendar;
     }
 }

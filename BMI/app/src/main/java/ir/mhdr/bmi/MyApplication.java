@@ -9,7 +9,6 @@ import android.support.v4.app.DialogFragment;
 import com.google.firebase.crash.FirebaseCrash;
 
 import net.danlew.android.joda.JodaTimeAndroid;
-import net.time4j.android.ApplicationStarter;
 
 import java.util.Locale;
 
@@ -28,7 +27,6 @@ public class MyApplication extends MultiDexApplication {
                 .setFontAttrId(R.attr.fontPath)
                 .build());
 
-        ApplicationStarter.initialize(this, true); // time4j
         JodaTimeAndroid.init(this); // joda
     }
 

@@ -47,11 +47,11 @@ public class CustomMarkerView extends MarkerView {
 
         TimeDiff timeDiff = TimeDiff.fromMinutes((int) e.getX());
         int year = timeDiff.getPersianCalendar().getYear();
-        int month = timeDiff.getPersianCalendar().getMonth().getValue();
-        int day = timeDiff.getPersianCalendar().getDayOfMonth();
-        int hour=timeDiff.getDateTime().getHourOfDay();
-        int minute=timeDiff.getDateTime().getMinuteOfHour();
-        String date = String.format(Locale.US,"%d/%d/%d %d:%d", year, month, day,hour,minute);
+        int month = timeDiff.getPersianCalendar().getMonth();
+        int day = timeDiff.getPersianCalendar().getDay();
+        int hour = timeDiff.getDateTime().getHourOfDay();
+        int minute = timeDiff.getDateTime().getMinuteOfHour();
+        String date = String.format(Locale.US, "%d/%d/%d %d:%d", year, month, day, hour, minute);
 
         textViewMarkerDateValue.setText(date);
 

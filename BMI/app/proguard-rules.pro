@@ -26,4 +26,3 @@
 
 -keep class com.github.mikephil.charting.** { *; }
 -keep class android.support.** { *; }
--keep class net.time4j.** { *; }

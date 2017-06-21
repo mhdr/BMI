@@ -54,7 +54,6 @@ dependencies {
     compile 'com.github.mhdr:Persian-Date-Picker-Dialog:V1.5'
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
-    compile 'net.time4j:time4j-android:3.32-2017b'
     compile 'com.github.mhdr:sc-widgets:2.2.1'
     compile 'net.danlew:android.joda:2.9.9'
     compile 'com.android.support:multidex:1.0.1'
@@ -64,6 +63,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-base:11.0.1'
     compile 'com.google.firebase:firebase-messaging:11.0.1'
     compile 'com.google.firebase:firebase-perf:11.0.1'
+    compile 'com.github.mhdr:JalaliCalendar:v1.3'
     testCompile 'junit:junit:4.12'
 }
 

@@ -22,7 +22,6 @@ import android.widget.Toast;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.crash.FirebaseCrash;
 
-import net.time4j.PlainDate;
 
 import org.joda.time.DateTime;
 
@@ -42,6 +41,7 @@ import ir.mhdr.bmi.lib.Gender;
 import ir.mhdr.bmi.lib.Resources;
 import ir.mhdr.bmi.model.History;
 import ir.mhdr.bmi.model.User;
+import ir.pupli.jalalicalendarlib.JCalendar;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class NewEditProfileActivity extends AppCompatActivity {
@@ -147,10 +147,9 @@ public class NewEditProfileActivity extends AppCompatActivity {
             }
 
             DateTime dateTime = new DateTime(birth);
-            PlainDate plainDate=PlainDate.of(dateTime.getYear(),dateTime.getMonthOfYear(), dateTime.getDayOfMonth());
-            net.time4j.calendar.PersianCalendar persianCalendar=plainDate.transform(net.time4j.calendar.PersianCalendar.class);
-            String dateStr = String.format(Locale.US,"%d/%d/%d", persianCalendar.getYear(), persianCalendar.getMonth().getValue(),
-                    persianCalendar.getDayOfMonth());
+
+            JCalendar jCalendar = new JCalendar(dateTime.getYear(), dateTime.getMonthOfYear(), dateTime.getDayOfMonth(), true);
+            String dateStr = jCalendar.toString();
 
             editTextNewProfileBirthdate.setText(dateStr);
             editTextNewProfileHeight.setText(userToEdit.getLatestHeight());
@@ -220,9 +219,9 @@ public class NewEditProfileActivity extends AppCompatActivity {
                 .setNegativeButton("انصراف")
                 .setTodayButton("امروز")
                 .setTodayButtonVisible(false)
+                .setInitDate(initDate)
                 .setMaxYear(1450)
                 .setMinYear(1300)
-                .setInitDate(initDate)
                 .setListener(new Listener() {
                     @Override
                     public void onDateSelected(PersianCalendar persianCalendar) {
@@ -230,7 +229,7 @@ public class NewEditProfileActivity extends AppCompatActivity {
                         int month = persianCalendar.getPersianMonth();
                         int day = persianCalendar.getPersianDay();
 
-                        String output = String.format(Locale.US,"%s/%s/%s", year, month, day);
+                        String output = String.format(Locale.US, "%s/%s/%s", year, month, day);
                         editTextNewProfileBirthdate.setText(output);
                     }
 
@@ -301,8 +300,8 @@ public class NewEditProfileActivity extends AppCompatActivity {
             int month = Integer.parseInt(birthdateArray[1]);
             int day = Integer.parseInt(birthdateArray[2]);
 
-            net.time4j.calendar.PersianCalendar persianCalendar = net.time4j.calendar.PersianCalendar.of(year, month, day);
-            PlainDate birthdate = persianCalendar.transform(PlainDate.class);
+            JCalendar jCalendar=new JCalendar(year, month, day);
+            DateTime birthdate = new DateTime(jCalendar.toGregorianDate());
 
             if (editMode) {
                 UserBL userBL = new UserBL(NewEditProfileActivity.this);
@@ -316,8 +315,8 @@ public class NewEditProfileActivity extends AppCompatActivity {
 
                 userBL.update(user);
 
-                HistoryBL historyBL=new HistoryBL(NewEditProfileActivity.this);
-                History history= historyBL.getLastHistory(user);
+                HistoryBL historyBL = new HistoryBL(NewEditProfileActivity.this);
+                History history = historyBL.getLastHistory(user);
                 history.setValue(weight);
 
                 historyBL.update(history);

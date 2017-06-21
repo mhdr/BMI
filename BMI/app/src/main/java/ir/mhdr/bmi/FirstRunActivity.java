@@ -29,8 +29,6 @@ import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-import net.time4j.PlainDate;
-
 import org.joda.time.DateTime;
 
 import java.util.List;
@@ -46,6 +44,7 @@ import ir.mhdr.bmi.lib.Gender;
 import ir.mhdr.bmi.lib.Resources;
 import ir.mhdr.bmi.model.History;
 import ir.mhdr.bmi.model.User;
+import ir.pupli.jalalicalendarlib.JCalendar;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class FirstRunActivity extends AppCompatActivity {
@@ -174,8 +173,8 @@ public class FirstRunActivity extends AppCompatActivity {
             int month = Integer.parseInt(birthdateArray[1]);
             int day = Integer.parseInt(birthdateArray[2]);
 
-            net.time4j.calendar.PersianCalendar persianCalendar = net.time4j.calendar.PersianCalendar.of(year, month, day);
-            PlainDate birthdate = persianCalendar.transform(PlainDate.class);
+            JCalendar jCalendar=new JCalendar(year, month, day);
+            DateTime birthdate = new DateTime(jCalendar.toGregorianDate());
 
             User user = new User();
             user.setName(name);
