@@ -57,7 +57,12 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
     ScArcGauge gauge;
     AppCompatTextView textViewBMI;
     Bitmap indicator;
-
+    View.OnClickListener imageButtonAddNewWeight_OnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            openWeightDialog();
+        }
+    };
     private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
@@ -70,7 +75,7 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
 
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
-            mFirebaseAnalytics.setCurrentScreen(this.getActivity(),"BmiFragment",this.getClass().getSimpleName());
+            mFirebaseAnalytics.setCurrentScreen(this.getActivity(), "BmiFragment", this.getClass().getSimpleName());
             mFirebaseAnalytics.setUserProperty("InstallSource", Statics.InstallSource);
         }
 
@@ -168,13 +173,6 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
 
         textViewCurrentWeight.setText(String.format(Locale.US, "%s کیلوگرم", user.getLatestWeight()));
     }
-
-    View.OnClickListener imageButtonAddNewWeight_OnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            openWeightDialog();
-        }
-    };
 
     private void openWeightDialog() {
 

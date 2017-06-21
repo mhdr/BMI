@@ -31,15 +31,40 @@ import ir.mhdr.bmi.model.User;
 
 public class TableFragment extends Fragment implements ProfileChangedListener {
 
-    private RecyclerView recyclerViewTable;
-    private WeightTableAdapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
     FloatingActionButton floatingActionButtonNewWeight;
-
-    private FirebaseAnalytics mFirebaseAnalytics;
-
     HistoryBL historyBL;
     UserBL userBL;
+    RecyclerView.OnScrollListener recyclerViewTable_OnScrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+
+            if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                floatingActionButtonNewWeight.show();
+            }
+
+            super.onScrollStateChanged(recyclerView, newState);
+        }
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+
+            if (dy > 0 || dy < 0 && floatingActionButtonNewWeight.isShown()) {
+                floatingActionButtonNewWeight.hide();
+            }
+
+            super.onScrolled(recyclerView, dx, dy);
+        }
+    };
+    private RecyclerView recyclerViewTable;
+    private WeightTableAdapter adapter;
+    View.OnClickListener floatingActionButtonNewWeight_OnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            openWeightDialog();
+        }
+    };
+    private RecyclerView.LayoutManager layoutManager;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,7 +76,7 @@ public class TableFragment extends Fragment implements ProfileChangedListener {
 
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
-            mFirebaseAnalytics.setCurrentScreen(this.getActivity(),"TableFragment",this.getClass().getSimpleName());
+            mFirebaseAnalytics.setCurrentScreen(this.getActivity(), "TableFragment", this.getClass().getSimpleName());
             mFirebaseAnalytics.setUserProperty("InstallSource", Statics.InstallSource);
         }
 
@@ -73,13 +98,6 @@ public class TableFragment extends Fragment implements ProfileChangedListener {
 
         return view;
     }
-
-    View.OnClickListener floatingActionButtonNewWeight_OnClickListener=new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            openWeightDialog();
-        }
-    };
 
     private void openWeightDialog() {
 
@@ -120,28 +138,6 @@ public class TableFragment extends Fragment implements ProfileChangedListener {
 
         weightFragment.show(getFragmentManager(), "weight");
     }
-
-    RecyclerView.OnScrollListener recyclerViewTable_OnScrollListener = new RecyclerView.OnScrollListener() {
-        @Override
-        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-
-            if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                floatingActionButtonNewWeight.show();
-            }
-
-            super.onScrollStateChanged(recyclerView, newState);
-        }
-
-        @Override
-        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-
-            if (dy > 0 || dy < 0 && floatingActionButtonNewWeight.isShown()) {
-                floatingActionButtonNewWeight.hide();
-            }
-
-            super.onScrolled(recyclerView, dx, dy);
-        }
-    };
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {

@@ -30,9 +30,15 @@ public class ProfileActivity extends AppCompatActivity {
     Toolbar toolbarProfile;
     FloatingActionButton floatingActionButtonNewProfile;
     RecyclerView recyclerViewProfiles;
+    View.OnClickListener floatingActionButtonNewProfile_OnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(ProfileActivity.this, NewEditProfileActivity.class);
+            startActivity(intent);
+        }
+    };
     private ProfileAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-
     private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
@@ -43,7 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
         if (FirebaseUtils.checkPlayServices(this)) {
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-            mFirebaseAnalytics.setCurrentScreen(this,"ProfileActivity",this.getClass().getSimpleName());
+            mFirebaseAnalytics.setCurrentScreen(this, "ProfileActivity", this.getClass().getSimpleName());
             mFirebaseAnalytics.setUserProperty("InstallSource", Statics.InstallSource);
         }
 
@@ -67,14 +73,6 @@ public class ProfileActivity extends AppCompatActivity {
         adapter = new ProfileAdapter(new ArrayList<User>());
         recyclerViewProfiles.setAdapter(adapter);
     }
-
-    View.OnClickListener floatingActionButtonNewProfile_OnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent=new Intent(ProfileActivity.this,NewEditProfileActivity.class);
-            startActivity(intent);
-        }
-    };
 
     @Override
     public void onResume() {

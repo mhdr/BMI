@@ -54,7 +54,172 @@ public class NewEditProfileActivity extends AppCompatActivity {
 
     boolean editMode = false;
     User userToEdit;
+    View.OnClickListener buttonNewProfileSave_OnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
 
+            int validationError = 0;
+
+            String name = editTextNewProfileName.getText().toString();
+
+            if (name.length() == 0) {
+                validationError++;
+            }
+
+            String genderStr = (String) spinnerNewProfileGender.getSelectedItem();
+
+            if (genderStr.length() == 0) {
+                validationError++;
+            }
+
+            String birthdateStr = editTextNewProfileBirthdate.getText().toString();
+
+            if (birthdateStr.length() == 0) {
+                validationError++;
+            }
+
+            String height = editTextNewProfileHeight.getText().toString();
+
+            if (height.length() == 0) {
+                validationError++;
+            }
+
+            String weight = editTextNewProfileWeight.getText().toString();
+
+            if (weight.length() == 0) {
+                validationError++;
+            }
+
+            if (validationError > 0) {
+                Toast.makeText(getApplicationContext(), R.string.new_profile_validation_msg, Toast.LENGTH_LONG).show();
+
+                return;
+            }
+
+            Gender gender = Gender.Male;
+
+            switch (genderStr) {
+                case "مرد":
+                    gender = Gender.Male;
+                    break;
+                case "زن":
+                    gender = Gender.Female;
+                    break;
+            }
+
+            String[] birthdateArray = birthdateStr.split("/");
+            int year = Integer.parseInt(birthdateArray[0]);
+            int month = Integer.parseInt(birthdateArray[1]);
+            int day = Integer.parseInt(birthdateArray[2]);
+
+            JCalendar jCalendar = new JCalendar(year, month, day);
+            DateTime birthdate = new DateTime(jCalendar.toGregorianDate());
+
+            if (editMode) {
+                UserBL userBL = new UserBL(NewEditProfileActivity.this);
+
+                User user = userToEdit;
+                user.setName(name);
+                user.setGenderX(gender);
+                user.setBirthdate(birthdate.toString());
+                user.setLatestHeight(height);
+                user.setLatestWeight(weight);
+
+                userBL.update(user);
+
+                HistoryBL historyBL = new HistoryBL(NewEditProfileActivity.this);
+                History history = historyBL.getLastHistory(user);
+                history.setValue(weight);
+
+                historyBL.update(history);
+
+                Toast.makeText(getApplicationContext(), R.string.profile_edit_successful, Toast.LENGTH_LONG).show();
+
+                NavUtils.navigateUpFromSameTask(NewEditProfileActivity.this); // return to parent activity
+
+            } else {
+                User user = new User();
+                user.setName(name);
+                user.setGenderX(gender);
+                user.setBirthdate(birthdate.toString());
+                user.setLatestHeight(height);
+                user.setLatestWeight(weight);
+                user.setIsActiveX(false);
+
+                UserBL userBL = new UserBL(NewEditProfileActivity.this);
+                long id = userBL.insert(user);
+
+                // assign the created id for using this instance of User class later
+                user.setId(id);
+
+                if (id > 0) {
+
+                    HistoryBL historyBL = new HistoryBL(NewEditProfileActivity.this);
+
+                    DateTime current = new DateTime();
+
+                    History history = new History();
+                    history.setUserId(id);
+                    history.setValue(weight);
+                    history.setDatetime(current.toString());
+
+                    long historyId = historyBL.insert(history);
+
+                    if (historyId > 0) {
+                        Toast.makeText(getApplicationContext(), R.string.profile_created_successful_msg, Toast.LENGTH_LONG).show();
+
+                        userBL.SwitchActiveUser(user);
+
+                        NavUtils.navigateUpFromSameTask(NewEditProfileActivity.this); // return to parent activity
+                    }
+                }
+            }
+        }
+    };
+    View.OnFocusChangeListener editTextNewProfileBirthdate_OnFocusChangeListener = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if (hasFocus) {
+                openPersianDatePickerDialog();
+            }
+
+        }
+    };
+    View.OnClickListener editTextNewProfileBirthdate_OnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            openPersianDatePickerDialog();
+        }
+    };
+    View.OnFocusChangeListener editTextNewProfileHeight_OnFocusChangeListener = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if (hasFocus) {
+                openHeightDialog();
+            }
+
+        }
+    };
+    View.OnClickListener editTextNewProfileHeight_OnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            openHeightDialog();
+        }
+    };
+    View.OnFocusChangeListener editTextNewProfileWeight_OnFocusChangeListener = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if (hasFocus) {
+                openWeightDialog();
+            }
+        }
+    };
+    View.OnClickListener editTextNewProfileWeight_OnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            openWeightDialog();
+        }
+    };
     private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
@@ -65,7 +230,7 @@ public class NewEditProfileActivity extends AppCompatActivity {
         if (FirebaseUtils.checkPlayServices(this)) {
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-            mFirebaseAnalytics.setCurrentScreen(this,"NewEditProfileActivity",this.getClass().getSimpleName());
+            mFirebaseAnalytics.setCurrentScreen(this, "NewEditProfileActivity", this.getClass().getSimpleName());
             mFirebaseAnalytics.setUserProperty("InstallSource", Statics.InstallSource);
         }
 
@@ -238,179 +403,6 @@ public class NewEditProfileActivity extends AppCompatActivity {
 
         dialog.show();
     }
-
-    View.OnClickListener buttonNewProfileSave_OnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-            int validationError = 0;
-
-            String name = editTextNewProfileName.getText().toString();
-
-            if (name.length() == 0) {
-                validationError++;
-            }
-
-            String genderStr = (String) spinnerNewProfileGender.getSelectedItem();
-
-            if (genderStr.length() == 0) {
-                validationError++;
-            }
-
-            String birthdateStr = editTextNewProfileBirthdate.getText().toString();
-
-            if (birthdateStr.length() == 0) {
-                validationError++;
-            }
-
-            String height = editTextNewProfileHeight.getText().toString();
-
-            if (height.length() == 0) {
-                validationError++;
-            }
-
-            String weight = editTextNewProfileWeight.getText().toString();
-
-            if (weight.length() == 0) {
-                validationError++;
-            }
-
-            if (validationError > 0) {
-                Toast.makeText(getApplicationContext(), R.string.new_profile_validation_msg, Toast.LENGTH_LONG).show();
-
-                return;
-            }
-
-            Gender gender = Gender.Male;
-
-            switch (genderStr) {
-                case "مرد":
-                    gender = Gender.Male;
-                    break;
-                case "زن":
-                    gender = Gender.Female;
-                    break;
-            }
-
-            String[] birthdateArray = birthdateStr.split("/");
-            int year = Integer.parseInt(birthdateArray[0]);
-            int month = Integer.parseInt(birthdateArray[1]);
-            int day = Integer.parseInt(birthdateArray[2]);
-
-            JCalendar jCalendar=new JCalendar(year, month, day);
-            DateTime birthdate = new DateTime(jCalendar.toGregorianDate());
-
-            if (editMode) {
-                UserBL userBL = new UserBL(NewEditProfileActivity.this);
-
-                User user = userToEdit;
-                user.setName(name);
-                user.setGenderX(gender);
-                user.setBirthdate(birthdate.toString());
-                user.setLatestHeight(height);
-                user.setLatestWeight(weight);
-
-                userBL.update(user);
-
-                HistoryBL historyBL = new HistoryBL(NewEditProfileActivity.this);
-                History history = historyBL.getLastHistory(user);
-                history.setValue(weight);
-
-                historyBL.update(history);
-
-                Toast.makeText(getApplicationContext(), R.string.profile_edit_successful, Toast.LENGTH_LONG).show();
-
-                NavUtils.navigateUpFromSameTask(NewEditProfileActivity.this); // return to parent activity
-
-            } else {
-                User user = new User();
-                user.setName(name);
-                user.setGenderX(gender);
-                user.setBirthdate(birthdate.toString());
-                user.setLatestHeight(height);
-                user.setLatestWeight(weight);
-                user.setIsActiveX(false);
-
-                UserBL userBL = new UserBL(NewEditProfileActivity.this);
-                long id = userBL.insert(user);
-
-                // assign the created id for using this instance of User class later
-                user.setId(id);
-
-                if (id > 0) {
-
-                    HistoryBL historyBL = new HistoryBL(NewEditProfileActivity.this);
-
-                    DateTime current = new DateTime();
-
-                    History history = new History();
-                    history.setUserId(id);
-                    history.setValue(weight);
-                    history.setDatetime(current.toString());
-
-                    long historyId = historyBL.insert(history);
-
-                    if (historyId > 0) {
-                        Toast.makeText(getApplicationContext(), R.string.profile_created_successful_msg, Toast.LENGTH_LONG).show();
-
-                        userBL.SwitchActiveUser(user);
-
-                        NavUtils.navigateUpFromSameTask(NewEditProfileActivity.this); // return to parent activity
-                    }
-                }
-            }
-        }
-    };
-
-    View.OnFocusChangeListener editTextNewProfileBirthdate_OnFocusChangeListener = new View.OnFocusChangeListener() {
-        @Override
-        public void onFocusChange(View v, boolean hasFocus) {
-            if (hasFocus) {
-                openPersianDatePickerDialog();
-            }
-
-        }
-    };
-
-    View.OnClickListener editTextNewProfileBirthdate_OnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            openPersianDatePickerDialog();
-        }
-    };
-
-    View.OnFocusChangeListener editTextNewProfileHeight_OnFocusChangeListener = new View.OnFocusChangeListener() {
-        @Override
-        public void onFocusChange(View v, boolean hasFocus) {
-            if (hasFocus) {
-                openHeightDialog();
-            }
-
-        }
-    };
-
-    View.OnClickListener editTextNewProfileHeight_OnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            openHeightDialog();
-        }
-    };
-
-    View.OnFocusChangeListener editTextNewProfileWeight_OnFocusChangeListener = new View.OnFocusChangeListener() {
-        @Override
-        public void onFocusChange(View v, boolean hasFocus) {
-            if (hasFocus) {
-                openWeightDialog();
-            }
-        }
-    };
-
-    View.OnClickListener editTextNewProfileWeight_OnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            openWeightDialog();
-        }
-    };
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

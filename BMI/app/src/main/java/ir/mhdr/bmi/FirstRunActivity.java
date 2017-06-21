@@ -46,64 +46,6 @@ public class FirstRunActivity extends AppCompatActivity {
     AppCompatEditText editTextWeight;
     AppCompatTextView textViewProfileName;
     AppCompatButton buttonStart;
-
-    private FirebaseAnalytics mFirebaseAnalytics;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_first_run);
-
-        if (FirebaseUtils.checkPlayServices(this)) {
-            // Obtain the FirebaseAnalytics instance.
-            mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-            mFirebaseAnalytics.setCurrentScreen(this,"FirstRunActivity",this.getClass().getSimpleName());
-            mFirebaseAnalytics.setUserProperty("InstallSource", Statics.InstallSource);
-        }
-
-        toolbarFirstRun = (Toolbar) findViewById(R.id.toolbarFirstRun);
-        setSupportActionBar(toolbarFirstRun);
-        getSupportActionBar().setTitle(R.string.initial_info);
-
-        textViewProfileName = (AppCompatTextView) findViewById(R.id.textViewProfileName);
-
-        textViewProfileName.setFocusable(true);
-        textViewProfileName.setFocusableInTouchMode(true);
-        textViewProfileName.requestFocusFromTouch();
-
-
-        editTextProfileName = (AppCompatEditText) findViewById(R.id.editTextProfileName);
-
-        spinnerGender = (AppCompatSpinner) findViewById(R.id.spinnerGender);
-
-        Resources resources = new Resources(FirstRunActivity.this);
-        genderList = resources.getGenderList();
-
-
-        spinnerAdapter = new ArrayAdapter<String>(FirstRunActivity.this, R.layout.simple_spinner_dropdown_item_rtl, genderList);
-        spinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_rtl);
-        spinnerGender.setAdapter(spinnerAdapter);
-
-        editTextBirthdate = (AppCompatEditText) findViewById(R.id.editTextBirthdate);
-        editTextBirthdate.setOnFocusChangeListener(editTextBirthdate_OnFocusChangeListener);
-        editTextBirthdate.setOnClickListener(editTextBirthdate_OnClickListener);
-
-        editTextHeight = (AppCompatEditText) findViewById(R.id.editTextHeight);
-        editTextHeight.setOnFocusChangeListener(editTextHeight_OnFocusChangeListener);
-        editTextHeight.setOnClickListener(editTextHeight_OnClickListener);
-
-        editTextWeight = (AppCompatEditText) findViewById(R.id.editTextWeight);
-        editTextWeight.setOnFocusChangeListener(editTextWeight_OnFocusChangeListener);
-        editTextWeight.setOnClickListener(editTextWeight_OnClickListener);
-
-        initializeButtonStart();
-    }
-
-    private void initializeButtonStart() {
-        buttonStart = (AppCompatButton) findViewById(R.id.buttonStart);
-        buttonStart.setOnClickListener(buttonStart_OnClickListener);
-    }
-
     View.OnClickListener buttonStart_OnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -162,7 +104,7 @@ public class FirstRunActivity extends AppCompatActivity {
             int month = Integer.parseInt(birthdateArray[1]);
             int day = Integer.parseInt(birthdateArray[2]);
 
-            JCalendar jCalendar=new JCalendar(year, month, day);
+            JCalendar jCalendar = new JCalendar(year, month, day);
             DateTime birthdate = new DateTime(jCalendar.toGregorianDate());
 
             User user = new User();
@@ -201,7 +143,6 @@ public class FirstRunActivity extends AppCompatActivity {
             }
         }
     };
-
     View.OnFocusChangeListener editTextBirthdate_OnFocusChangeListener = new View.OnFocusChangeListener() {
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
@@ -211,14 +152,12 @@ public class FirstRunActivity extends AppCompatActivity {
 
         }
     };
-
     View.OnClickListener editTextBirthdate_OnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             openPersianDatePickerDialog();
         }
     };
-
     View.OnFocusChangeListener editTextHeight_OnFocusChangeListener = new View.OnFocusChangeListener() {
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
@@ -228,14 +167,12 @@ public class FirstRunActivity extends AppCompatActivity {
 
         }
     };
-
     View.OnClickListener editTextHeight_OnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             openHeightDialog();
         }
     };
-
     View.OnFocusChangeListener editTextWeight_OnFocusChangeListener = new View.OnFocusChangeListener() {
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
@@ -244,13 +181,68 @@ public class FirstRunActivity extends AppCompatActivity {
             }
         }
     };
-
     View.OnClickListener editTextWeight_OnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             openWeightDialog();
         }
     };
+    private FirebaseAnalytics mFirebaseAnalytics;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_first_run);
+
+        if (FirebaseUtils.checkPlayServices(this)) {
+            // Obtain the FirebaseAnalytics instance.
+            mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+            mFirebaseAnalytics.setCurrentScreen(this, "FirstRunActivity", this.getClass().getSimpleName());
+            mFirebaseAnalytics.setUserProperty("InstallSource", Statics.InstallSource);
+        }
+
+        toolbarFirstRun = (Toolbar) findViewById(R.id.toolbarFirstRun);
+        setSupportActionBar(toolbarFirstRun);
+        getSupportActionBar().setTitle(R.string.initial_info);
+
+        textViewProfileName = (AppCompatTextView) findViewById(R.id.textViewProfileName);
+
+        textViewProfileName.setFocusable(true);
+        textViewProfileName.setFocusableInTouchMode(true);
+        textViewProfileName.requestFocusFromTouch();
+
+
+        editTextProfileName = (AppCompatEditText) findViewById(R.id.editTextProfileName);
+
+        spinnerGender = (AppCompatSpinner) findViewById(R.id.spinnerGender);
+
+        Resources resources = new Resources(FirstRunActivity.this);
+        genderList = resources.getGenderList();
+
+
+        spinnerAdapter = new ArrayAdapter<String>(FirstRunActivity.this, R.layout.simple_spinner_dropdown_item_rtl, genderList);
+        spinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_rtl);
+        spinnerGender.setAdapter(spinnerAdapter);
+
+        editTextBirthdate = (AppCompatEditText) findViewById(R.id.editTextBirthdate);
+        editTextBirthdate.setOnFocusChangeListener(editTextBirthdate_OnFocusChangeListener);
+        editTextBirthdate.setOnClickListener(editTextBirthdate_OnClickListener);
+
+        editTextHeight = (AppCompatEditText) findViewById(R.id.editTextHeight);
+        editTextHeight.setOnFocusChangeListener(editTextHeight_OnFocusChangeListener);
+        editTextHeight.setOnClickListener(editTextHeight_OnClickListener);
+
+        editTextWeight = (AppCompatEditText) findViewById(R.id.editTextWeight);
+        editTextWeight.setOnFocusChangeListener(editTextWeight_OnFocusChangeListener);
+        editTextWeight.setOnClickListener(editTextWeight_OnClickListener);
+
+        initializeButtonStart();
+    }
+
+    private void initializeButtonStart() {
+        buttonStart = (AppCompatButton) findViewById(R.id.buttonStart);
+        buttonStart.setOnClickListener(buttonStart_OnClickListener);
+    }
 
     private void openPersianDatePickerDialog() {
 
@@ -287,7 +279,7 @@ public class FirstRunActivity extends AppCompatActivity {
                         int month = persianCalendar.getPersianMonth();
                         int day = persianCalendar.getPersianDay();
 
-                        String output = String.format(Locale.US,"%s/%s/%s", year, month, day);
+                        String output = String.format(Locale.US, "%s/%s/%s", year, month, day);
                         editTextBirthdate.setText(output);
                     }
 

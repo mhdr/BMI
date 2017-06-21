@@ -50,7 +50,66 @@ public class GraphFragment extends Fragment implements ProfileChangedListener {
 
     int defaultColorForText;
     int activeColorForText;
+    View.OnClickListener buttonGraphShowAll_OnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            buttonGraphShowAll.setTextColor(activeColorForText);
+            buttonGraphShowThreeMonth.setTextColor(defaultColorForText);
+            buttonGraphShowOneMonth.setTextColor(defaultColorForText);
+            buttonGraphShowOneWeek.setTextColor(defaultColorForText);
+            buttonGraphShowOneYear.setTextColor(defaultColorForText);
 
+            drawChart(Period.All);
+        }
+    };
+    View.OnClickListener buttonGraphShowThreeMonth_OnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            buttonGraphShowAll.setTextColor(defaultColorForText);
+            buttonGraphShowThreeMonth.setTextColor(activeColorForText);
+            buttonGraphShowOneMonth.setTextColor(defaultColorForText);
+            buttonGraphShowOneWeek.setTextColor(defaultColorForText);
+            buttonGraphShowOneYear.setTextColor(defaultColorForText);
+
+            drawChart(Period.ThreeMonth);
+        }
+    };
+    View.OnClickListener buttonGraphShowOneMonth_OnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            buttonGraphShowAll.setTextColor(defaultColorForText);
+            buttonGraphShowThreeMonth.setTextColor(defaultColorForText);
+            buttonGraphShowOneMonth.setTextColor(activeColorForText);
+            buttonGraphShowOneWeek.setTextColor(defaultColorForText);
+            buttonGraphShowOneYear.setTextColor(defaultColorForText);
+
+            drawChart(Period.OneMonth);
+        }
+    };
+    View.OnClickListener buttonGraphShowOneWeek_OnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            buttonGraphShowAll.setTextColor(defaultColorForText);
+            buttonGraphShowThreeMonth.setTextColor(defaultColorForText);
+            buttonGraphShowOneMonth.setTextColor(defaultColorForText);
+            buttonGraphShowOneWeek.setTextColor(activeColorForText);
+            buttonGraphShowOneYear.setTextColor(defaultColorForText);
+
+            drawChart(Period.OneWeek);
+        }
+    };
+    View.OnClickListener buttonGraphShowOneYear_OnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            buttonGraphShowAll.setTextColor(defaultColorForText);
+            buttonGraphShowThreeMonth.setTextColor(defaultColorForText);
+            buttonGraphShowOneMonth.setTextColor(defaultColorForText);
+            buttonGraphShowOneWeek.setTextColor(defaultColorForText);
+            buttonGraphShowOneYear.setTextColor(activeColorForText);
+
+            drawChart(Period.OneYear);
+        }
+    };
     private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
@@ -63,7 +122,7 @@ public class GraphFragment extends Fragment implements ProfileChangedListener {
 
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
-            mFirebaseAnalytics.setCurrentScreen(this.getActivity(),"GraphFragment",this.getClass().getSimpleName());
+            mFirebaseAnalytics.setCurrentScreen(this.getActivity(), "GraphFragment", this.getClass().getSimpleName());
             mFirebaseAnalytics.setUserProperty("InstallSource", Statics.InstallSource);
         }
         // Obtain the FirebaseAnalytics instance.
@@ -90,72 +149,6 @@ public class GraphFragment extends Fragment implements ProfileChangedListener {
         return view;
     }
 
-    View.OnClickListener buttonGraphShowAll_OnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            buttonGraphShowAll.setTextColor(activeColorForText);
-            buttonGraphShowThreeMonth.setTextColor(defaultColorForText);
-            buttonGraphShowOneMonth.setTextColor(defaultColorForText);
-            buttonGraphShowOneWeek.setTextColor(defaultColorForText);
-            buttonGraphShowOneYear.setTextColor(defaultColorForText);
-
-            drawChart(Period.All);
-        }
-    };
-
-    View.OnClickListener buttonGraphShowThreeMonth_OnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            buttonGraphShowAll.setTextColor(defaultColorForText);
-            buttonGraphShowThreeMonth.setTextColor(activeColorForText);
-            buttonGraphShowOneMonth.setTextColor(defaultColorForText);
-            buttonGraphShowOneWeek.setTextColor(defaultColorForText);
-            buttonGraphShowOneYear.setTextColor(defaultColorForText);
-
-            drawChart(Period.ThreeMonth);
-        }
-    };
-
-    View.OnClickListener buttonGraphShowOneMonth_OnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            buttonGraphShowAll.setTextColor(defaultColorForText);
-            buttonGraphShowThreeMonth.setTextColor(defaultColorForText);
-            buttonGraphShowOneMonth.setTextColor(activeColorForText);
-            buttonGraphShowOneWeek.setTextColor(defaultColorForText);
-            buttonGraphShowOneYear.setTextColor(defaultColorForText);
-
-            drawChart(Period.OneMonth);
-        }
-    };
-
-
-    View.OnClickListener buttonGraphShowOneWeek_OnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            buttonGraphShowAll.setTextColor(defaultColorForText);
-            buttonGraphShowThreeMonth.setTextColor(defaultColorForText);
-            buttonGraphShowOneMonth.setTextColor(defaultColorForText);
-            buttonGraphShowOneWeek.setTextColor(activeColorForText);
-            buttonGraphShowOneYear.setTextColor(defaultColorForText);
-
-            drawChart(Period.OneWeek);
-        }
-    };
-
-    View.OnClickListener buttonGraphShowOneYear_OnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            buttonGraphShowAll.setTextColor(defaultColorForText);
-            buttonGraphShowThreeMonth.setTextColor(defaultColorForText);
-            buttonGraphShowOneMonth.setTextColor(defaultColorForText);
-            buttonGraphShowOneWeek.setTextColor(defaultColorForText);
-            buttonGraphShowOneYear.setTextColor(activeColorForText);
-
-            drawChart(Period.OneYear);
-        }
-    };
-
     private void drawChart(Period period) {
 
         this.calculateStartAndEndTime(period);
@@ -170,8 +163,7 @@ public class GraphFragment extends Fragment implements ProfileChangedListener {
         User user = userBL.getActiveUser();
         List<History> historyList = historyBL.getHistory(user);
 
-        if (historyList.size()==0)
-        {
+        if (historyList.size() == 0) {
             return;
         }
 
@@ -196,8 +188,7 @@ public class GraphFragment extends Fragment implements ProfileChangedListener {
             }
         }
 
-        if (entries.size()==0)
-        {
+        if (entries.size() == 0) {
             return;
         }
 
@@ -258,7 +249,7 @@ public class GraphFragment extends Fragment implements ProfileChangedListener {
         lineChartWeight.invalidate();
     }
 
-   @Override
+    @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
 
@@ -272,8 +263,7 @@ public class GraphFragment extends Fragment implements ProfileChangedListener {
         super.onResume();
 
         super.onResume();
-        if (!getUserVisibleHint())
-        {
+        if (!getUserVisibleHint()) {
             return;
         }
 

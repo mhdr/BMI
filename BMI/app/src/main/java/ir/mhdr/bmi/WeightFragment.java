@@ -27,13 +27,29 @@ public class WeightFragment extends DialogFragment {
 
     OnSaveListener onSaveListener;
     double initialWeightValue = -1;
+    View.OnClickListener buttonSaveWeight_OnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            int num1 = numberPickerWeight1.getValue();
+            int num2 = numberPickerWeight2.getValue();
 
+            double temp1 = num2 / 10f;
+            double temp2 = Double.parseDouble(String.format(Locale.US, "%.1f", temp1));
+            double value = num1 + temp2;
+
+            if (onSaveListener != null) {
+                onSaveListener.onSave(value);
+            }
+
+            dismiss();
+        }
+    };
     private FirebaseAnalytics mFirebaseAnalytics;
+
 
     public WeightFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,24 +95,6 @@ public class WeightFragment extends DialogFragment {
 
         return view;
     }
-
-    View.OnClickListener buttonSaveWeight_OnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            int num1 = numberPickerWeight1.getValue();
-            int num2 = numberPickerWeight2.getValue();
-
-            double temp1 = num2 / 10f;
-            double temp2 = Double.parseDouble(String.format(Locale.US, "%.1f", temp1));
-            double value = num1 + temp2;
-
-            if (onSaveListener != null) {
-                onSaveListener.onSave(value);
-            }
-
-            dismiss();
-        }
-    };
 
     public void setWeightValue(Double value) {
         this.initialWeightValue = value;

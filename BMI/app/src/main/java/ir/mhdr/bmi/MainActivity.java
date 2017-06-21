@@ -36,6 +36,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     ActionBarDrawerToggle actionBarDrawerToggle;
@@ -45,13 +46,111 @@ public class MainActivity extends AppCompatActivity {
     boolean firstRun = false;
     AppCompatSpinner spinnerProfile;
     ArrayAdapter<String> spinnerAdapter;
-
     String[] profiles;
     MainViewPagerAdapter viewPagerAdapter;
+    AdapterView.OnItemSelectedListener spinnerProfile_OnItemSelectedListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            UserBL userBL = new UserBL(MainActivity.this);
+            userBL.SwitchActiveUser(userBL.getUsers().get(position));
 
+            int pos = viewPagerMain.getCurrentItem();
+            ProfileChangedListener profileChangedListener = (ProfileChangedListener) viewPagerAdapter.getRegisteredFragment(pos);
+            profileChangedListener.onProfileChanged();
+
+            if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
+                drawerLayout.closeDrawer(GravityCompat.END); // close the navigation drawer after changing profile
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
+    NavigationView.OnNavigationItemSelectedListener navigationView_OnNavigationItemSelectedListener = new NavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+            // uncheck other menus and sub menus
+            int menuSize = navigationView.getMenu().size();
+
+            for (int i = 0; i < menuSize; i++) {
+                MenuItem menuItem = navigationView.getMenu().getItem(i);
+
+                if (menuItem.hasSubMenu()) {
+                    int submenuSize = menuItem.getSubMenu().size();
+
+                    for (int j = 0; j < submenuSize; j++) {
+                        MenuItem subItem = menuItem.getSubMenu().getItem(j);
+                        subItem.setChecked(false);
+                    }
+                } else {
+                    menuItem.setChecked(false);
+                }
+            }
+
+            item.setChecked(true);
+
+            if (item.getItemId() == R.id.itemMenuExit) {
+
+                finish();
+                System.exit(0);
+                return true;
+            } else if (item.getItemId() == R.id.itemMenuProfile) {
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+
+            return false;
+        }
+    };
+    BottomNavigationView.OnNavigationItemSelectedListener bottomNavigationView_OnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+            switch (item.getItemId()) {
+                case R.id.item_bn_graph:
+                    viewPagerMain.setCurrentItem(0);
+                    break;
+                case R.id.item_bn_bmi:
+                    viewPagerMain.setCurrentItem(1);
+                    break;
+                case R.id.item_bn_table:
+                    viewPagerMain.setCurrentItem(2);
+                    break;
+            }
+
+            return true;
+        }
+    };
+    ViewPager.OnPageChangeListener viewPagerMain_OnPageChangeListener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            switch (position) {
+                case 0:
+                    bottomNavigationView.getMenu().getItem(0).setChecked(true);
+                    break;
+                case 1:
+                    bottomNavigationView.getMenu().getItem(1).setChecked(true);
+                    break;
+                case 2:
+                    bottomNavigationView.getMenu().getItem(2).setChecked(true);
+                    break;
+            }
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
     private FirebaseAnalytics mFirebaseAnalytics;
-
-    private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +160,8 @@ public class MainActivity extends AppCompatActivity {
         if (FirebaseUtils.checkPlayServices(this)) {
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-            mFirebaseAnalytics.setCurrentScreen(this,"MainActivity",this.getClass().getSimpleName());
-            mFirebaseAnalytics.setUserProperty("InstallSource",Statics.InstallSource);
+            mFirebaseAnalytics.setCurrentScreen(this, "MainActivity", this.getClass().getSimpleName());
+            mFirebaseAnalytics.setUserProperty("InstallSource", Statics.InstallSource);
         }
 
         UserBL userBL = new UserBL(MainActivity.this);
@@ -115,27 +214,6 @@ public class MainActivity extends AppCompatActivity {
         spinnerProfile.setOnItemSelectedListener(spinnerProfile_OnItemSelectedListener);
     }
 
-    AdapterView.OnItemSelectedListener spinnerProfile_OnItemSelectedListener = new AdapterView.OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            UserBL userBL = new UserBL(MainActivity.this);
-            userBL.SwitchActiveUser(userBL.getUsers().get(position));
-
-            int pos = viewPagerMain.getCurrentItem();
-            ProfileChangedListener profileChangedListener = (ProfileChangedListener) viewPagerAdapter.getRegisteredFragment(pos);
-            profileChangedListener.onProfileChanged();
-
-            if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
-                drawerLayout.closeDrawer(GravityCompat.END); // close the navigation drawer after changing profile
-            }
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-
-        }
-    };
-
     private void generateSpinnerProfile() {
         UserBL userBL = new UserBL(MainActivity.this);
         List<User> userList = userBL.getUsers();
@@ -162,91 +240,6 @@ public class MainActivity extends AppCompatActivity {
         spinnerProfile.setSelection(activeUserIndex);
 
     }
-
-    NavigationView.OnNavigationItemSelectedListener navigationView_OnNavigationItemSelectedListener = new NavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-            // uncheck other menus and sub menus
-            int menuSize = navigationView.getMenu().size();
-
-            for (int i = 0; i < menuSize; i++) {
-                MenuItem menuItem = navigationView.getMenu().getItem(i);
-
-                if (menuItem.hasSubMenu()) {
-                    int submenuSize = menuItem.getSubMenu().size();
-
-                    for (int j = 0; j < submenuSize; j++) {
-                        MenuItem subItem = menuItem.getSubMenu().getItem(j);
-                        subItem.setChecked(false);
-                    }
-                } else {
-                    menuItem.setChecked(false);
-                }
-            }
-
-            item.setChecked(true);
-
-            if (item.getItemId() == R.id.itemMenuExit) {
-
-                finish();
-                System.exit(0);
-                return true;
-            } else if (item.getItemId() == R.id.itemMenuProfile) {
-                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-                startActivity(intent);
-            }
-
-            return false;
-        }
-    };
-
-    BottomNavigationView.OnNavigationItemSelectedListener bottomNavigationView_OnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-            switch (item.getItemId()) {
-                case R.id.item_bn_graph:
-                    viewPagerMain.setCurrentItem(0);
-                    break;
-                case R.id.item_bn_bmi:
-                    viewPagerMain.setCurrentItem(1);
-                    break;
-                case R.id.item_bn_table:
-                    viewPagerMain.setCurrentItem(2);
-                    break;
-            }
-
-            return true;
-        }
-    };
-
-    ViewPager.OnPageChangeListener viewPagerMain_OnPageChangeListener = new ViewPager.OnPageChangeListener() {
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            switch (position) {
-                case 0:
-                    bottomNavigationView.getMenu().getItem(0).setChecked(true);
-                    break;
-                case 1:
-                    bottomNavigationView.getMenu().getItem(1).setChecked(true);
-                    break;
-                case 2:
-                    bottomNavigationView.getMenu().getItem(2).setChecked(true);
-                    break;
-            }
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
-    };
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
