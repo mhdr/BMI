@@ -1,0 +1,93 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
+    tools:context="ir.mhdr.bmi.DatePickerFragment">
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textViewDatePicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="چهارشنبه ۱ خرداد ۱۳۶۴" />
+
+
+        <android.support.v7.widget.GridLayout
+            android:id="@+id/gridLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <NumberPicker
+                android:id="@+id/numberPickerDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="10dp"
+                app:layout_column="0"
+                app:layout_columnWeight="1"
+                app:layout_row="0" />
+
+            <NumberPicker
+                android:id="@+id/numberPickerMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                app:layout_column="1"
+                app:layout_columnWeight="1"
+                app:layout_row="0" />
+
+            <NumberPicker
+                android:id="@+id/numberPickerYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="5dp"
+                app:layout_column="2"
+                app:layout_columnWeight="1"
+                app:layout_row="0" />
+
+        </android.support.v7.widget.GridLayout>
+
+        <android.support.v7.widget.GridLayout
+            android:id="@+id/gridLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/buttonDatePickerOk"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ok"
+                app:layout_column="0"
+                app:layout_columnWeight="1"
+                app:layout_row="0" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/buttonDatePickerCancel"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel"
+                app:layout_column="1"
+                app:layout_columnWeight="1"
+                app:layout_row="0" />
+
+        </android.support.v7.widget.GridLayout>
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+
+</FrameLayout>

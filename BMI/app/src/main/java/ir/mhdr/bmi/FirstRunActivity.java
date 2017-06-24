@@ -20,9 +20,6 @@ import org.joda.time.DateTime;
 import java.util.List;
 import java.util.Locale;
 
-import ir.hamsaa.persiandatepicker.Listener;
-import ir.hamsaa.persiandatepicker.PersianDatePickerDialog;
-import ir.hamsaa.persiandatepicker.util.PersianCalendar;
 import ir.mhdr.bmi.bl.HistoryBL;
 import ir.mhdr.bmi.bl.UserBL;
 import ir.mhdr.bmi.lib.FirebaseUtils;
@@ -245,51 +242,22 @@ public class FirstRunActivity extends AppCompatActivity {
     }
 
     private void openPersianDatePickerDialog() {
-
         String previousStr = editTextBirthdate.getText().toString();
-        PersianCalendar initDate = null;
+        DatePickerFragment datePickerFragment = new DatePickerFragment();
+        datePickerFragment.setOnSaveListener(new DatePickerFragment.OnSaveListener() {
+            @Override
+            public void onSave(String value) {
+                editTextBirthdate.setText(value);
+            }
+        });
 
         if (previousStr.length() > 0) {
-            String[] previous = previousStr.split("/");
-            PersianCalendar previousBirthDate = new PersianCalendar();
-
-            int year = Integer.parseInt(previous[0]);
-            int month = Integer.parseInt(previous[1]);
-            int day = Integer.parseInt(previous[2]);
-
-            previousBirthDate.setPersianDate(year, month, day);
-            initDate = previousBirthDate;
-        } else {
-            initDate = new PersianCalendar();
-            initDate.setPersianDate(1364, 3, 1);
+            Bundle bundle = new Bundle();
+            bundle.putString("initDate", previousStr);
+            datePickerFragment.setArguments(bundle);
         }
 
-        PersianDatePickerDialog dialog = new PersianDatePickerDialog(FirstRunActivity.this)
-                .setPositiveButtonString("تائید")
-                .setNegativeButton("انصراف")
-                .setTodayButton("امروز")
-                .setTodayButtonVisible(false)
-                .setInitDate(initDate)
-                .setMaxYear(1450)
-                .setMinYear(1300)
-                .setListener(new Listener() {
-                    @Override
-                    public void onDateSelected(PersianCalendar persianCalendar) {
-                        int year = persianCalendar.getPersianYear();
-                        int month = persianCalendar.getPersianMonth();
-                        int day = persianCalendar.getPersianDay();
-
-                        String output = String.format(Locale.US, "%s/%s/%s", year, month, day);
-                        editTextBirthdate.setText(output);
-                    }
-
-                    @Override
-                    public void onDisimised() {
-
-                    }
-                });
-
-        dialog.show();
+        datePickerFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
     private void openHeightDialog() {

@@ -18,6 +18,7 @@ public class HeightFragment extends DialogFragment {
 
     NumberPicker numberPickerHeight;
     AppCompatButton buttonSaveHeight;
+    AppCompatButton buttonCancelHeight;
 
     OnSaveListener onSaveListener;
     int initialHeightValue = -1;
@@ -55,6 +56,7 @@ public class HeightFragment extends DialogFragment {
 
         numberPickerHeight = (NumberPicker) view.findViewById(R.id.numberPickerHeight);
         buttonSaveHeight = (AppCompatButton) view.findViewById(R.id.buttonSaveHeight);
+        buttonCancelHeight= (AppCompatButton) view.findViewById(R.id.buttonCancelHeight);
 
         numberPickerHeight.setMaxValue(999);
         numberPickerHeight.setMinValue(0);
@@ -68,6 +70,13 @@ public class HeightFragment extends DialogFragment {
         numberPickerHeight.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
 
         buttonSaveHeight.setOnClickListener(buttonSaveHeight_OnClickListener);
+
+        buttonCancelHeight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
 
         return view;
     }

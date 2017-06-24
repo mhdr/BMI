@@ -106,8 +106,23 @@
     <string name="updating">در حال دریافت بروزرسانی …</string>
     <string name="check_update">بروزرسانی …</string>
 
-    <string name="cancelDownload">انصراف</string>
+    <string name="cancel">انصراف</string>
 
     <string name="yes">بلی</string>
     <string name="no">خیر</string>
+
+    <string-array name="months">
+        <item>فرودین</item>
+        <item>اردیبهشت</item>
+        <item>خرداد</item>
+        <item>تیر</item>
+        <item>مرداد</item>
+        <item>شهریور</item>
+        <item>مهر</item>
+        <item>آبان</item>
+        <item>آذر</item>
+        <item>دی</item>
+        <item>بهمن</item>
+        <item>اسفند</item>
+    </string-array>
 </resources>

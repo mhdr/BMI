@@ -24,6 +24,7 @@ public class WeightFragment extends DialogFragment {
     NumberPicker numberPickerWeight1;
     NumberPicker numberPickerWeight2;
     AppCompatButton buttonSaveWeight;
+    AppCompatButton buttonCancelWeight;
 
     OnSaveListener onSaveListener;
     double initialWeightValue = -1;
@@ -67,6 +68,7 @@ public class WeightFragment extends DialogFragment {
         numberPickerWeight1 = (NumberPicker) view.findViewById(R.id.numberPickerWeight1);
         numberPickerWeight2 = (NumberPicker) view.findViewById(R.id.numberPickerWeight2);
         buttonSaveWeight = (AppCompatButton) view.findViewById(R.id.buttonSaveWeight);
+        buttonCancelWeight = (AppCompatButton) view.findViewById(R.id.buttonCancelWeight);
 
 
         Map<Integer, Integer> extractedValue = extractWeigtValue();
@@ -92,6 +94,13 @@ public class WeightFragment extends DialogFragment {
         numberPickerWeight2.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
 
         buttonSaveWeight.setOnClickListener(buttonSaveWeight_OnClickListener);
+
+        buttonCancelWeight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
 
         return view;
     }
