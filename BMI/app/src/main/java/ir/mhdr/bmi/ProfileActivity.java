@@ -50,7 +50,7 @@ public class ProfileActivity extends AppCompatActivity {
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
             mFirebaseAnalytics.setCurrentScreen(this, "ProfileActivity", this.getClass().getSimpleName());
-            mFirebaseAnalytics.setUserProperty("InstallSource", Statics.InstallSource);
+            mFirebaseAnalytics.setUserProperty(FirebaseUtils.UserProperty.InstallSource, Statics.InstallSource);
         }
 
         toolbarProfile = (Toolbar) findViewById(R.id.toolbarProfile);
@@ -58,6 +58,7 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.profile_management);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
 
 
         floatingActionButtonNewProfile = (FloatingActionButton) findViewById(R.id.floatingActionButtonNewProfile);

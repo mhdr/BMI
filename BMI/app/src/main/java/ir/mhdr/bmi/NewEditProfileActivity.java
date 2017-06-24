@@ -2,6 +2,7 @@ package ir.mhdr.bmi;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
@@ -228,7 +229,7 @@ public class NewEditProfileActivity extends AppCompatActivity {
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
             mFirebaseAnalytics.setCurrentScreen(this, "NewEditProfileActivity", this.getClass().getSimpleName());
-            mFirebaseAnalytics.setUserProperty("InstallSource", Statics.InstallSource);
+            mFirebaseAnalytics.setUserProperty(FirebaseUtils.UserProperty.InstallSource, Statics.InstallSource);
         }
 
         Bundle bundle = getIntent().getExtras();
@@ -252,6 +253,7 @@ public class NewEditProfileActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
 
         textViewNewProfileName = (AppCompatTextView) findViewById(R.id.textViewNewProfileName);
         textViewNewProfileName.requestFocusFromTouch();
@@ -320,6 +322,7 @@ public class NewEditProfileActivity extends AppCompatActivity {
         String valueStr = editTextNewProfileHeight.getText().toString();
 
         HeightFragment heightFragment = new HeightFragment();
+        heightFragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.CustomDialog);
 
         if (valueStr.length() > 0) {
             heightFragment.setHeightValue(Integer.parseInt(valueStr));
@@ -339,6 +342,7 @@ public class NewEditProfileActivity extends AppCompatActivity {
         String valueStr = editTextNewProfileWeight.getText().toString();
 
         WeightFragment weightFragment = new WeightFragment();
+        weightFragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.CustomDialog);
 
         if (valueStr.length() > 0) {
             weightFragment.setWeightValue(Double.parseDouble(valueStr));
@@ -357,6 +361,7 @@ public class NewEditProfileActivity extends AppCompatActivity {
 
         String previousStr = editTextNewProfileBirthdate.getText().toString();
         DatePickerFragment datePickerFragment = new DatePickerFragment();
+        datePickerFragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.CustomDialog);
         datePickerFragment.setOnSaveListener(new DatePickerFragment.OnSaveListener() {
             @Override
             public void onSave(String value) {

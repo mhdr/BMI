@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
             mFirebaseAnalytics.setCurrentScreen(this, "MainActivity", this.getClass().getSimpleName());
-            mFirebaseAnalytics.setUserProperty("InstallSource", Statics.InstallSource);
+            mFirebaseAnalytics.setUserProperty(FirebaseUtils.UserProperty.InstallSource, Statics.InstallSource);
         }
 
         UserBL userBL = new UserBL(MainActivity.this);
@@ -186,8 +186,10 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
 

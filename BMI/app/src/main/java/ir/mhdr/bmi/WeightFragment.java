@@ -62,7 +62,7 @@ public class WeightFragment extends DialogFragment {
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
             mFirebaseAnalytics.setCurrentScreen(this.getActivity(), "WeightFragment", this.getClass().getSimpleName());
-            mFirebaseAnalytics.setUserProperty("InstallSource", Statics.InstallSource);
+            mFirebaseAnalytics.setUserProperty(FirebaseUtils.UserProperty.InstallSource, Statics.InstallSource);
         }
 
         numberPickerWeight1 = (NumberPicker) view.findViewById(R.id.numberPickerWeight1);

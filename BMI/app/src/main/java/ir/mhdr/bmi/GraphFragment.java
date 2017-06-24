@@ -123,7 +123,7 @@ public class GraphFragment extends Fragment implements ProfileChangedListener {
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
             mFirebaseAnalytics.setCurrentScreen(this.getActivity(), "GraphFragment", this.getClass().getSimpleName());
-            mFirebaseAnalytics.setUserProperty("InstallSource", Statics.InstallSource);
+            mFirebaseAnalytics.setUserProperty(FirebaseUtils.UserProperty.InstallSource, Statics.InstallSource);
         }
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());

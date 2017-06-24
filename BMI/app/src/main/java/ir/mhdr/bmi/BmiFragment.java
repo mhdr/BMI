@@ -3,6 +3,7 @@ package ir.mhdr.bmi;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatTextView;
@@ -72,11 +73,10 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
         View view = inflater.inflate(R.layout.fragment_bmi, container, false);
 
         if (FirebaseUtils.checkPlayServices(getContext())) {
-
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
             mFirebaseAnalytics.setCurrentScreen(this.getActivity(), "BmiFragment", this.getClass().getSimpleName());
-            mFirebaseAnalytics.setUserProperty("InstallSource", Statics.InstallSource);
+            mFirebaseAnalytics.setUserProperty(FirebaseUtils.UserProperty.InstallSource, Statics.InstallSource);
         }
 
         textViewProfileInfoAge = (AppCompatTextView) view.findViewById(R.id.textViewProfileInfoAge);
@@ -183,6 +183,7 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
         String valueStr = user.getLatestWeight();
 
         WeightFragment weightFragment = new WeightFragment();
+        weightFragment.setStyle(DialogFragment.STYLE_NO_TITLE,R.style.CustomDialog);
 
         if (valueStr.length() > 0) {
             weightFragment.setWeightValue(Double.parseDouble(valueStr));

@@ -2,6 +2,7 @@ package ir.mhdr.bmi.lib;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
@@ -142,6 +143,7 @@ public class WeightTableAdapter extends RecyclerView.Adapter<WeightTableAdapter.
                             final String valueStr = currentHistory.getValue();
 
                             WeightFragment weightFragment = new WeightFragment();
+                            weightFragment.setStyle(DialogFragment.STYLE_NO_TITLE,R.style.CustomDialog);
 
                             if (valueStr.length() > 0) {
                                 weightFragment.setWeightValue(Double.parseDouble(valueStr));

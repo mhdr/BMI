@@ -7,17 +7,25 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-/**
- * Created by mahmood on 6/19/17.
- */
-
 public class FirebaseUtils {
 
+    public class AppStoreSource {
+        public final static String Bazaar = "Bazaar";
+        public final static String GooglePlayStore = "Bazaar";
+        public final static String IranApps = "Bazaar";
+        public final static String AvalMarket = "Bazaar";
+    }
 
-    public final static String Bazaar = "Bazaar";
-    public final static String GooglePlayStore = "Bazaar";
-    public final static String IranApps = "Bazaar";
-    public final static String AvalMarket = "Bazaar";
+    public class UserProperty {
+        public final static String InstallSource = "InstallSource";
+        public final static String NumberOfProfiles = "NumberOfProfiles";
+        public final static String NumberOfWeightRecords = "NumberOfWeightRecords";
+        public final static String UsageInterval = "UsageInterval";
+        public final static String UserAge = "UserAge";
+        public final static String UserGender = "UserGender";
+        public final static String UUID = "UUID";
+    }
+
 
     /**
      * check google play service availability

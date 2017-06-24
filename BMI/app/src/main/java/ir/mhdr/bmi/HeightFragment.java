@@ -51,7 +51,7 @@ public class HeightFragment extends DialogFragment {
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
             mFirebaseAnalytics.setCurrentScreen(this.getActivity(), "HeightFragment", this.getClass().getSimpleName());
-            mFirebaseAnalytics.setUserProperty("InstallSource", Statics.InstallSource);
+            mFirebaseAnalytics.setUserProperty(FirebaseUtils.UserProperty.InstallSource, Statics.InstallSource);
         }
 
         numberPickerHeight = (NumberPicker) view.findViewById(R.id.numberPickerHeight);

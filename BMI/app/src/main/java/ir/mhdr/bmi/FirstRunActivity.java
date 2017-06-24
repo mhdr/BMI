@@ -3,6 +3,7 @@ package ir.mhdr.bmi;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
@@ -195,7 +196,7 @@ public class FirstRunActivity extends AppCompatActivity {
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
             mFirebaseAnalytics.setCurrentScreen(this, "FirstRunActivity", this.getClass().getSimpleName());
-            mFirebaseAnalytics.setUserProperty("InstallSource", Statics.InstallSource);
+            mFirebaseAnalytics.setUserProperty(FirebaseUtils.UserProperty.InstallSource, Statics.InstallSource);
         }
 
         toolbarFirstRun = (Toolbar) findViewById(R.id.toolbarFirstRun);
@@ -244,6 +245,7 @@ public class FirstRunActivity extends AppCompatActivity {
     private void openPersianDatePickerDialog() {
         String previousStr = editTextBirthdate.getText().toString();
         DatePickerFragment datePickerFragment = new DatePickerFragment();
+        datePickerFragment.setStyle(DialogFragment.STYLE_NO_TITLE,R.style.CustomDialog);
         datePickerFragment.setOnSaveListener(new DatePickerFragment.OnSaveListener() {
             @Override
             public void onSave(String value) {
@@ -264,6 +266,7 @@ public class FirstRunActivity extends AppCompatActivity {
         String valueStr = editTextHeight.getText().toString();
 
         HeightFragment heightFragment = new HeightFragment();
+        heightFragment.setStyle(DialogFragment.STYLE_NO_TITLE,R.style.CustomDialog);
 
         if (valueStr.length() > 0) {
             heightFragment.setHeightValue(Integer.parseInt(valueStr));
@@ -283,6 +286,7 @@ public class FirstRunActivity extends AppCompatActivity {
         String valueStr = editTextWeight.getText().toString();
 
         WeightFragment weightFragment = new WeightFragment();
+        weightFragment.setStyle(DialogFragment.STYLE_NO_TITLE,R.style.CustomDialog);
 
         if (valueStr.length() > 0) {
             weightFragment.setWeightValue(Double.parseDouble(valueStr));

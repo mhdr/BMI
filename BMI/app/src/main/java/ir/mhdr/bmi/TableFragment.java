@@ -2,6 +2,7 @@ package ir.mhdr.bmi;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -77,7 +78,7 @@ public class TableFragment extends Fragment implements ProfileChangedListener {
             // Obtain the FirebaseAnalytics instance.
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
             mFirebaseAnalytics.setCurrentScreen(this.getActivity(), "TableFragment", this.getClass().getSimpleName());
-            mFirebaseAnalytics.setUserProperty("InstallSource", Statics.InstallSource);
+            mFirebaseAnalytics.setUserProperty(FirebaseUtils.UserProperty.InstallSource, Statics.InstallSource);
         }
 
         userBL = new UserBL(view.getContext());
@@ -108,6 +109,7 @@ public class TableFragment extends Fragment implements ProfileChangedListener {
         String valueStr = user.getLatestWeight();
 
         WeightFragment weightFragment = new WeightFragment();
+        weightFragment.setStyle(DialogFragment.STYLE_NO_TITLE,R.style.CustomDialog);
 
         if (valueStr.length() > 0) {
             weightFragment.setWeightValue(Double.parseDouble(valueStr));

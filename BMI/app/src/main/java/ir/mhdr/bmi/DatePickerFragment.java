@@ -13,8 +13,12 @@ import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.NumberPicker;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.util.Locale;
 
+import ir.mhdr.bmi.lib.FirebaseUtils;
+import ir.mhdr.bmi.lib.Statics;
 import ir.pupli.jalalicalendarlib.JCalendar;
 
 
@@ -32,6 +36,8 @@ public class DatePickerFragment extends DialogFragment {
 
     DatePickerFragment.OnSaveListener onSaveListener;
 
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     String[] months;
 
     public DatePickerFragment() {
@@ -43,6 +49,14 @@ public class DatePickerFragment extends DialogFragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_date_picker, container, false);
+
+        if (FirebaseUtils.checkPlayServices(getContext())) {
+
+            // Obtain the FirebaseAnalytics instance.
+            mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+            mFirebaseAnalytics.setCurrentScreen(this.getActivity(), "DatePickerFragment", this.getClass().getSimpleName());
+            mFirebaseAnalytics.setUserProperty(FirebaseUtils.UserProperty.InstallSource, Statics.InstallSource);
+        }
 
         textViewDatePicker = (AppCompatTextView) view.findViewById(R.id.textViewDatePicker);
         numberPickerDay = (NumberPicker) view.findViewById(R.id.numberPickerDay);
