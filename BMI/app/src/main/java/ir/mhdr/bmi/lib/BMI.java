@@ -1,6 +1,8 @@
 package ir.mhdr.bmi.lib;
 
-public class BMI {
+import java.io.Serializable;
+
+public class BMI implements Serializable{
 
     private String height;
     private String weight;
