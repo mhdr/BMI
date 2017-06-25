@@ -5,11 +5,14 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -28,6 +31,7 @@ import org.joda.time.Period;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import ir.mhdr.bmi.bl.HistoryBL;
@@ -45,16 +49,10 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
     AppCompatTextView textViewProfileInfoAge;
     AppCompatTextView textViewProfileInfoName;
     AppCompatTextView textViewProfileInfoHeight;
-    AppCompatTextView textViewWeightRange1;
-    AppCompatTextView textViewWeightRange2;
-    AppCompatTextView textViewWeightRange3;
-    AppCompatTextView textViewWeightRange4;
-    AppCompatTextView textViewWeightRange5;
-    AppCompatTextView textViewWeightRange6;
-    AppCompatTextView textViewWeightRange7;
-    AppCompatTextView textViewWeightRange8;
+    LinearLayout linearLayoutRangeContainer;
     AppCompatTextView textViewCurrentWeight;
     AppCompatImageButton imageButtonAddNewWeight;
+    AppCompatImageButton imageButtonSwapRanges;
     ScArcGauge gauge;
     AppCompatTextView textViewBMI;
     Bitmap indicator;
@@ -123,26 +121,28 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
             }
         });
 
-        textViewWeightRange1 = (AppCompatTextView) view.findViewById(R.id.textViewWeightRange1);
-        textViewWeightRange2 = (AppCompatTextView) view.findViewById(R.id.textViewWeightRange2);
-        textViewWeightRange3 = (AppCompatTextView) view.findViewById(R.id.textViewWeightRange3);
-        textViewWeightRange4 = (AppCompatTextView) view.findViewById(R.id.textViewWeightRange4);
-        textViewWeightRange5 = (AppCompatTextView) view.findViewById(R.id.textViewWeightRange5);
-        textViewWeightRange6 = (AppCompatTextView) view.findViewById(R.id.textViewWeightRange6);
-        textViewWeightRange7 = (AppCompatTextView) view.findViewById(R.id.textViewWeightRange7);
-        textViewWeightRange8 = (AppCompatTextView) view.findViewById(R.id.textViewWeightRange8);
-
+        linearLayoutRangeContainer = (LinearLayout) view.findViewById(R.id.linearLayoutRangeContainer);
         textViewCurrentWeight = (AppCompatTextView) view.findViewById(R.id.textViewCurrentWeight);
 
         imageButtonAddNewWeight = (AppCompatImageButton) view.findViewById(R.id.imageButtonAddNewWeight);
         imageButtonAddNewWeight.setOnClickListener(imageButtonAddNewWeight_OnClickListener);
 
-        calculateAndShow();
+        imageButtonSwapRanges = (AppCompatImageButton) view.findViewById(R.id.imageButtonSwapRanges);
+        imageButtonSwapRanges.setOnClickListener(imageButtonSwapRanges_OnClickListener);
+
+        calculateAndShow(false);
 
         return view;
     }
 
-    public void calculateAndShow() {
+    View.OnClickListener imageButtonSwapRanges_OnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            calculateAndShow(true);
+        }
+    };
+
+    public void calculateAndShow(boolean swapRanges) {
         float value = 24;
         UserBL userBL = new UserBL(getContext());
         User user = userBL.getActiveUser();
@@ -162,16 +162,57 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
 
         textViewBMI.setText(String.valueOf(value));
 
-        textViewWeightRange1.setText(String.format(Locale.US, "کمتر از %.2f کیلوگرم", bmi.weightPoint1()));
-        textViewWeightRange2.setText(String.format(Locale.US, "%.2f - %.2f کیلوگرم", bmi.weightPoint1(), bmi.weightPoint2()));
-        textViewWeightRange3.setText(String.format(Locale.US, "%.2f - %.2f کیلوگرم", bmi.weightPoint2(), bmi.weightPoint3()));
-        textViewWeightRange4.setText(String.format(Locale.US, "%.2f - %.2f کیلوگرم", bmi.weightPoint3(), bmi.weightPoint4()));
-        textViewWeightRange5.setText(String.format(Locale.US, "%.2f - %.2f کیلوگرم", bmi.weightPoint4(), bmi.weightPoint5()));
-        textViewWeightRange6.setText(String.format(Locale.US, "%.2f - %.2f کیلوگرم", bmi.weightPoint5(), bmi.weightPoint6()));
-        textViewWeightRange7.setText(String.format(Locale.US, "%.2f - %.2f کیلوگرم", bmi.weightPoint6(), bmi.weightPoint7()));
-        textViewWeightRange8.setText(String.format(Locale.US, "بیشتر از %.2f کیلوگرم", bmi.weightPoint7()));
-
         textViewCurrentWeight.setText(String.format(Locale.US, "%s کیلوگرم", user.getLatestWeight()));
+
+        if (!swapRanges) {
+
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            WeightRangeFragment weightRangeFragment = new WeightRangeFragment();
+
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("bmi", bmi);
+
+            weightRangeFragment.setArguments(bundle);
+
+            fragmentTransaction.replace(R.id.linearLayoutRangeContainer, weightRangeFragment);
+
+            fragmentTransaction.commit();
+        } else {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            Fragment previousFragment = fragmentManager.findFragmentById(R.id.linearLayoutRangeContainer);
+
+            if (previousFragment instanceof WeightRangeFragment) {
+
+                BmiRangeFragment bmiRangeFragment = new BmiRangeFragment();
+
+                fragmentTransaction.setCustomAnimations(
+                        R.animator.card_flip_right_in,
+                        R.animator.card_flip_right_out,
+                        R.animator.card_flip_left_in,
+                        R.animator.card_flip_left_out)
+                        .replace(R.id.linearLayoutRangeContainer, bmiRangeFragment);
+
+            } else if (previousFragment instanceof BmiRangeFragment) {
+                WeightRangeFragment weightRangeFragment = new WeightRangeFragment();
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("bmi", bmi);
+                weightRangeFragment.setArguments(bundle);
+
+
+                fragmentTransaction.setCustomAnimations(
+                        R.animator.card_flip_right_in,
+                        R.animator.card_flip_right_out,
+                        R.animator.card_flip_left_in,
+                        R.animator.card_flip_left_out)
+                        .replace(R.id.linearLayoutRangeContainer, weightRangeFragment);
+            }
+
+            fragmentTransaction.commit();
+        }
     }
 
     private void openWeightDialog() {
@@ -183,7 +224,7 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
         String valueStr = user.getLatestWeight();
 
         WeightFragment weightFragment = new WeightFragment();
-        weightFragment.setStyle(DialogFragment.STYLE_NO_TITLE,R.style.CustomDialog);
+        weightFragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.CustomDialog);
 
         if (valueStr.length() > 0) {
             weightFragment.setWeightValue(Double.parseDouble(valueStr));
@@ -206,7 +247,7 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
 
                 if (historyId > 0) {
                     Toast.makeText(getContext(), R.string.new_weight_saved, Toast.LENGTH_LONG).show();
-                    calculateAndShow();
+                    calculateAndShow(false);
                 }
             }
         });
@@ -310,7 +351,7 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
             return;
         }
 
-        calculateAndShow();
+        calculateAndShow(false);
     }
 
     @Override
