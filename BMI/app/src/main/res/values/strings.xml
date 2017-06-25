@@ -57,6 +57,15 @@
     <string name="bmi_range_7">چاقی شدید</string>
     <string name="bmi_range_8">چاقی بسیار شدید</string>
 
+    <string name="bmi_range_value_1">کمتر از ۱۶</string>
+    <string name="bmi_range_value_2">۱۶ تا ۱۷</string>
+    <string name="bmi_range_value_3">۱۷ تا ۱۸.۵</string>
+    <string name="bmi_range_value_4">۱۸.۵ تا ۲۵</string>
+    <string name="bmi_range_value_5">۲۵ تا ۳۰</string>
+    <string name="bmi_range_value_6">۳۰ تا ۳۵</string>
+    <string name="bmi_range_value_7">۳۵ تا ۴۰</string>
+    <string name="bmi_range_value_8">بیشتر از ۴۰</string>
+
 
     <string name="weight">وزن</string>
 

@@ -158,28 +158,6 @@
                             android:src="@drawable/ic_add" />
                     </FrameLayout>
 
-                    <FrameLayout
-                        android:id="@+id/frameLayoutImageButtonSwapRanges"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_toLeftOf="@id/frameLayoutImageButtonAddNewWeight"
-                        android:layout_toStartOf="@id/frameLayoutImageButtonAddNewWeight"
-                        android:background="@android:color/transparent">
-
-                        <android.support.v7.widget.AppCompatImageButton
-                            android:id="@+id/imageButtonSwapRanges"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:layout_marginEnd="5dp"
-                            android:layout_marginRight="5dp"
-                            android:background="?android:attr/selectableItemBackground"
-                            android:scaleType="centerInside"
-                            android:src="@drawable/ic_swap" />
-                    </FrameLayout>
-
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/textViewCurrentWeight"
                         android:layout_width="wrap_content"
@@ -199,8 +177,31 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="30dp"
                         android:background="@color/colorPrimary" />
+
+                    <FrameLayout
+                        android:id="@+id/frameLayoutImageButtonSwapRanges"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@id/textViewCurrentWeight"
+                        android:layout_toStartOf="@id/textViewCurrentWeight"
+                        android:background="@android:color/transparent">
+
+                        <android.support.v7.widget.AppCompatImageButton
+                            android:id="@+id/imageButtonSwapRanges"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginRight="5dp"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/ic_swap" />
+                    </FrameLayout>
+
                 </RelativeLayout>
 
                 <LinearLayout

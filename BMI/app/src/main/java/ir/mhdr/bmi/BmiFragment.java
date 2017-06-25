@@ -1,5 +1,7 @@
 package ir.mhdr.bmi;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -164,23 +166,38 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
 
         textViewCurrentWeight.setText(String.format(Locale.US, "%s کیلوگرم", user.getLatestWeight()));
 
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("bmi", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
         if (!swapRanges) {
 
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            WeightRangeFragment weightRangeFragment = new WeightRangeFragment();
+            if (sharedPreferences.getInt("bmi_range", -1) == -1) {
 
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("bmi", bmi);
+                BmiRangeFragment bmiRangeFragment = new BmiRangeFragment();
+                fragmentTransaction.replace(R.id.linearLayoutRangeContainer, bmiRangeFragment);
 
-            weightRangeFragment.setArguments(bundle);
+            } else if (sharedPreferences.getInt("bmi_range", -1) == 1) {
 
-            fragmentTransaction.replace(R.id.linearLayoutRangeContainer, weightRangeFragment);
+                BmiRangeFragment bmiRangeFragment = new BmiRangeFragment();
+                fragmentTransaction.replace(R.id.linearLayoutRangeContainer, bmiRangeFragment);
+
+            } else if (sharedPreferences.getInt("bmi_range", -1) == 2) {
+                WeightRangeFragment weightRangeFragment = new WeightRangeFragment();
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("bmi", bmi);
+                weightRangeFragment.setArguments(bundle);
+
+                fragmentTransaction.replace(R.id.linearLayoutRangeContainer, weightRangeFragment);
+
+            }
 
             fragmentTransaction.commit();
+
         } else {
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
             Fragment previousFragment = fragmentManager.findFragmentById(R.id.linearLayoutRangeContainer);
 
@@ -188,12 +205,10 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
 
                 BmiRangeFragment bmiRangeFragment = new BmiRangeFragment();
 
-                fragmentTransaction.setCustomAnimations(
-                        R.animator.card_flip_right_in,
-                        R.animator.card_flip_right_out,
-                        R.animator.card_flip_left_in,
-                        R.animator.card_flip_left_out)
+                fragmentTransaction.setCustomAnimations(R.anim.scale_up, R.anim.scale_down)
                         .replace(R.id.linearLayoutRangeContainer, bmiRangeFragment);
+
+                editor.putInt("bmi_range", 1);
 
             } else if (previousFragment instanceof BmiRangeFragment) {
                 WeightRangeFragment weightRangeFragment = new WeightRangeFragment();
@@ -203,15 +218,14 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
                 weightRangeFragment.setArguments(bundle);
 
 
-                fragmentTransaction.setCustomAnimations(
-                        R.animator.card_flip_right_in,
-                        R.animator.card_flip_right_out,
-                        R.animator.card_flip_left_in,
-                        R.animator.card_flip_left_out)
+                fragmentTransaction.setCustomAnimations(R.anim.scale_up, R.anim.scale_down)
                         .replace(R.id.linearLayoutRangeContainer, weightRangeFragment);
+
+                editor.putInt("bmi_range", 2);
             }
 
             fragmentTransaction.commit();
+            editor.apply();
         }
     }
 
