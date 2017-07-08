@@ -360,7 +360,6 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
     public void onResume() {
         super.onResume();
 
-        super.onResume();
         if (!getUserVisibleHint()) {
             return;
         }
