@@ -4,18 +4,13 @@ package ir.mhdr.bmi.model;
 import ir.mhdr.bmi.lib.Gender;
 
 public class User {
-
     private long id;
-
     private String name;
-
     private String birthdate;
-
     private int gender;
-
     private String latestHeight;
-
     private String latestWeight;
+    private int isActive;
 
     public int getIsActive() {
         return isActive;
@@ -24,8 +19,6 @@ public class User {
     public void setIsActive(int isActive) {
         this.isActive = isActive;
     }
-
-    private int isActive;
 
     public long getId() {
         return id;
@@ -97,26 +90,19 @@ public class User {
         }
     }
 
-    public boolean getIsActiveX()
-    {
-        if (this.isActive==1)
-        {
+    public boolean getIsActiveX() {
+        if (this.isActive == 1) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
 
-    public void setIsActiveX(boolean value)
-    {
-        if (value)
-        {
-            this.isActive=1;
-        }
-        else {
-            this.isActive=0;
+    public void setIsActiveX(boolean value) {
+        if (value) {
+            this.isActive = 1;
+        } else {
+            this.isActive = 0;
         }
     }
 }

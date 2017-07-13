@@ -7,6 +7,11 @@ import ir.pupli.jalalicalendarlib.JCalendar;
 
 
 public class History {
+    private long _id;
+    private long userId;
+    private String datetime;
+    private String value;
+
     public long getId() {
         return _id;
     }
@@ -38,14 +43,6 @@ public class History {
     public void setValue(String value) {
         this.value = value;
     }
-
-    private long _id;
-
-    private long userId;
-
-    private String datetime;
-
-    private String value;
 
     public DateTime getDatetime2()
     {
