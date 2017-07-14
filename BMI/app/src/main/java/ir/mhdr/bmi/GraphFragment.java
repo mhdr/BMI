@@ -25,16 +25,16 @@ import org.joda.time.DateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import ir.mhdr.bmi.bl.HistoryBL;
-import ir.mhdr.bmi.bl.UserBL;
+import ir.mhdr.bmi.blDao.HistoryBL;
+import ir.mhdr.bmi.blDao.UserBL;
+import ir.mhdr.bmi.dao.History;
+import ir.mhdr.bmi.dao.User;
 import ir.mhdr.bmi.lib.CustomMarkerView;
 import ir.mhdr.bmi.lib.DateAxisValueFormatter;
 import ir.mhdr.bmi.lib.FirebaseUtils;
 import ir.mhdr.bmi.lib.ProfileChangedListener;
 import ir.mhdr.bmi.lib.Statics;
 import ir.mhdr.bmi.lib.TimeDiff;
-import ir.mhdr.bmi.model.History;
-import ir.mhdr.bmi.model.User;
 
 public class GraphFragment extends Fragment implements ProfileChangedListener {
 
@@ -157,8 +157,8 @@ public class GraphFragment extends Fragment implements ProfileChangedListener {
 
         List<Entry> entries = new ArrayList<Entry>();
 
-        UserBL userBL = new UserBL(getContext());
-        HistoryBL historyBL = new HistoryBL(getContext());
+        UserBL userBL = new UserBL();
+        HistoryBL historyBL = new HistoryBL();
 
         User user = userBL.getActiveUser();
         List<History> historyList = historyBL.getHistory(user);

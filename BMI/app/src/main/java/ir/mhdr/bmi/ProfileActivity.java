@@ -18,11 +18,11 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import java.util.ArrayList;
 import java.util.List;
 
-import ir.mhdr.bmi.bl.UserBL;
+import ir.mhdr.bmi.blDao.UserBL;
+import ir.mhdr.bmi.dao.User;
 import ir.mhdr.bmi.lib.FirebaseUtils;
 import ir.mhdr.bmi.lib.ProfileAdapter;
 import ir.mhdr.bmi.lib.Statics;
-import ir.mhdr.bmi.model.User;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -79,7 +79,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
 
-        UserBL userBL = new UserBL(this);
+        UserBL userBL = new UserBL();
         List<User> userList = userBL.getUsers();
         adapter.setUserList(userList);
     }

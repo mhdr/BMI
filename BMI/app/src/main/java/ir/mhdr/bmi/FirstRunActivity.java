@@ -21,14 +21,16 @@ import org.joda.time.DateTime;
 import java.util.List;
 import java.util.Locale;
 
-import ir.mhdr.bmi.bl.HistoryBL;
-import ir.mhdr.bmi.bl.UserBL;
+import ir.mhdr.bmi.blDao.HistoryBL;
+import ir.mhdr.bmi.blDao.PrivateSettingBL;
+import ir.mhdr.bmi.blDao.UserBL;
+import ir.mhdr.bmi.dao.History;
+import ir.mhdr.bmi.dao.PrivateSetting;
+import ir.mhdr.bmi.dao.User;
 import ir.mhdr.bmi.lib.FirebaseUtils;
 import ir.mhdr.bmi.lib.Gender;
 import ir.mhdr.bmi.lib.Resources;
 import ir.mhdr.bmi.lib.Statics;
-import ir.mhdr.bmi.model.History;
-import ir.mhdr.bmi.model.User;
 import ir.pupli.jalalicalendarlib.JCalendar;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -111,20 +113,22 @@ public class FirstRunActivity extends AppCompatActivity {
             user.setBirthdate(birthdate.toString());
             user.setLatestHeight(height);
             user.setLatestWeight(weight);
-            user.setIsActiveX(true);
 
-            UserBL userBL = new UserBL(FirstRunActivity.this);
+            UserBL userBL = new UserBL();
             long id = userBL.insert(user);
+
+            PrivateSettingBL privateSettingBL=new PrivateSettingBL();
+            privateSettingBL.setActiveUser(user);
 
 
             if (id > 0) {
 
-                HistoryBL historyBL = new HistoryBL(FirstRunActivity.this);
+                HistoryBL historyBL = new HistoryBL();
 
                 DateTime current = new DateTime();
 
                 History history = new History();
-                history.setUserId(id);
+                history.setUserUuid(user.getUuid());
                 history.setValue(weight);
                 history.setDatetime(current.toString());
 

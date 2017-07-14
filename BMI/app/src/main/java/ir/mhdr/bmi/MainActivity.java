@@ -25,13 +25,13 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import java.util.ArrayList;
 import java.util.List;
 
-import ir.mhdr.bmi.bl.UserBL;
+import ir.mhdr.bmi.blDao.UserBL;
+import ir.mhdr.bmi.dao.User;
 import ir.mhdr.bmi.lib.CustomViewPager;
 import ir.mhdr.bmi.lib.FirebaseUtils;
 import ir.mhdr.bmi.lib.MainViewPagerAdapter;
 import ir.mhdr.bmi.lib.ProfileChangedListener;
 import ir.mhdr.bmi.lib.Statics;
-import ir.mhdr.bmi.model.User;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     AdapterView.OnItemSelectedListener spinnerProfile_OnItemSelectedListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            UserBL userBL = new UserBL(MainActivity.this);
+            UserBL userBL = new UserBL();
             userBL.SwitchActiveUser(userBL.getUsers().get(position));
 
             int pos = viewPagerMain.getCurrentItem();
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
             mFirebaseAnalytics.setUserProperty(FirebaseUtils.UserProperty.InstallSource, Statics.InstallSource);
         }
 
-        UserBL userBL = new UserBL(MainActivity.this);
+        UserBL userBL = new UserBL();
 
         if (userBL.countUsers() == 0) {
             firstRun = true;
@@ -217,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void generateSpinnerProfile() {
-        UserBL userBL = new UserBL(MainActivity.this);
+        UserBL userBL = new UserBL();
         List<User> userList = userBL.getUsers();
         List<String> profileStrList = new ArrayList<>();
 
@@ -228,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
 
             profileStrList.add(u.getName());
 
-            if (u.getIsActiveX()) {
+            if (u.isActive()) {
                 activeUserIndex = currentIndex;
             }
 

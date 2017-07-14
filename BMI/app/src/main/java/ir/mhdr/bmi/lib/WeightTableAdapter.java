@@ -26,10 +26,10 @@ import java.util.Locale;
 
 import ir.mhdr.bmi.R;
 import ir.mhdr.bmi.WeightFragment;
-import ir.mhdr.bmi.bl.HistoryBL;
-import ir.mhdr.bmi.bl.UserBL;
-import ir.mhdr.bmi.model.History;
-import ir.mhdr.bmi.model.User;
+import ir.mhdr.bmi.blDao.HistoryBL;
+import ir.mhdr.bmi.blDao.UserBL;
+import ir.mhdr.bmi.dao.History;
+import ir.mhdr.bmi.dao.User;
 
 public class WeightTableAdapter extends RecyclerView.Adapter<WeightTableAdapter.WeightTableViewHolder> {
 
@@ -57,7 +57,7 @@ public class WeightTableAdapter extends RecyclerView.Adapter<WeightTableAdapter.
 
         View view = inflater.inflate(R.layout.weight_table_row, parent, false);
 
-        UserBL userBL = new UserBL(context);
+        UserBL userBL = new UserBL();
         this.user = userBL.getActiveUser();
 
         WeightTableViewHolder viewHolder = new WeightTableViewHolder(view);
@@ -137,13 +137,13 @@ public class WeightTableAdapter extends RecyclerView.Adapter<WeightTableAdapter.
                             final int itemPosition = viewHolder.getAdapterPosition();
                             final History currentHistory = historyList.get(itemPosition);
 
-                            final UserBL userBL = new UserBL(context.getApplicationContext());
-                            final HistoryBL historyBL = new HistoryBL(context);
+                            final UserBL userBL = new UserBL();
+                            final HistoryBL historyBL = new HistoryBL();
 
                             final String valueStr = currentHistory.getValue();
 
                             WeightFragment weightFragment = new WeightFragment();
-                            weightFragment.setStyle(DialogFragment.STYLE_NO_TITLE,R.style.CustomDialog);
+                            weightFragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.CustomDialog);
 
                             if (valueStr.length() > 0) {
                                 weightFragment.setWeightValue(Double.parseDouble(valueStr));
@@ -153,7 +153,7 @@ public class WeightTableAdapter extends RecyclerView.Adapter<WeightTableAdapter.
                                 @Override
                                 public void onSave(double value) {
                                     currentHistory.setValue(String.valueOf(value));
-                                    int rows_affected = historyBL.update(currentHistory);
+                                    historyBL.update(currentHistory);
 
                                     if (itemPosition == 0) {
                                         user.setLatestWeight(String.valueOf(value));
@@ -178,8 +178,8 @@ public class WeightTableAdapter extends RecyclerView.Adapter<WeightTableAdapter.
 
                             int itemPosition = viewHolder.getAdapterPosition();
 
-                            UserBL userBL = new UserBL(context.getApplicationContext());
-                            HistoryBL historyBL = new HistoryBL(context.getApplicationContext());
+                            UserBL userBL = new UserBL();
+                            HistoryBL historyBL = new HistoryBL();
 
                             History historyToDelete = historyList.get(itemPosition);
                             historyBL.delete(historyToDelete);

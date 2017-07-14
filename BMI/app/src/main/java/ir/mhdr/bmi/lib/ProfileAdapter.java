@@ -24,9 +24,10 @@ import java.util.List;
 
 import ir.mhdr.bmi.NewEditProfileActivity;
 import ir.mhdr.bmi.R;
-import ir.mhdr.bmi.bl.HistoryBL;
-import ir.mhdr.bmi.bl.UserBL;
-import ir.mhdr.bmi.model.User;
+import ir.mhdr.bmi.blDao.HistoryBL;
+import ir.mhdr.bmi.blDao.PrivateSettingBL;
+import ir.mhdr.bmi.blDao.UserBL;
+import ir.mhdr.bmi.dao.User;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileViewHolder> {
 
@@ -69,7 +70,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
         final User user = userList.get(position);
         holder.textViewProfile.setText(user.getName());
 
-        if (user.getIsActiveX()) {
+        if (user.isActive()) {
             holder.imageViewActiveProfileStar.setVisibility(View.VISIBLE);
         }
         else {
@@ -82,7 +83,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
         holder.relativeLayoutProfileRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserBL userBL = new UserBL(context.getApplicationContext());
+                UserBL userBL = new UserBL();
                 int itemPosition = viewHolder.getAdapterPosition();
                 User userToEdit = userList.get(itemPosition);
                 userBL.SwitchActiveUser(userToEdit);
@@ -131,8 +132,8 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
                                 return;
                             }
 
-                            UserBL userBL = new UserBL(context.getApplicationContext());
-                            HistoryBL historyBL = new HistoryBL(context.getApplicationContext());
+                            UserBL userBL = new UserBL();
+                            HistoryBL historyBL = new HistoryBL();
 
                             User userToDelete = userList.get(itemPosition);
 
@@ -140,7 +141,10 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
                             userBL.delete(userToDelete);
 
                             User nextUser = userBL.getUsers().get(0);
-                            nextUser.setIsActiveX(true);
+
+                            PrivateSettingBL privateSettingBL=new PrivateSettingBL();
+                            privateSettingBL.setActiveUser(nextUser);
+
                             userBL.update(nextUser);
 
                             Toast.makeText(context, context.getResources().getString(R.string.user_removed), Toast.LENGTH_LONG).show();

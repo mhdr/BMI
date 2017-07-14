@@ -26,14 +26,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import ir.mhdr.bmi.bl.HistoryBL;
-import ir.mhdr.bmi.bl.UserBL;
+import ir.mhdr.bmi.blDao.HistoryBL;
+import ir.mhdr.bmi.blDao.PrivateSettingBL;
+import ir.mhdr.bmi.blDao.UserBL;
+import ir.mhdr.bmi.dao.History;
+import ir.mhdr.bmi.dao.User;
 import ir.mhdr.bmi.lib.FirebaseUtils;
 import ir.mhdr.bmi.lib.Gender;
 import ir.mhdr.bmi.lib.Resources;
 import ir.mhdr.bmi.lib.Statics;
-import ir.mhdr.bmi.model.History;
-import ir.mhdr.bmi.model.User;
 import ir.pupli.jalalicalendarlib.JCalendar;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -114,7 +115,7 @@ public class NewEditProfileActivity extends AppCompatActivity {
             DateTime birthdate = new DateTime(jCalendar.toGregorianDate());
 
             if (editMode) {
-                UserBL userBL = new UserBL(NewEditProfileActivity.this);
+                UserBL userBL = new UserBL();
 
                 User user = userToEdit;
                 user.setName(name);
@@ -125,7 +126,7 @@ public class NewEditProfileActivity extends AppCompatActivity {
 
                 userBL.update(user);
 
-                HistoryBL historyBL = new HistoryBL(NewEditProfileActivity.this);
+                HistoryBL historyBL = new HistoryBL();
                 History history = historyBL.getLastHistory(user);
                 history.setValue(weight);
 
@@ -142,9 +143,8 @@ public class NewEditProfileActivity extends AppCompatActivity {
                 user.setBirthdate(birthdate.toString());
                 user.setLatestHeight(height);
                 user.setLatestWeight(weight);
-                user.setIsActiveX(false);
 
-                UserBL userBL = new UserBL(NewEditProfileActivity.this);
+                UserBL userBL = new UserBL();
                 long id = userBL.insert(user);
 
                 // assign the created id for using this instance of User class later
@@ -152,12 +152,12 @@ public class NewEditProfileActivity extends AppCompatActivity {
 
                 if (id > 0) {
 
-                    HistoryBL historyBL = new HistoryBL(NewEditProfileActivity.this);
+                    HistoryBL historyBL = new HistoryBL();
 
                     DateTime current = new DateTime();
 
                     History history = new History();
-                    history.setUserId(id);
+                    history.setUserUuid(user.getUuid());
                     history.setValue(weight);
                     history.setDatetime(current.toString());
 
@@ -237,7 +237,7 @@ public class NewEditProfileActivity extends AppCompatActivity {
         if (bundle != null) {
             if (bundle.containsKey("userId")) {
                 editMode = true;
-                UserBL userBL = new UserBL(NewEditProfileActivity.this);
+                UserBL userBL = new UserBL();
                 userToEdit = userBL.getUser(bundle.getLong("userId"));
             }
         }

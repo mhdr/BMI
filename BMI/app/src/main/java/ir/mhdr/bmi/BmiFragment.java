@@ -36,14 +36,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import ir.mhdr.bmi.bl.HistoryBL;
-import ir.mhdr.bmi.bl.UserBL;
+import ir.mhdr.bmi.blDao.HistoryBL;
+import ir.mhdr.bmi.blDao.UserBL;
+import ir.mhdr.bmi.dao.History;
+import ir.mhdr.bmi.dao.User;
 import ir.mhdr.bmi.lib.BMI;
 import ir.mhdr.bmi.lib.FirebaseUtils;
 import ir.mhdr.bmi.lib.ProfileChangedListener;
 import ir.mhdr.bmi.lib.Statics;
-import ir.mhdr.bmi.model.History;
-import ir.mhdr.bmi.model.User;
 
 
 public class BmiFragment extends Fragment implements ProfileChangedListener {
@@ -146,7 +146,7 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
 
     public void calculateAndShow(boolean swapRanges) {
         float value = 24;
-        UserBL userBL = new UserBL(getContext());
+        UserBL userBL = new UserBL();
         User user = userBL.getActiveUser();
 
         BMI bmi = new BMI(user.getLatestHeight(), user.getLatestWeight());
@@ -231,8 +231,8 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
 
     private void openWeightDialog() {
 
-        final UserBL userBL = new UserBL(getContext());
-        final HistoryBL historyBL = new HistoryBL(getContext());
+        final UserBL userBL = new UserBL();
+        final HistoryBL historyBL = new HistoryBL();
         final User user = userBL.getActiveUser();
 
         String valueStr = user.getLatestWeight();
@@ -248,12 +248,12 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
             @Override
             public void onSave(double value) {
                 user.setLatestWeight(String.valueOf(value));
-                int rows_affected = userBL.update(user);
+                userBL.update(user);
 
                 DateTime current = new DateTime();
 
                 History history = new History();
-                history.setUserId(user.getId());
+                history.setUserUuid(user.getUuid());
                 history.setValue(String.valueOf(value));
                 history.setDatetime(current.toString());
 
