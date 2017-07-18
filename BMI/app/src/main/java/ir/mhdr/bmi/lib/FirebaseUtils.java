@@ -10,10 +10,14 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 public class FirebaseUtils {
 
     public class AppStoreSource {
+        public final static String Dev = "Dev";
         public final static String Bazaar = "Bazaar";
-        public final static String GooglePlayStore = "Bazaar";
-        public final static String IranApps = "Bazaar";
-        public final static String AvalMarket = "Bazaar";
+        public final static String GooglePlayStore = "GooglePlayStore";
+        public final static String IranApps = "IranApps";
+        public final static String AvalMarket = "AvalMarket";
+        public final static String MyKet = "Myket";
+        public final static String ParsHub = "ParsHub";
+        public final static String Cando = "Cando";
     }
 
     public class UserProperty {

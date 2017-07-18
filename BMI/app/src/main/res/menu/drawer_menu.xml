@@ -10,6 +10,7 @@
             android:id="@+id/itemMenuProfile"
             android:checkable="true"
             android:enabled="true"
+            android:icon="@drawable/account"
             android:layoutDirection="rtl"
             android:textDirection="rtl"
             android:title="@string/profile_management"
@@ -41,9 +42,21 @@
                 app:showAsAction="never" />
 
             <item
-                android:id="@+id/itemMenuExit"
-                android:checkable="true"
+                android:id="@+id/itemMenuTelegram"
+                android:checkable="false"
                 android:enabled="true"
+                android:icon="@drawable/telegram"
+                android:layoutDirection="rtl"
+                android:textDirection="rtl"
+                android:title="@string/telegram_menu_item"
+                android:visible="true"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/itemMenuExit"
+                android:checkable="false"
+                android:enabled="true"
+                android:icon="@drawable/exit"
                 android:layoutDirection="rtl"
                 android:textDirection="rtl"
                 android:title="@string/exit"

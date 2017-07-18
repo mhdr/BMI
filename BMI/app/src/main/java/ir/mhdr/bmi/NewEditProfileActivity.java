@@ -1,6 +1,7 @@
 package ir.mhdr.bmi;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.NavUtils;
@@ -239,10 +240,10 @@ public class NewEditProfileActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
 
         if (bundle != null) {
-            if (bundle.containsKey("userId")) {
+            if (bundle.containsKey("userUuid")) {
                 editMode = true;
                 UserBL userBL = new UserBL();
-                userToEdit = userBL.getUser(bundle.getLong("userId"));
+                userToEdit = userBL.getUserByUuid(bundle.getString("userUuid"));
             }
         }
 

@@ -11,6 +11,7 @@ import org.greenrobot.greendao.database.Database;
 
 import java.util.Locale;
 
+import ir.mhdr.bmi.blDao.Import;
 import ir.mhdr.bmi.blDao.PrivateSettingBL;
 import ir.mhdr.bmi.dao.DaoMaster;
 import ir.mhdr.bmi.lib.Statics;
@@ -35,7 +36,10 @@ public class MyApplication extends MultiDexApplication {
         Statics.daoSession = new DaoMaster(db).newSession();
 
         PrivateSettingBL privateSettingBL = new PrivateSettingBL();
-        privateSettingBL.createSession();
+        privateSettingBL.createSettings();
+
+        Import importDb=new Import(getApplicationContext());
+        importDb.fromV1ToV2();
     }
 
     @Override

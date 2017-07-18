@@ -1,7 +1,5 @@
 package ir.mhdr.bmi;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -33,10 +31,10 @@ import org.joda.time.Period;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import ir.mhdr.bmi.blDao.HistoryBL;
+import ir.mhdr.bmi.blDao.PrivateSettingBL;
 import ir.mhdr.bmi.blDao.UserBL;
 import ir.mhdr.bmi.dao.History;
 import ir.mhdr.bmi.dao.User;
@@ -169,22 +167,22 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("bmi", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        PrivateSettingBL privateSettingBL = new PrivateSettingBL();
+        int bmiRangeMode = privateSettingBL.getBmiRangeMode();
 
         if (!swapRanges) {
 
-            if (sharedPreferences.getInt("bmi_range", -1) == -1) {
+            if (bmiRangeMode == -1) {
 
                 BmiRangeFragment bmiRangeFragment = new BmiRangeFragment();
                 fragmentTransaction.replace(R.id.linearLayoutRangeContainer, bmiRangeFragment);
 
-            } else if (sharedPreferences.getInt("bmi_range", -1) == 1) {
+            } else if (bmiRangeMode == 1) {
 
                 BmiRangeFragment bmiRangeFragment = new BmiRangeFragment();
                 fragmentTransaction.replace(R.id.linearLayoutRangeContainer, bmiRangeFragment);
 
-            } else if (sharedPreferences.getInt("bmi_range", -1) == 2) {
+            } else if (bmiRangeMode == 2) {
                 WeightRangeFragment weightRangeFragment = new WeightRangeFragment();
 
                 Bundle bundle = new Bundle();
@@ -208,7 +206,7 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
                 fragmentTransaction.setCustomAnimations(R.anim.scale_up, R.anim.scale_down)
                         .replace(R.id.linearLayoutRangeContainer, bmiRangeFragment);
 
-                editor.putInt("bmi_range", 1);
+                privateSettingBL.setBmiRange(1);
 
             } else if (previousFragment instanceof BmiRangeFragment) {
                 WeightRangeFragment weightRangeFragment = new WeightRangeFragment();
@@ -221,11 +219,10 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
                 fragmentTransaction.setCustomAnimations(R.anim.scale_up, R.anim.scale_down)
                         .replace(R.id.linearLayoutRangeContainer, weightRangeFragment);
 
-                editor.putInt("bmi_range", 2);
+                privateSettingBL.setBmiRange(2);
             }
 
             fragmentTransaction.commit();
-            editor.apply();
         }
     }
 

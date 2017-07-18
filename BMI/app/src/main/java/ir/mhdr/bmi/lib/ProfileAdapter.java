@@ -121,7 +121,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
 
                             User userToEdit = userList.get(itemPosition);
                             Intent intent = new Intent(context, NewEditProfileActivity.class);
-                            intent.putExtra("userId", userToEdit.getId());
+                            intent.putExtra("userUuid", userToEdit.getUuid());
                             context.startActivity(intent);
                             listPopupWindow.dismiss();
                         } else if (position == 1) {

@@ -2,7 +2,9 @@ package ir.mhdr.bmi;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -100,6 +103,17 @@ public class MainActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.itemMenuProfile) {
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
+            } else if (item.getItemId() == R.id.itemMenuTelegram) {
+                final String appName = "org.telegram.messenger";
+                final boolean isAppInstalled = isAppAvailable(getApplicationContext(), appName);
+                if (isAppInstalled) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/joinchat/BSLSdUJkvhEVnDI4lbNw3g"));
+                    startActivity(intent);
+                } else {
+                    String msg = getResources().getString(R.string.telegram_not_installed);
+                    Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+                }
+
             }
 
             return false;
@@ -178,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         navigationView = (NavigationView) findViewById(R.id.navigationView);
+        navigationView.setItemIconTintList(null);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -266,6 +281,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    public boolean isAppAvailable(Context context, String appName) {
+        PackageManager pm = context.getPackageManager();
+        try {
+            pm.getPackageInfo(appName, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
     }
 
     @Override

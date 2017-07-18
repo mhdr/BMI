@@ -8,6 +8,7 @@ import java.util.UUID;
 import ir.mhdr.bmi.dao.History;
 import ir.mhdr.bmi.dao.HistoryDao;
 import ir.mhdr.bmi.dao.User;
+import ir.mhdr.bmi.dao.UserDao;
 import ir.mhdr.bmi.lib.Statics;
 
 public class HistoryBL {
@@ -22,6 +23,20 @@ public class HistoryBL {
         long id = historyDao.insert(history);
 
         return id;
+    }
+
+    public void insertRange(List<History> historyList)
+    {
+        HistoryDao historyDao=Statics.daoSession.getHistoryDao();
+
+        for (History history:historyList)
+        {
+            history.setUuid(UUID.randomUUID().toString());
+            history.setTimestamp(UUID.randomUUID().toString());
+            history.setIsRemoved(false);
+        }
+
+        historyDao.insertInTx(historyList);
     }
 
     public List<History> getHistory(User user) {

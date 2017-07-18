@@ -24,6 +24,20 @@ public class UserBL {
         return id;
     }
 
+    public void insertRange(List<User> userList)
+    {
+        UserDao userDao = Statics.daoSession.getUserDao();
+
+        for (User user:userList)
+        {
+            user.setUuid(UUID.randomUUID().toString());
+            user.setTimestamp(UUID.randomUUID().toString());
+            user.setIsRemoved(false);
+        }
+
+        userDao.insertInTx(userList);
+    }
+
     public User getUser(long id) {
 
         User user = null;
@@ -32,6 +46,20 @@ public class UserBL {
 
         user = userDao.queryBuilder().
                 where(UserDao.Properties.Id.eq(id)).
+                where(UserDao.Properties.IsRemoved.eq(false)).
+                unique();
+
+        return user;
+    }
+
+    public User getUserByUuid(String uuid) {
+
+        User user = null;
+
+        UserDao userDao = Statics.daoSession.getUserDao();
+
+        user = userDao.queryBuilder().
+                where(UserDao.Properties.Uuid.eq(uuid)).
                 where(UserDao.Properties.IsRemoved.eq(false)).
                 unique();
 
