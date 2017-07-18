@@ -34,6 +34,7 @@ import ir.mhdr.bmi.lib.Statics;
 import ir.pupli.jalalicalendarlib.JCalendar;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
+
 public class FirstRunActivity extends AppCompatActivity {
 
     List<String> genderList;
@@ -56,6 +57,7 @@ public class FirstRunActivity extends AppCompatActivity {
 
             if (name.length() == 0) {
                 validationError++;
+                editTextProfileName.setError(getResources().getString(R.string.validate_profile_name));
             }
 
             String genderStr = (String) spinnerGender.getSelectedItem();
@@ -68,18 +70,21 @@ public class FirstRunActivity extends AppCompatActivity {
 
             if (birthdateStr.length() == 0) {
                 validationError++;
+                editTextBirthdate.setError(getResources().getString(R.string.validate_birthdate));
             }
 
             String height = editTextHeight.getText().toString();
 
             if (height.length() == 0) {
                 validationError++;
+                editTextHeight.setError(getResources().getString(R.string.validate_height));
             }
 
             String weight = editTextWeight.getText().toString();
 
             if (weight.length() == 0) {
                 validationError++;
+                editTextWeight.setError(getResources().getString(R.string.validate_weight));
             }
 
             if (validationError > 0) {
@@ -117,7 +122,7 @@ public class FirstRunActivity extends AppCompatActivity {
             UserBL userBL = new UserBL();
             long id = userBL.insert(user);
 
-            PrivateSettingBL privateSettingBL=new PrivateSettingBL();
+            PrivateSettingBL privateSettingBL = new PrivateSettingBL();
             privateSettingBL.setActiveUser(user);
 
 
@@ -239,6 +244,7 @@ public class FirstRunActivity extends AppCompatActivity {
         editTextWeight.setOnClickListener(editTextWeight_OnClickListener);
 
         initializeButtonStart();
+
     }
 
     private void initializeButtonStart() {
@@ -249,11 +255,12 @@ public class FirstRunActivity extends AppCompatActivity {
     private void openPersianDatePickerDialog() {
         String previousStr = editTextBirthdate.getText().toString();
         DatePickerFragment datePickerFragment = new DatePickerFragment();
-        datePickerFragment.setStyle(DialogFragment.STYLE_NO_TITLE,R.style.CustomDialog);
+        datePickerFragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.CustomDialog);
         datePickerFragment.setOnSaveListener(new DatePickerFragment.OnSaveListener() {
             @Override
             public void onSave(String value) {
                 editTextBirthdate.setText(value);
+                editTextBirthdate.setError(null);
             }
         });
 
@@ -270,7 +277,7 @@ public class FirstRunActivity extends AppCompatActivity {
         String valueStr = editTextHeight.getText().toString();
 
         HeightFragment heightFragment = new HeightFragment();
-        heightFragment.setStyle(DialogFragment.STYLE_NO_TITLE,R.style.CustomDialog);
+        heightFragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.CustomDialog);
 
         if (valueStr.length() > 0) {
             heightFragment.setHeightValue(Integer.parseInt(valueStr));
@@ -280,6 +287,7 @@ public class FirstRunActivity extends AppCompatActivity {
             @Override
             public void onSave(int value) {
                 editTextHeight.setText(String.valueOf(value));
+                editTextHeight.setError(null);
             }
         });
 
@@ -290,7 +298,7 @@ public class FirstRunActivity extends AppCompatActivity {
         String valueStr = editTextWeight.getText().toString();
 
         WeightFragment weightFragment = new WeightFragment();
-        weightFragment.setStyle(DialogFragment.STYLE_NO_TITLE,R.style.CustomDialog);
+        weightFragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.CustomDialog);
 
         if (valueStr.length() > 0) {
             weightFragment.setWeightValue(Double.parseDouble(valueStr));
@@ -300,6 +308,7 @@ public class FirstRunActivity extends AppCompatActivity {
             @Override
             public void onSave(double value) {
                 editTextWeight.setText(String.valueOf(value));
+                editTextWeight.setError(null);
             }
         });
         weightFragment.show(getSupportFragmentManager(), "weight");

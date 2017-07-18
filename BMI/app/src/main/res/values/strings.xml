@@ -135,6 +135,8 @@
         <item>اسفند</item>
     </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="validate_profile_name">نام پروفایل نمی تواند خالی باشد</string>
+    <string name="validate_birthdate">تاریخ تولد نمی تواند خالی باشد</string>
+    <string name="validate_height">قد نمی تواند خالی باشد</string>
+    <string name="validate_weight">وزن نمی تواند خالی باشد</string>
 </resources>

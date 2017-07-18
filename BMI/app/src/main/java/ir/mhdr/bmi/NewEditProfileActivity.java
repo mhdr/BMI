@@ -63,6 +63,7 @@ public class NewEditProfileActivity extends AppCompatActivity {
 
             if (name.length() == 0) {
                 validationError++;
+                editTextNewProfileName.setError(getResources().getString(R.string.validate_profile_name));
             }
 
             String genderStr = (String) spinnerNewProfileGender.getSelectedItem();
@@ -75,18 +76,21 @@ public class NewEditProfileActivity extends AppCompatActivity {
 
             if (birthdateStr.length() == 0) {
                 validationError++;
+                editTextNewProfileBirthdate.setError(getResources().getString(R.string.validate_birthdate));
             }
 
             String height = editTextNewProfileHeight.getText().toString();
 
             if (height.length() == 0) {
                 validationError++;
+                editTextNewProfileHeight.setError(getResources().getString(R.string.validate_height));
             }
 
             String weight = editTextNewProfileWeight.getText().toString();
 
             if (weight.length() == 0) {
                 validationError++;
+                editTextNewProfileWeight.setError(getResources().getString(R.string.validate_weight));
             }
 
             if (validationError > 0) {
@@ -332,6 +336,7 @@ public class NewEditProfileActivity extends AppCompatActivity {
             @Override
             public void onSave(int value) {
                 editTextNewProfileHeight.setText(String.valueOf(value));
+                editTextNewProfileHeight.setError(null);
             }
         });
 
@@ -352,6 +357,7 @@ public class NewEditProfileActivity extends AppCompatActivity {
             @Override
             public void onSave(double value) {
                 editTextNewProfileWeight.setText(String.valueOf(value));
+                editTextNewProfileWeight.setError(null);
             }
         });
         weightFragment.show(getSupportFragmentManager(), "weight");
@@ -366,6 +372,7 @@ public class NewEditProfileActivity extends AppCompatActivity {
             @Override
             public void onSave(String value) {
                 editTextNewProfileBirthdate.setText(value);
+                editTextNewProfileBirthdate.setError(null);
             }
         });
 

@@ -26,3 +26,6 @@
 
 -keep class com.github.mikephil.charting.** { *; }
 -keep class android.support.** { *; }
+
+-keep class com.mobsandgeeks.saripaar.** {*;}
+-keep @com.mobsandgeeks.saripaar.annotation.ValidateUsing class * {*;}

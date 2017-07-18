@@ -61,9 +61,8 @@ public class PrivateSettingBL {
             privateSetting = new PrivateSetting();
             privateSetting.setKey("Session");
             privateSetting.setValue(UUID.randomUUID().toString());
+            privateSettingDao.insert(privateSetting);
         }
-
-        privateSettingDao.insert(privateSetting);
     }
 
     public String getSession() {
