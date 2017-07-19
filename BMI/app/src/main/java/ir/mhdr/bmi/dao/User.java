@@ -19,27 +19,13 @@ public class User {
     private int gender;
     private String latestHeight;
     private String latestWeight;
-    private String timestamp;
     private boolean isRemoved;
 
-    @Generated(hash = 1794674225)
-    public User(Long id, String uuid, String name, String birthdate, int gender,
-            String latestHeight, String latestWeight, String timestamp,
-            boolean isRemoved) {
-        this.id = id;
-        this.uuid = uuid;
-        this.name = name;
-        this.birthdate = birthdate;
-        this.gender = gender;
-        this.latestHeight = latestHeight;
-        this.latestWeight = latestWeight;
-        this.timestamp = timestamp;
-        this.isRemoved = isRemoved;
-    }
-
-    @Generated(hash = 586692638)
-    public User() {
-    }
+    // sync
+    private String timestamp;
+    private boolean syncState;
+    private String datetimeModified;
+    //
 
     public boolean isActive() {
         PrivateSettingBL privateSettingBL = new PrivateSettingBL();
@@ -74,60 +60,79 @@ public class User {
         }
     }
 
+    @Generated(hash = 2123755141)
+    public User(Long id, String uuid, String name, String birthdate, int gender,
+            String latestHeight, String latestWeight, boolean isRemoved,
+            String timestamp, boolean syncState, String datetimeModified) {
+        this.id = id;
+        this.uuid = uuid;
+        this.name = name;
+        this.birthdate = birthdate;
+        this.gender = gender;
+        this.latestHeight = latestHeight;
+        this.latestWeight = latestWeight;
+        this.isRemoved = isRemoved;
+        this.timestamp = timestamp;
+        this.syncState = syncState;
+        this.datetimeModified = datetimeModified;
+    }
+
+    @Generated(hash = 586692638)
+    public User() {
+    }
     public Long getId() {
         return this.id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getUuid() {
         return this.uuid;
     }
-
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
-
     public String getName() {
         return this.name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public String getBirthdate() {
         return this.birthdate;
     }
-
     public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
-
     public int getGender() {
         return this.gender;
     }
-
     public void setGender(int gender) {
         this.gender = gender;
     }
-
     public String getLatestHeight() {
         return this.latestHeight;
     }
-
     public void setLatestHeight(String latestHeight) {
         this.latestHeight = latestHeight;
     }
-
     public String getLatestWeight() {
         return this.latestWeight;
     }
-
     public void setLatestWeight(String latestWeight) {
         this.latestWeight = latestWeight;
+    }
+    public boolean getIsRemoved() {
+        return this.isRemoved;
+    }
+    public void setIsRemoved(boolean isRemoved) {
+        this.isRemoved = isRemoved;
+    }
+    public boolean getSyncState() {
+        return this.syncState;
+    }
+    public void setSyncState(boolean syncState) {
+        this.syncState = syncState;
     }
 
     public String getTimestamp() {
@@ -138,13 +143,11 @@ public class User {
         this.timestamp = timestamp;
     }
 
-    public boolean getIsRemoved() {
-        return this.isRemoved;
+    public String getDatetimeModified() {
+        return this.datetimeModified;
     }
 
-    public void setIsRemoved(boolean isRemoved) {
-        this.isRemoved = isRemoved;
+    public void setDatetimeModified(String datetimeModified) {
+        this.datetimeModified = datetimeModified;
     }
-
-    
 }

@@ -1,6 +1,8 @@
 package ir.mhdr.bmi.blDao;
 
 
+import org.joda.time.DateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -16,23 +18,31 @@ public class UserBL {
         UserDao userDao = Statics.daoSession.getUserDao();
 
         user.setUuid(UUID.randomUUID().toString());
-        user.setTimestamp(UUID.randomUUID().toString());
         user.setIsRemoved(false);
+
+        // for sync
+        user.setSyncState(false);
+        user.setDatetimeModified(new DateTime().toString());
+        user.setTimestamp(UUID.randomUUID().toString());
+        //
 
         long id = userDao.insert(user);
 
         return id;
     }
 
-    public void insertRange(List<User> userList)
-    {
+    public void insertRange(List<User> userList) {
         UserDao userDao = Statics.daoSession.getUserDao();
 
-        for (User user:userList)
-        {
+        for (User user : userList) {
             user.setUuid(UUID.randomUUID().toString());
-            user.setTimestamp(UUID.randomUUID().toString());
             user.setIsRemoved(false);
+
+            // for sync
+            user.setSyncState(false);
+            user.setDatetimeModified(new DateTime().toString());
+            user.setTimestamp(UUID.randomUUID().toString());
+            //
         }
 
         userDao.insertInTx(userList);
@@ -98,15 +108,24 @@ public class UserBL {
     public void update(User user) {
         UserDao userDao = Statics.daoSession.getUserDao();
 
+        // for sync
+        user.setSyncState(false);
+        user.setDatetimeModified(new DateTime().toString());
         user.setTimestamp(UUID.randomUUID().toString());
+        //
 
         userDao.update(user);
     }
 
     public void delete(User user) {
         UserDao userDao = Statics.daoSession.getUserDao();
-        user.setTimestamp(UUID.randomUUID().toString());
         user.setIsRemoved(true);
+
+        // for sync
+        user.setSyncState(false);
+        user.setDatetimeModified(new DateTime().toString());
+        user.setTimestamp(UUID.randomUUID().toString());
+        //
 
         userDao.update(user);
     }

@@ -9,7 +9,7 @@ import org.joda.time.DateTime;
 import ir.pupli.jalalicalendarlib.JCalendar;
 
 @Entity
-public class History {
+public class History{
     @Id(autoincrement = true)
     private Long id;
 
@@ -20,29 +20,23 @@ public class History {
     private String userUuid;
     private String datetime;
     private String value;
-    private String timestamp;
     private boolean isRemoved;
 
-
-    @Generated(hash = 680039804)
-    public History(Long id, String uuid, String userUuid, String datetime, String value, String timestamp,
-            boolean isRemoved) {
-        this.id = id;
-        this.uuid = uuid;
-        this.userUuid = userUuid;
-        this.datetime = datetime;
-        this.value = value;
-        this.timestamp = timestamp;
-        this.isRemoved = isRemoved;
-    }
-
-    @Generated(hash = 869423138)
-    public History() {
-    }
+    // sync
+    private String timestamp;
+    private boolean syncState;
+    private String datetimeModified;
+    //
 
 
     public DateTime getDatetime2() {
         DateTime dateTime = DateTime.parse(this.getDatetime());
+
+        return dateTime;
+    }
+
+    public DateTime getDatetimeModified2() {
+        DateTime dateTime = DateTime.parse(this.getDatetimeModified());
 
         return dateTime;
     }
@@ -55,44 +49,72 @@ public class History {
         return jCalendar;
     }
 
+    @Generated(hash = 617609890)
+    public History(Long id, String uuid, String userUuid, String datetime, String value, boolean isRemoved,
+            String timestamp, boolean syncState, String datetimeModified) {
+        this.id = id;
+        this.uuid = uuid;
+        this.userUuid = userUuid;
+        this.datetime = datetime;
+        this.value = value;
+        this.isRemoved = isRemoved;
+        this.timestamp = timestamp;
+        this.syncState = syncState;
+        this.datetimeModified = datetimeModified;
+    }
+
+    @Generated(hash = 869423138)
+    public History() {
+    }
     public Long getId() {
         return this.id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getUuid() {
         return this.uuid;
     }
-
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
-
     public String getUserUuid() {
         return this.userUuid;
     }
-
     public void setUserUuid(String userUuid) {
         this.userUuid = userUuid;
     }
-
     public String getDatetime() {
         return this.datetime;
     }
-
     public void setDatetime(String datetime) {
         this.datetime = datetime;
     }
-
     public String getValue() {
         return this.value;
     }
-
     public void setValue(String value) {
         this.value = value;
+    }
+    public boolean getIsRemoved() {
+        return this.isRemoved;
+    }
+    public void setIsRemoved(boolean isRemoved) {
+        this.isRemoved = isRemoved;
+    }
+    public boolean getSyncState() {
+        return this.syncState;
+    }
+    public void setSyncState(boolean syncState) {
+        this.syncState = syncState;
+    }
+
+    public String getDatetimeModified() {
+        return this.datetimeModified;
+    }
+
+    public void setDatetimeModified(String datetimeModified) {
+        this.datetimeModified = datetimeModified;
     }
 
     public String getTimestamp() {
@@ -102,14 +124,4 @@ public class History {
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
-
-    public boolean getIsRemoved() {
-        return this.isRemoved;
-    }
-
-    public void setIsRemoved(boolean isRemoved) {
-        this.isRemoved = isRemoved;
-    }
-
-
 }

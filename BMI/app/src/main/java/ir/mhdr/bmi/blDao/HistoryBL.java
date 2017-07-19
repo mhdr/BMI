@@ -1,6 +1,8 @@
 package ir.mhdr.bmi.blDao;
 
 
+import org.joda.time.DateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -17,23 +19,31 @@ public class HistoryBL {
         HistoryDao historyDao = Statics.daoSession.getHistoryDao();
 
         history.setUuid(UUID.randomUUID().toString());
-        history.setTimestamp(UUID.randomUUID().toString());
         history.setIsRemoved(false);
+
+        // for sync
+        history.setSyncState(false);
+        history.setTimestamp(UUID.randomUUID().toString());
+        history.setDatetimeModified(new DateTime().toString());
+        //
 
         long id = historyDao.insert(history);
 
         return id;
     }
 
-    public void insertRange(List<History> historyList)
-    {
-        HistoryDao historyDao=Statics.daoSession.getHistoryDao();
+    public void insertRange(List<History> historyList) {
+        HistoryDao historyDao = Statics.daoSession.getHistoryDao();
 
-        for (History history:historyList)
-        {
+        for (History history : historyList) {
             history.setUuid(UUID.randomUUID().toString());
-            history.setTimestamp(UUID.randomUUID().toString());
             history.setIsRemoved(false);
+
+            // for sync
+            history.setSyncState(false);
+            history.setTimestamp(UUID.randomUUID().toString());
+            history.setDatetimeModified(new DateTime().toString());
+            //
         }
 
         historyDao.insertInTx(historyList);
@@ -55,8 +65,13 @@ public class HistoryBL {
     public void delete(History history) {
         HistoryDao historyDao = Statics.daoSession.getHistoryDao();
 
-        history.setTimestamp(UUID.randomUUID().toString());
         history.setIsRemoved(true);
+
+        // for sync
+        history.setSyncState(false);
+        history.setTimestamp(UUID.randomUUID().toString());
+        history.setDatetimeModified(new DateTime().toString());
+        //
 
         historyDao.update(history);
     }
@@ -73,7 +88,7 @@ public class HistoryBL {
 
         for (History history : historyList) {
             history.setIsRemoved(false);
-            history.setTimestamp(UUID.randomUUID().toString());
+            history.setSyncState(false);
         }
 
         historyDao.updateInTx(historyList);
@@ -82,7 +97,11 @@ public class HistoryBL {
     public void update(History history) {
         HistoryDao historyDao = Statics.daoSession.getHistoryDao();
 
+        // for sync
+        history.setSyncState(false);
         history.setTimestamp(UUID.randomUUID().toString());
+        history.setDatetimeModified(new DateTime().toString());
+        //
 
         historyDao.update(history);
     }

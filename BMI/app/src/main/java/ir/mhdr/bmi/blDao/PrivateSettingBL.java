@@ -1,6 +1,8 @@
 package ir.mhdr.bmi.blDao;
 
 
+import org.joda.time.DateTime;
+
 import java.util.UUID;
 
 import ir.mhdr.bmi.dao.PrivateSetting;
@@ -139,8 +141,7 @@ public class PrivateSettingBL {
         return session;
     }
 
-    public void createImportDbV1()
-    {
+    public void createImportDbV1() {
         PrivateSettingDao privateSettingDao = Statics.daoSession.getPrivateSettingDao();
 
         PrivateSetting privateSetting = privateSettingDao.queryBuilder().
@@ -179,5 +180,4 @@ public class PrivateSettingBL {
         privateSetting.setValue(String.valueOf(value));
         privateSettingDao.update(privateSetting);
     }
-
 }
