@@ -18,6 +18,7 @@ public class FirebaseUtils {
         public final static String MyKet = "Myket";
         public final static String ParsHub = "ParsHub";
         public final static String Cando = "Cando";
+        public final static String Pupli = "Pupli";
     }
 
     public class UserProperty {

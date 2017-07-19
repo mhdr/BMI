@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -24,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.crash.FirebaseCrash;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,7 @@ import ir.mhdr.bmi.lib.FirebaseUtils;
 import ir.mhdr.bmi.lib.MainViewPagerAdapter;
 import ir.mhdr.bmi.lib.ProfileChangedListener;
 import ir.mhdr.bmi.lib.Statics;
+import ir.mhdr.bmi.lib.Update;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
@@ -178,6 +182,14 @@ public class MainActivity extends AppCompatActivity {
             mFirebaseAnalytics.setUserProperty(FirebaseUtils.UserProperty.InstallSource, Statics.InstallSource);
         }
 
+        if (!Statics.isCheckedForUpdate) {
+            //check for update just once
+            Update update = new Update();
+            update.setUpdateListener(updateListener);
+            update.Check();
+            //
+        }
+
         UserBL userBL = new UserBL();
 
         if (userBL.countUsers() == 0) {
@@ -230,6 +242,35 @@ public class MainActivity extends AppCompatActivity {
         generateSpinnerProfile();
         spinnerProfile.setOnItemSelectedListener(spinnerProfile_OnItemSelectedListener);
     }
+
+    Update.UpdateListener updateListener = new Update.UpdateListener() {
+        @Override
+        public void newUpdateAvailable(Update.UpdateInfo updateInfo) {
+
+            final Update.UpdateInfo localUpdateInfo = updateInfo;
+            Statics.isCheckedForUpdate = true;
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        ConfirmUpdateFragment confirmUpdateFragment = new ConfirmUpdateFragment();
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            confirmUpdateFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
+                        }
+
+                        confirmUpdateFragment.setUpdateInfo(localUpdateInfo);
+                        confirmUpdateFragment.show(getSupportFragmentManager(), "confirm_update");
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        FirebaseCrash.report(ex);
+                    }
+                }
+            });
+
+        }
+    };
 
     private void generateSpinnerProfile() {
         UserBL userBL = new UserBL();

@@ -36,6 +36,13 @@ public class Import {
         List<User> usersOld = userBLOld.getUsers();
         ir.mhdr.bmi.dao.User activeUser = null;
 
+
+        // if there is no previouse version of app
+        if (usersOld.size() == 0) {
+            privateSettingBL.setImportDbV1(1);
+            return;
+        }
+
         for (User user : usersOld) {
             ir.mhdr.bmi.dao.User newUser = new ir.mhdr.bmi.dao.User();
             newUser.setName(user.getName());

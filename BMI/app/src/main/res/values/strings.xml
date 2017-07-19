@@ -143,4 +143,6 @@
     <string name="telegram_menu_item">گزارش خطا و ارتباط با پاپلی</string>
 
     <string name="telegram_not_installed">برنامه تلگرام در دستگاه شما نصب نشده است</string>
+
+    <string name="cancelDownload">انصراف</string>
 </resources>

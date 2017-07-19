@@ -9,4 +9,6 @@ public class Statics {
 
     public static DaoSession daoSession;
 
+    public static boolean isCheckedForUpdate=false;
+
 }
