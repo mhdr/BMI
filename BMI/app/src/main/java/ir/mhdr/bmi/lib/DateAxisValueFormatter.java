@@ -43,26 +43,42 @@ public class DateAxisValueFormatter implements IAxisValueFormatter {
             // less than 1 hour
 
             result = String.format(Locale.US, "%d:%d", dateTime.getHourOfDay(), dateTime.getMinuteOfHour());
+            chart.getXAxis().setLabelCount(3);
 
         } else if (visibleRange < 60 * 24) {
             // less than 1 day
 
             result = String.format(Locale.US, "%d:%d", dateTime.getHourOfDay(), dateTime.getMinuteOfHour());
+            chart.getXAxis().setLabelCount(3);
 
         } else if (visibleRange < 60 * 24 * 30) {
             // less than 1 month
 
             result = String.format(Locale.US, "%d %s", persianCalendar.getDay(), this.getMonthName(persianCalendar.getMonth()));
+            chart.getXAxis().setLabelCount(3);
+
+        } else if (visibleRange < 60 * 24 * 30 * 3) {
+            // less than 3 month
+
+            result = String.format(Locale.US, "%s", String.valueOf(persianCalendar.getMonthString()));
+            chart.getXAxis().setLabelCount(2);
 
         } else if (visibleRange < 60 * 24 * 30 * 12) {
             // less than 1 year
 
             result = String.format(Locale.US, "%s", String.valueOf(persianCalendar.getMonthString()));
+            chart.getXAxis().setLabelCount(3);
+
+        } else if (visibleRange < 60 * 24 * 30 * 12 * 3) {
+            // less than 3 year
+
+            result = String.format(Locale.US, "%d", persianCalendar.getYear());
             chart.getXAxis().setLabelCount(2);
 
-        } else if (visibleRange > 60 * 24 * 30 * 12) {
+        } else if (visibleRange >= 60 * 24 * 30 * 12 * 3) {
             // more than 1 year
             result = String.format(Locale.US, "%d", persianCalendar.getYear());
+            chart.getXAxis().setLabelCount(3);
 
         } else {
 

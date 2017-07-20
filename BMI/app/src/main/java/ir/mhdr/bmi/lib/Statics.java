@@ -5,7 +5,7 @@ import ir.mhdr.bmi.dao.DaoSession;
 
 public class Statics {
 
-    public final static String InstallSource = FirebaseUtils.AppStoreSource.Dev;
+    public final static String InstallSource = FirebaseUtils.AppStoreSource.Pupli;
 
     public static DaoSession daoSession;
 
