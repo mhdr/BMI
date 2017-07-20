@@ -92,7 +92,7 @@
                 app:layout_columnWeight="1" />
 
         </android.support.v7.widget.GridLayout>
-        
+
     </android.support.v7.widget.LinearLayoutCompat>
 
 </FrameLayout>
