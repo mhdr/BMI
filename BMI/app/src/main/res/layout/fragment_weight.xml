@@ -3,50 +3,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
     tools:context="ir.mhdr.bmi.WeightFragment">
 
-    <LinearLayout
+    <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <android.support.v7.widget.GridLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+            app:columnCount="4"
+            android:layout_gravity="center"
+            android:gravity="center">
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/textViewWeightUnit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="40dp"
-                android:layout_marginRight="40dp"
-                android:text="@string/weight_unit" />
+                android:layout_marginStart="40dp"
+                android:gravity="center"
+                android:text="@string/weight_unit"
+                app:layout_column="3"
+                app:layout_rowWeight="1" />
 
             <NumberPicker
                 android:id="@+id/numberPickerWeight1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                app:layout_column="2"
+                app:layout_rowWeight="1">
 
             </NumberPicker>
 
             <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/textViewDot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:text="@string/dot" />
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
+                android:text="@string/dot"
+                app:layout_column="1"
+                app:layout_rowWeight="1" />
 
             <NumberPicker
                 android:id="@+id/numberPickerWeight2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:layout_column="0"
+                app:layout_rowWeight="1">
 
             </NumberPicker>
 
-
-        </LinearLayout>
+        </android.support.v7.widget.GridLayout>
 
         <android.support.v7.widget.GridLayout
             android:layout_width="match_parent"
@@ -77,8 +92,7 @@
                 app:layout_columnWeight="1" />
 
         </android.support.v7.widget.GridLayout>
-
-
-    </LinearLayout>
+        
+    </android.support.v7.widget.LinearLayoutCompat>
 
 </FrameLayout>

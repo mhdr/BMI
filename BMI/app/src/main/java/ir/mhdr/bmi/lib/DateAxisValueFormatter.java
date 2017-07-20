@@ -58,6 +58,7 @@ public class DateAxisValueFormatter implements IAxisValueFormatter {
             // less than 1 year
 
             result = String.format(Locale.US, "%s", String.valueOf(persianCalendar.getMonthString()));
+            chart.getXAxis().setLabelCount(2);
 
         } else if (visibleRange > 60 * 24 * 30 * 12) {
             // more than 1 year

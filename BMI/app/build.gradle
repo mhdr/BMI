@@ -25,7 +25,7 @@ android {
         applicationId "ir.mhdr.bmi"
         minSdkVersion 17
         targetSdkVersion 25
-        versionName '2.0.0-rc'
+        versionName '2.0.0'
         versionCode 9
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

@@ -355,13 +355,13 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
 
     @Override
     public void onResume() {
-        super.onResume();
 
         if (!getUserVisibleHint()) {
             return;
         }
 
         calculateAndShow(false);
+        super.onResume();
     }
 
     @Override
