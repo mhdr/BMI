@@ -52,14 +52,13 @@ public class Update {
 
                     inputStream.close();
 
-                    if (versionCode> BuildConfig.VERSION_CODE)
-                    {
-                        mUpdateListener.newUpdateAvailable(new UpdateInfo(baseUrl,versionCode,versionName,apk));
+                    if (versionCode > BuildConfig.VERSION_CODE) {
+                        mUpdateListener.newUpdateAvailable(new UpdateInfo(baseUrl, versionCode, versionName, apk));
                     }
 
                 } catch (Exception e) {
-                    e.printStackTrace();
-                    FirebaseCrash.report(e);
+                    //e.printStackTrace();
+                    //FirebaseCrash.report(e);
                 }
             }
         });
