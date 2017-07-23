@@ -1,7 +1,10 @@
 package ir.mhdr.bmi;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -364,9 +367,7 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
             }
 
             calculateAndShow(false);
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }

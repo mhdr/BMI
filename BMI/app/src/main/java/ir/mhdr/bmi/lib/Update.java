@@ -1,5 +1,9 @@
 package ir.mhdr.bmi.lib;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 import com.google.firebase.crash.FirebaseCrash;
 
 import org.w3c.dom.Document;
@@ -17,9 +21,14 @@ import ir.mhdr.bmi.BuildConfig;
 public class Update {
 
     private UpdateListener mUpdateListener;
+    private Context context;
 
     public void setUpdateListener(UpdateListener listener) {
         mUpdateListener = listener;
+    }
+
+    public Update(Context context) {
+        this.context = context;
     }
 
     public void Check() {
@@ -27,6 +36,10 @@ public class Update {
             @Override
             public void run() {
                 try {
+
+                    if (!isNetworkAvailable()) {
+                        return;
+                    }
 
                     String baseUrl = "https://update.pupli.ir/bmi/";
 
@@ -64,6 +77,13 @@ public class Update {
         });
 
         thread.start();
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     public interface UpdateListener {

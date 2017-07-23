@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -184,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (!Statics.isCheckedForUpdate) {
             //check for update just once
-            Update update = new Update();
+            Update update = new Update(this);
             update.setUpdateListener(updateListener);
             update.Check();
             //
