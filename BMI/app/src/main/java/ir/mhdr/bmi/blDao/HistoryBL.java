@@ -111,6 +111,7 @@ public class HistoryBL {
         History history = null;
 
         history = historyDao.queryBuilder()
+                .where(HistoryDao.Properties.UserUuid.eq(user.getUuid()))
                 .orderAsc(HistoryDao.Properties.Datetime)
                 .limit(1)
                 .unique();

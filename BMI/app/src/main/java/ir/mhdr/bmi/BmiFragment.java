@@ -161,7 +161,16 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
         textViewProfileInfoName.setText(String.format(Locale.US, "%s", name));
         textViewProfileInfoHeight.setText(String.format(Locale.US, "%s سانتی متر", height));
 
-        gauge.setHighValue(value, 12, 44);
+        // if value is bigger than 44 or less than 12 it should be 44 or 12 on gauge
+        // not on textViewBMI just on the gauge
+        float valueScaled = value;
+        if (value > 42) {
+            valueScaled = 41.8f;
+        } else if (value < 14) {
+            valueScaled = 14.2f;
+        }
+
+        gauge.setHighValue(valueScaled, 14, 42);
 
         textViewBMI.setText(String.valueOf(value));
 
@@ -270,10 +279,10 @@ public class BmiFragment extends Fragment implements ProfileChangedListener {
 
     private int[] generateStrokeColors() {
 
-        int length = 58;
+        int length = 56;
         int range1 = 4;
         int range2 = 2;
-        int range3 = 5;
+        int range3 = 3;
         int range4 = 13;
         int range5 = 10;
         int range6 = 10;
