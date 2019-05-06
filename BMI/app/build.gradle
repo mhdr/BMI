@@ -19,12 +19,12 @@ android {
             storePassword keystoreProperties['storePassword']
         }
     }
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "ir.mhdr.bmi"
         minSdkVersion 17
-        targetSdkVersion 25
+        targetSdkVersion 28
         versionName '2.0.4'
         versionCode 13
         multiDexEnabled true
@@ -44,27 +44,27 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.3-alpha', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.android.support:percent:25.3.1'
-    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:appcompat-v7:28.0.0'
+    compile 'com.android.support:design:28.0.0'
+    compile 'com.android.support:percent:28.0.0'
+    compile 'com.android.support:support-v4:28.0.0'
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
     compile 'com.github.mhdr:sc-widgets:2.3.4'
-    compile 'net.danlew:android.joda:2.9.9'
-    compile 'com.android.support:multidex:1.0.1'
-    compile 'com.google.firebase:firebase-crash:11.0.2'
-    compile 'com.google.firebase:firebase-core:11.0.2'
-    compile 'com.android.support:gridlayout-v7:25.3.1'
-    compile 'com.google.android.gms:play-services-base:11.0.2'
-    compile 'com.google.firebase:firebase-perf:11.0.2'
+    compile 'net.danlew:android.joda:2.10.1.2'
+    compile 'com.android.support:multidex:1.0.3'
+    compile 'com.google.firebase:firebase-crash:16.2.1'
+    compile 'com.google.firebase:firebase-core:16.0.8'
+    compile 'com.android.support:gridlayout-v7:28.0.0'
+    compile 'com.google.android.gms:play-services-base:16.1.0'
+    compile 'com.google.firebase:firebase-perf:16.2.5'
     compile 'com.github.mhdr:JalaliCalendar:v1.3'
     compile 'org.greenrobot:greendao:3.2.2'
-    compile 'com.google.firebase:firebase-messaging:11.0.2'
-    testCompile 'junit:junit:4.12'
+    compile 'com.google.firebase:firebase-messaging:17.6.0'
+    testCompile 'junit:junit:4.13-beta-2'
 }
 
 android.defaultConfig.vectorDrawables.useSupportLibrary = true
